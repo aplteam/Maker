@@ -1,0 +1,19 @@
+ R←Test_002(stopFlag batchFlag);⎕TRAP;F;folder;rc
+⍝ Exercise `RecreateFolder`
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+ R←∆Failed
+
+ F←##.Maker.FilesAndDirs
+ folder←F.NormalizePath'.\Tests\Test-RecreateFolder'
+ {}F.RmDir folder
+ rc←##.Maker.RecreateFolder folder
+ →GoToTidyUp 0≠≢rc
+ ⎕DL 0.01
+ rc←##.Maker.RecreateFolder folder
+ →GoToTidyUp 0≠≢rc
+
+ R←∆OK
+
+∆TidyUp:
+ F.RmDir folder
+⍝Done

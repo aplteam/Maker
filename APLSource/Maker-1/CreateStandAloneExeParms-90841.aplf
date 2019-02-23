@@ -1,0 +1,27 @@
+ CreateStandAloneExeParms←{
+⍝ Creates a parameter space for the `MakeStandAloneRunTimeExe` function.\\
+⍝ `⍵` is a two-element vector:
+⍝ 1. The filename of the EXE to be created.
+⍝ 2. Name of the project. For "Fire" that would be "Fire".\\
+⍝ Workflow:\\
+⍝ 1. Create parameter space
+⍝ 1. Make amendments
+⍝ 1. Call `MakeStandAloneRunTimeExe` and pass the parameter space as right argument
+     2≠≢⍵:'Invalid right argument: provide "filename" and "projectName"'⎕SIGNAL 5
+     r←⎕NS''
+     r.(Filename ProjectName)←⍵
+     r.Filename←'.exe'{⍺≡APLTreeUtils.Lowercase(-⍴⍺)↑⍵:⍵ ⋄ ⍵,'.exe'}r.Filename
+     r.Icon←''
+     r.CompanyName←'APL Team Ltd'
+     r.LegalCopyright←'See https://github.com/aplteam/',r.ProjectName
+     r.ProductName←r.ProjectName
+     r.FileVersion←2⊃#.⍎r.ProjectName,'.Version'
+     r.FileDescription←''
+     r.ProductVersion←2⊃#.⍎r.ProjectName,'.Version'
+     r.CompanyName←'APL Team Ltd'      ⍝ Not shown by Windows Explorer anyway
+     r.Comments←''                     ⍝ Not shown by Windows Explorer anyway
+     r.Commandline←''                  ⍝ Any commandline parameters to be passed on
+     r.Resource←''
+     _←r.⎕FX'r←∆List' 'r←{⍵,[1.5]⍎¨⍵}'' ''~⍨¨↓⎕nl 2'
+     r
+ }

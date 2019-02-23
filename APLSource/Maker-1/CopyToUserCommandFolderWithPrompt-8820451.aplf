@@ -1,0 +1,46 @@
+ {r}←{noPrompt}CopyToUserCommandFolderWithPrompt y;⎕ML;⎕IO;isFolder;path;copyContent;list;toFolder;this;toFolder2;rc;more;isSubFolder
+⍝ Copies what's specified by `y` to the user's user command folder.\\
+⍝ `y` might be a simple character vector representing the name of a folder, typically `Dist`.
+⍝ In that case the folder itself is copied over.\\
+⍝ If you want to copy just the **content** of the folder rather than the folder itself add `\*` at the end.\\
+⍝ It might also be a list of files, each one specifying the full or relative path of a file.\\
+⍝ Note that any files with the extension `.zip` are removed from `y`.\\
+⍝ The optional left argument can be used to suppress the prompt by providing a 1, but this is meant
+⍝ to be used by test cases only.\\
+⍝ If you specify, say, `Dist\Fire\` as `y` then the folder `Fire\` will be copied to the target.\\
+⍝ If you specify, say, `Dist\Fire\*` as `y` then the **contents** of the folder `Fire\` will be copied
+⍝ to the target.\\
+⍝ The target is determined by the result of the function `GetUserCommandFolder`.
+ ⎕IO←1 ⋄ ⎕ML←1
+ r←⍬
+ noPrompt←{0<⎕NC ⍵:⍎⍵ ⋄ 0}'noPrompt'
+ :If 0 1∊⍨≡y
+ :AndIf isFolder←FilesAndDirs.IsDir(¯1×'*'=¯1↑y)↓y
+     path←y
+     (('\'=path)/path)←'/'
+     copyContent←'*'=¯1↑path
+     'Invalid right argument'⎕SIGNAL 11/⍨copyContent∧'/'≠⊃¯2↑path
+     list←⊃('recursive' 1)FilesAndDirs.Dir path,(~(¯1↑path)∊'/*')/'/'
+     list/⍨←'.zip'∘≢¨APLTreeUtils.Lowercase 3⊃∘⎕NPARTS¨list
+     path←(-'*'=¯1↑path)↓path
+     toFolder←(GetUserCommandFolder⊃list),(~copyContent)/'/',⊃¯1↑('/'APLTreeUtils.Split path)~⊂''
+     'Create!'FilesAndDirs.CheckPath toFolder
+     :For this :In list
+         isSubFolder←FilesAndDirs.IsDir this
+         :If isSubFolder
+             toFolder2←toFolder,'/',isSubFolder/(⍴path)↓this
+             ('Creating ',toFolder2,' failed')U.Assert'Create!'FilesAndDirs.CheckPath toFolder2
+         :Else
+             toFolder2←toFolder,'/',(⍴path)↓this
+             (rc more)←this FilesAndDirs.CopyTo toFolder2
+             'Copying to the User Command folder failed'U.Assert 0=+/rc
+         :EndIf
+     :EndFor
+ :Else
+     list←{{,⊂,⍵}⍣(0 1∊⍨≡⍵)⊣⍵}y
+     list/⍨←'.zip'∘≢¨APLTreeUtils.Lowercase 3⊃∘⎕NPARTS¨list
+     toFolder←(GetUserCommandFolder⊃list),'/'
+     (rc more)←↓⍉↑toFolder∘{⍵ FilesAndDirs.CopyTo ⍺}¨list
+     'Copying to the User Command folder failed'U.Assert 0=+/rc
+ :EndIf
+⍝Done

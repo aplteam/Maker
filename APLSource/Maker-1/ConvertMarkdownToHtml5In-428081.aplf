@@ -1,0 +1,21 @@
+ {noOf}←{targetFolder}ConvertMarkdownToHtml5In folder;parms;html;list;this;ns;sourceFolder;cmd;rc;⎕IO;⎕ML
+⍝ This function converts all markdown documents in `folder\` into HTML5 files with the MarkAPL converter.\\
+⍝ By default the HTML files are saved in `folder\`. If that does not fit your needs you can specify an
+⍝ optional `targetFolder` via the left argument.\\
+⍝ The function returns the number of documents converted.\\
+⍝ Note that it is assumed that the Markdown document(s) are syntactically correct. Parameters must be
+⍝ included in the document since they cannot be specified.\\
+ ⎕IO←1 ⋄ ⎕ML←1
+ noOf←0
+ targetFolder←folder{0<⎕NC ⍵:⍎⍵ ⋄ ⍺}'targetFolder'
+ list←⊃FilesAndDirs.Dir folder,'/*.md'
+ :For this :In list
+     noOf+←1
+     parms←MarkAPL.CreateParms
+     parms.inputFilename←this
+     parms.outputFilename←targetFolder,'/',(2⊃⎕NPARTS this),'.html'
+     parms.homeFolder←U.GetSourceFolder'MarkAPL/Files/'
+     parms.verbose←0
+     (html ns)←parms ##.Maker.MarkAPL.Markdown2HTML''
+ :EndFor
+⍝Done

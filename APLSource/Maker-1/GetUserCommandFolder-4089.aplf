@@ -1,0 +1,23 @@
+ userCommandFolder←GetUserCommandFolder userCommandScriptName;rk;userCommandFolders;b;⎕IO;⎕ML
+⍝ Reads all folders from the Windows Registry that are defined as containing user commands.\\
+⍝ It will ignore Dyalog's own folders: `SALT\Spice` underneath any installed version of Dyalog.\\
+⍝ It will then try to find `userCommandScriptName` in any of these folders. If it is a re-install
+⍝ then it will find it and return the directory it was previously installed in.\\
+⍝ If it does not then it will return the default directory for user defined user commands
+⍝ which is `%USERPROFILE%Documents\MyUCMDs`.\\
+⍝ However, do not confuse the name `userCommandScriptName` with the name of a user command:
+⍝ it is the full name of the **script**. For example, for `]Fire` it is `fire_uc.dyalog`!
+ ⎕IO←1 ⋄ ⎕ML←1
+ rk←'SOFTWARE\Dyalog\Dyalog APL/W-64 15.0 Unicode\SALT\CommandFolder'
+ userCommandFolders←WinReg.GetString rk
+ (('∘'=userCommandFolders)/userCommandFolders)←';'  ⍝ There was once a version which used `∘` as a separator!
+ userCommandFolders←';'APLTreeUtils.Split userCommandFolders
+ userCommandFolders←(~∨/¨'\salt\spice'∘⍷¨APLTreeUtils.Lowercase userCommandFolders)/userCommandFolders
+ userCommandFolders←({(⍳⍴⍵)=⍵⍳⍵}APLTreeUtils.Lowercase userCommandFolders)/userCommandFolders
+ userCommandScriptName{⍺,(⍵≢(-⍴⍵)↑APLTreeUtils.Lowercase ⍺)/⍵}←'.dyalog'
+ :If ∨/b←FilesAndDirs.IsFile userCommandFolders,¨⊂'\',userCommandScriptName
+     userCommandFolder←(b⍳1)⊃userCommandFolders
+ :Else
+     userCommandFolder←(WinSys.ExpandEnv'%USERPROFILE%'),'\Documents\MyUCMDs'
+ :EndIf
+⍝Done

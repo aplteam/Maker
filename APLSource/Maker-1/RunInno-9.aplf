@@ -1,0 +1,36 @@
+ {r}←RunInno name;cmd;rc;batFilename;buff;issFilename;flag;counter;A;F;msg
+⍝ Runs the INNO batch compiler in order to create an installer.\\
+⍝ `name` is the project name; for "Fire" that would be "Fire".\\
+⍝ This will work under three assumptions:
+⍝ 1. The ISS file is "{name}.iss".
+⍝ 2. The ISS file lives in the current directory.
+⍝ 3. The EXE lives in a sub folder of the current directory called `Dist\`.\\
+⍝ Note that this fails quite freqently for no apparent reason. However, it helps to just try again.
+⍝ Normally after 3-5 times it works but sometimes it takes longer, so we try a max of 10 times.
+ r←⍬
+ counter←flag←0
+ A←APLTreeUtils
+ F←FilesAndDirs
+ :Repeat
+     :Trap 0
+         counter+←1
+         ⎕←(⍕counter),' attempt to create the SetUp.exe...'
+         cmd←'"C:\Program Files (x86)\Inno Setup 5\ISCC.exe" '
+         issFilename←'expand'F.NormalizePath name,'.iss'
+         cmd,←'"',issFilename,'"'
+         batFilename←F.GetTempFilename''
+         F.DeleteFile batFilename
+         batFilename,←'.bat'
+         A.WriteUtf8File batFilename cmd
+         buff←Execute.Process batFilename
+         msg←2⊃buff
+         rc←~∨/'Successful compile'⍷∊msg
+         'Creating installer EXE failed'U.Assert 0=⊃rc
+         F.DeleteFile batFilename
+         flag←1
+     :Else
+         ⎕DL 1
+         'Attempted 10 times to create the installe EXE, always failed!'U.Assert 10≠counter
+     :EndTrap
+ :Until flag
+⍝Done

@@ -1,0 +1,14 @@
+ {r}←EraseStuff erase;bool;⎕ML;⎕IO
+⍝ Right argument `erase` defines what to erase from the current workspace.
+⍝ This is typically coming from a file `publish.config` that was brought into the WS with `GetPublishConfig`.\\
+⍝ Returns the number of erased items.\\
+⍝ Useful only when a project comes with a large set of functionality of which only a
+⍝ part is actually used.
+ ⎕IO←1 ⋄ ⎕ML←1
+ :If 0=≢erase
+     r←0
+ :Else
+     r←⊃+/0<⎕NC¨erase[;3]
+     ⎕EX¨erase[;3]
+ :EndIf
+⍝Done

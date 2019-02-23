@@ -1,0 +1,21 @@
+ R←Test_013(stopFlag batchFlag);⎕TRAP;F;wasDir;xml
+⍝ Exercise `EraseStuff`
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+ R←∆Failed
+
+ F←##.Maker.FilesAndDirs
+ #.⎕SHADOW'TEMP'
+ 'TEMP'#.⎕NS''
+ #.TEMP.⎕FX'r←DeleteMe' 'r←1'
+ #.TEMP.⎕FX'r←DoNotDeleteMe' 'r←2'
+
+ wasDir←F.Cd'MoreTests'
+ xml←##.Maker.GetPublishConfig 1
+ {}F.Cd wasDir
+
+ →PassesIf 1=##.Maker.EraseStuff xml.erase
+ →PassesIf≢#.TEMP.⎕NL 3
+ →PassesIf 0=#.TEMP.⎕NC'DeleteMe'
+
+ R←∆OK
+⍝Done

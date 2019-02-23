@@ -1,0 +1,8 @@
+ {r}←Set_LX expr
+⍝ `expr` comes typically from what was brought into the WS with `GetPublishConfig`.\\
+⍝ Returns 1 in case `⎕LX` was actually set and 0 otherwise.
+ r←0
+ :If 0≠≢expr
+     ⎕LX←expr
+     r←1
+ :EndIf

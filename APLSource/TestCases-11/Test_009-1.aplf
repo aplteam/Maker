@@ -1,0 +1,22 @@
+ R←Test_009(stopFlag batchFlag);⎕TRAP;parms;filename;rc;LXwas
+⍝ Exercise `MakeStandAloneRunTimeExe` and implicitly also `CreateStandAloneExeParms`
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+ R←∆Failed
+
+ #.⎕SHADOW'Test_009'
+ 'Test_009'#.⎕NS''
+ #.Test_009.⎕FX'r←Version' 'r←''inno'' ''2.0.0'' ''yyy-mm-dd'''
+
+ filename←##.Maker.FilesAndDirs.GetTempPath,'Test_009'
+ parms←##.Maker.CreateStandAloneExeParms filename'Test_009'
+ LXwas←⎕LX
+ ⎕LX←⊃⎕XSI
+ rc←##.Maker.MakeStandAloneRunTimeExe parms
+ ⎕LX←LXwas
+ →GoToTidyUp 0=##.Maker.FilesAndDirs.IsFile filename,'.exe'
+
+ R←∆OK
+
+∆TidyUp:
+ :Trap 0 ⋄ ##.Maker.FilesAndDirs.DeleteFile filename,'.exe' ⋄ :EndTrap
+⍝Done

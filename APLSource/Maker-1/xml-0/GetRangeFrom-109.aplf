@@ -1,0 +1,4 @@
+ r←name GetRangeFrom xml;⎕ML;⎕IO
+ ⎕IO←1 ⋄ ⎕ML←1
+ r←{⍵↑⍨+/∧\2=⍵[;1]}(xml[;2]⍳⊂name)↓xml
+⍝Done

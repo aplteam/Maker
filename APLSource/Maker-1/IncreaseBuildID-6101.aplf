@@ -1,0 +1,42 @@
+ {r}←{filename}IncreaseBuildID fnsName;⎕ML;⎕IO;xml;row;filename;result;buildID;isTest;A;flag;counter;folder
+⍝ Reads XML file `filename` (typically "publish.config") and gets the value of `buildid` from it.
+⍝ If there is no such element yet it is injected with the value 0.
+⍝ The build ID is then increased by 1 and the xml is written back.\\
+⍝ Then `fnsName` is modified accordingly and acre informed about the change.\\
+⍝ Finally the change is committed and then the user is prompted whether the changes
+⍝ should be pushed to GitHub.\\
+⍝ The left argument is used only by test cases.
+ ⎕IO←1 ⋄ ⎕ML←1
+ r←⍬
+ A←APLTreeUtils
+ (filename isTest)←{0<⎕NC ⍵:(⍎⍵)1 ⋄ 'publish.config' 0}'filename'
+ xml←⎕XML'flat'A.ReadUtf8File filename
+ :If ~(⊂'buildid')∊xml[;2]
+     xml⍪←1 'buildid' '0'(0 2⍴⊂'')5
+ :EndIf
+ row←xml[;2]⍳⊂'buildid'
+ buildID←1+⊃(//)⎕VFI 3⊃xml[row;]
+ xml[row;3]←⊂⍕buildID
+
+ ⍝ We've seen this going wrong very often, therefore the loop!
+ flag←counter←0
+ :Repeat
+     :Trap 0
+         A.WriteUtf8File filename(⎕XML xml)
+         flag←1
+     :Else
+         ⎕DL 0.1
+     :EndTrap
+ :Until flag∨20<counter←counter+1
+
+ fnsName U.AddBuildID2Version buildID
+ :If ~isTest
+     result←⎕SE.UCMD'acre.SetChanged ',⍕fnsName
+     U.Assert 1=⍴result
+ :EndIf
+ folder←'expand'FilesAndDirs.NormalizePath{0∊⍴⍵:'./' ⋄ ⍵}1⊃⎕NPARTS filename
+ :If ⎕SE.APLGit.IsGitProject folder
+ :AndIf 'master'≢⎕SE.APLGit.GetCurrentBranch folder
+     {}folder ⎕SE.APLGit.Commit'Changed by "Make"'
+ :EndIf
+⍝Done

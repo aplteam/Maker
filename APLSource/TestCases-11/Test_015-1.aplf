@@ -1,0 +1,20 @@
+ R←Test_015(stopFlag batchFlag);⎕TRAP;F;wasDir;xml;wasLX
+⍝ Exercise `Set_LX`
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+ R←∆Failed
+
+ F←##.Maker.FilesAndDirs
+ wasDir←F.Cd'MoreTests'
+ xml←##.Maker.GetPublishConfig 1
+ {}F.Cd wasDir
+
+ wasLX←⎕LX
+ →GoToTidyUp 1≠##.Maker.Set_LX xml.lx
+ →GoToTidyUp'#.RunThisFns'≢⎕LX
+ ⎕LX←wasLX
+
+ R←∆OK
+
+∆TidyUp:
+ ⎕LX←wasLX
+⍝Done

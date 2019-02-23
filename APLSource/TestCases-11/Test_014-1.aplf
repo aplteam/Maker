@@ -1,0 +1,22 @@
+ R←Test_014(stopFlag batchFlag);⎕TRAP;F;wasDir;xml
+⍝ Exercise `LoadedNeededAndEstablishRefs`.
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+ R←∆Failed
+
+ F←##.Maker.FilesAndDirs
+ #.⎕SHADOW'_Foo'
+ '_Foo.Foo'#.⎕NS''
+ #._Foo.Foo.Hello←{'World'}
+ wasDir←F.Cd'MoreTests'
+ xml←##.Maker.GetPublishConfig 1
+ {}F.Cd wasDir
+
+ ##.Maker.LoadedNeededAndEstablishRefs'Foo'xml
+ →PassesIf 2=≢#._Foo.⎕NL 9.1
+ →PassesIf 3=≢#._Foo.⎕NL 9.4
+ →PassesIf 1=≢#._Foo.Foo.⎕NL⍳16
+
+ R←∆OK
+
+∆TidyUp:
+⍝Done

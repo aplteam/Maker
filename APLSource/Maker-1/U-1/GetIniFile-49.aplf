@@ -1,0 +1,5 @@
+ ini←GetIniFile;⎕IO;⎕ML
+⍝ Instantiactes the general "Make" INI file
+ ⎕IO←1 ⋄ ⎕ML←1
+ ini←⎕NEW ##.IniFiles(,⊂GetProjectFolder'Make.Ini')
+⍝Done

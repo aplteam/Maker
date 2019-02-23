@@ -1,0 +1,3 @@
+ r←GetSourceFolder subFolder;⎕IO;⎕ML
+ ⎕IO←1 ⋄ ⎕ML←1
+ r←GetProjectFolder'_Source/',subFolder

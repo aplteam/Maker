@@ -1,0 +1,5 @@
+ Info
+⍝ Note that a few functions are not covered by test cases beacause of the immense cost:
+⍝ * ProcessSingleScriptProjects
+⍝ * RunInno
+⍝ * MakeWorkspace

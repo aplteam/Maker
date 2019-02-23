@@ -1,0 +1,29 @@
+ R←Test_007(stopFlag batchFlag);⎕TRAP;F;folder;noOf1;noOf2;list;tempFolder
+⍝ Exercise `ConvertMarkdownToHtml5In`
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+ R←∆Failed
+
+ F←##.Maker.FilesAndDirs
+
+ folder←'./MoreTests/Docs'
+ noOf1←⍴⊃F.Dir folder,'/*.md'
+
+ noOf2←##.Maker.ConvertMarkdownToHtml5In folder
+ →PassesIf noOf1=noOf2
+ →PassesIf 2=≢list←⊃F.Dir folder,'/*.html'
+ F.DeleteFile list
+
+ tempFolder←F.GetTempPath,'/',⊃⎕SI
+ F.RmDir tempFolder
+ 'Create!'F.CheckPath tempFolder
+
+ noOf2←tempFolder ##.Maker.ConvertMarkdownToHtml5In folder
+ →GoToTidyUp noOf1≠noOf2
+ →GoToTidyUp 2≠≢list←⊃F.Dir tempFolder,'/*.html'
+ F.DeleteFile list
+
+ R←∆OK
+
+∆TidyUp:
+ :Trap 0 ⋄ F.RmDir tempFolder ⋄ :EndTrap
+⍝Done

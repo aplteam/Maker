@@ -1,0 +1,3 @@
+ r←GetProjectFolder add;⎕IO;⎕ML
+ ⎕IO←1 ⋄ ⎕ML←1
+ r←(⎕SE.UCMD'GetAcreProjectPath'),add

@@ -1,0 +1,6 @@
+ r←name GetValueFrom xml;⎕ML;⎕IO
+ ⎕IO←1 ⋄ ⎕ML←1
+ r←⍬
+ :If (⊂name)∊xml[;2]
+     r←3⊃xml[xml[;2]⍳⊂name;]
+ :EndIf

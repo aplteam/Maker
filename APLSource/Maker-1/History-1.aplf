@@ -1,0 +1,17 @@
+ History
+⍝ * 2.2.0
+⍝   * Handling of acre change files removed (both the method as such and from the Run_* functions).
+⍝   * Bug in CreateZipFile regarding the version number fixed.
+⍝ * 2.1.0
+⍝   * Handling of script-only projects required to establish dependencies upfront. Now established.
+⍝ * 2.0.1
+⍝   * Adressing utilities in `CopyToUserCommandFolderWithPrompt` was buggy.
+⍝ * 2.0.0
+⍝   * Bug fix in `CopyToUserCommandFolderWithPrompt` that comes with a breaking syntax change!
+⍝   * Documentation improved.
+⍝   * The function `HandleAcreHistoryFiles` was deleted: we do not do acre change files any more.
+⍝   * Bugs in `ProcessSingleScriptProjects` fixed.
+⍝   * Template functions `Run_2`, and `Run_3` modified, `Run_4` deleted.
+⍝   * Two bug fixes in `CopyToUserCommandFolderWithPrompt`.
+⍝\\
+⍝ For information regarding older versions see <https://github.com/aplteam/Maker/releases>

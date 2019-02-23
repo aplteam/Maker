@@ -1,0 +1,31 @@
+ {rc}←MakeStandAloneRunTimeExe p;counter;success;RUNTIME;⎕IO;⎕ML;details
+⍝ Attempts to create a stand-alone EXE from the current workspace.\\
+⍝ `p` is a parameter space, typically created by calling `CreateStandAloneExeParms`.\\
+⍝ `←` is what the `Bind` method returns or `⍬` in case something goes wrong without throwing an error.\\
+⍝ Because the creation of a stand-alone EXE quite often fails for no apparent reason this function repeats the attempt up to 50 times.
+⍝ If it fails that often then the likelyhood is that the EXE is running and therefore cannot be overwritten.
+ rc←⍬
+ ⎕IO←1 ⋄ ⎕ML←1
+ 'Right argument is not a parameter space'⎕SIGNAL 11/⍨9.1≠⎕NC⊂,'p'
+ 'Parameter space does not provide a filename'⎕SIGNAL 11/⍨0=p.⎕NC'Filename'
+ '"Filename" is empty'⎕SIGNAL 11/⍨0=≢p.Filename
+ counter←success←0
+ RUNTIME←8
+ details←0 2⍴''
+ details⍪←'FileDescription'p.FileDescription
+ details⍪←'ProductVersion'p.ProductVersion
+ details⍪←'CompanyName'p.CompanyName           ⍝ Not shown by Windows Explorer anyway
+ details⍪←'Comments'p.Comments                 ⍝ Not shown by Windows Explorer anyway
+ details⍪←'ProductName'p.ProjectName
+ details⍪←'FileVersion'(2⊃#.⍎p.ProjectName,'.Version')
+ details⍪←'LegalCopyright'('See https://github.com/aplteam/',p.ProjectName)
+ :Repeat
+     :Trap 11
+         rc←2 ⎕NQ'#' 'Bind'p.Filename'StandaloneNativeExe'RUNTIME p.Resource p.Icon p.Commandline details
+         success←1
+     :Else
+         ⎕DL 0.2
+     :EndTrap
+ :Until success∨50<counter←counter+1
+ 'Creating stand-alone EXE failed'U.Assert success
+⍝Done

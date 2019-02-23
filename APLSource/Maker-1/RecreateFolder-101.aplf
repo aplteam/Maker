@@ -1,0 +1,10 @@
+ {r}←RecreateFolder targetFolder;rc;⎕IO;⎕ML;F
+⍝ Typically the right argument is `./Dist`. The folder will be removed and then created.
+ ⎕IO←1 ⋄ ⎕ML←1
+ r←⍬
+ F←FilesAndDirs
+ :If F.IsDir targetFolder
+     U.Assert 0=⊃rc←F.RmDir targetFolder
+ :EndIf
+ 'Could not create the target folder'U.Assert'Create!'F.CheckPath targetFolder
+⍝Done

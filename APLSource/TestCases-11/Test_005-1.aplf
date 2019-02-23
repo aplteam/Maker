@@ -1,0 +1,33 @@
+ R←Test_005(stopFlag batchFlag);⎕TRAP;F;tempFolder
+⍝ Exercise `CopyTo`
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+ R←∆Failed
+
+ F←##.Maker.FilesAndDirs
+
+ tempFolder←F.GetTempPath,⊃⎕SI
+ F.RmDir tempFolder
+ 'Create!'F.CheckPath tempFolder
+ 'MoreTests\publish.config'##.Maker.CopyTo tempFolder,'\'
+ →GoToTidyUp 0=F.IsFile tempFolder,'\publish.config'
+
+ F.RmDir tempFolder
+ 'Create!'F.CheckPath tempFolder
+ 'MoreTests'##.Maker.CopyTo tempFolder,'\'
+ →GoToTidyUp 2≠≢⊃F.Dir tempFolder,'/*'
+
+ F.RmDir tempFolder
+ 'Create!'F.CheckPath tempFolder
+ 'MoreTests/'##.Maker.CopyTo tempFolder,'\'
+ →GoToTidyUp 2≠≢⊃F.Dir tempFolder,'/*'
+
+ :Trap 11
+     'MoreTests\publish.config'##.Maker.CopyTo tempFolder   ⍝ That must generate an error: can't copy file over folder!
+     →GoToTidyUp 1
+ :EndTrap
+
+ R←∆OK
+
+∆TidyUp:
+ F.RmDir tempFolder
+⍝Done

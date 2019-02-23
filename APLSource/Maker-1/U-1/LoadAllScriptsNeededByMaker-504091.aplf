@@ -1,0 +1,14 @@
+ {needed}←LoadAllScriptsNeededByMaker TesterFlag;needed;path;name;cmd;rc;⎕ML;⎕IO
+⍝ Loads all classes and scripts needed by `Maker`.\\
+⍝ If `TesterFlag` is 1 then the `Tester` class is loaded as well; needed for developing/debugging the `Maker` application.
+⍝ Otherwise it's not, for example when `Maker`'s ]Make is executed.
+ ⎕IO←1 ⋄ ⎕ML←1
+ needed←'APLTreeUtils' 'FilesAndDirs' 'OS' 'SevenZip' 'Execute' 'WinReg' 'MarkAPL' 'WinSys'
+ needed,←TesterFlag/⊂'Tester'
+ path←GetSourceFolder''
+ :For name :In needed
+     cmd←path,name,'.dyalog -target=',⍕##.⎕THIS
+     rc←⍕⎕SE.UCMD'SALT.Load ',cmd
+     Assert name≡{⍵↑⍨-¯1+1⍳⍨⌽'.'=⍵}rc
+ :EndFor
+⍝Done

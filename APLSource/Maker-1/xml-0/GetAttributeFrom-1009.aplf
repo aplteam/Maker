@@ -1,0 +1,8 @@
+ r←name GetAttributeFrom attr;⎕ML;⎕IO
+ ⎕IO←1 ⋄ ⎕ML←1
+ r←⍬
+ :If (⊂name)∊attr[;1]
+     r←2⊃attr[attr[;1]⍳⊂name;]
+ :EndIf
+ r←','##.APLTreeUtils.Split r
+⍝Done

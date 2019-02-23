@@ -1,0 +1,28 @@
+ {r}←ProcessSingleScriptProjects(pathToSource targetPath);M;⎕IO;⎕ML;⎕WX;A;projName;body;ref;filename;pathInWS;version;filename2;parms;fns;Version
+⍝ This function needs no input whatsoever, it rather works everything out itself.\\
+⍝ If this is executed on a non-scripted project an error is thrown.
+⍝ For that to work it relies on the current directory being the project folder.\\
+⍝ For other, more complex scenarios see `Run_2` and `Run_3`.\\
+ ⎕IO←1 ⋄ ⎕ML←1 ⋄ ⎕WX←3
+ r←⍬
+ A←APLTreeUtils
+ projName←'ProjectSpace'{{⍵↑⍨¯1+⍵⍳''''}⍵↓⍨(4+⍴⍺)+1⍳⍨⍺⍷⍵}∊A.ReadUtf8File'acre.config'
+ RecreateFolder targetPath
+ parms←GetPublishConfig 0
+ LoadedNeededAndEstablishRefs projName parms
+ {}⎕SE.UCMD'acre.openproject ','expand'FilesAndDirs.NormalizePath'./'
+ ref←⍎pathInWS←'#._',projName,'.',projName
+ 'Not a script-only project!'⎕SIGNAL 11/⍨(,'1')≢,parms.script
+ :If 'APLTreeUtils'≢projName
+     IncreaseBuildID ref
+ :EndIf
+ body←⎕SRC ref
+ filename←(targetPath,'/',projName,'.dyalog')
+ A.WriteUtf8File filename body
+ filename2←U.GetSourceFolder projName,'.dyalog'
+ A.WriteUtf8File filename2 body
+ version←body U.GetVersioNoFromScript pathInWS
+ ⎕FX'r←Version dummy'('r←⍬ ''',version,''' ⍬')
+ (Version CreateZipFile)projName targetPath
+ FilesAndDirs.DeleteFile filename
+⍝Done

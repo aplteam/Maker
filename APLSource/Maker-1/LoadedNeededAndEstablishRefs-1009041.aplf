@@ -1,0 +1,25 @@
+ {r}←{loadInto}LoadedNeededAndEstablishRefs(name XML);needed;ref;sourcePath;bool;neededScripts;attr;obj;path;wsname;target
+⍝ Loads and establishes references to all scripts needed by the project
+⍝ to be loaded, like `APLTreeUtils`. It also copies needed stuff from workspaces.\\
+⍝ `loadInto` defaults to '#' but can be the name (NOT a ref!) to any existing namespace.
+⍝ Call this function **before** the acre project is opened!\\
+⍝ `name` is the name of the project, like "Fire".\\
+⍝ `parms` is the contents of `public.config` as a namespace.\\
+ r←⍬
+ loadInto←{0<⎕NC ⍵:⍎⍵ ⋄ '#'}'loadInto'
+ needed←XML.needed
+ bool←needed[;2]≡¨⊂'script'
+ sourcePath←U.GetSourceFolder''
+ target←'#._',name     ⍝ By naming convention
+ :If 0<≢neededScripts←bool⌿needed[;3]
+     ref←⍎target ⎕NS''     ⍝ By naming convention
+     loadInto{⎕SE.SALT.Load sourcePath,⍵,' -target=',⍺}¨neededScripts
+     ref.{⍎⍵,'←#.',⍵}¨neededScripts
+ :EndIf
+ bool←~bool ⍝ The workspaces
+ :For wsname attr :In ↓bool⌿needed[;3 4]
+     obj←'copy'xml.GetAttributeFrom attr
+     path←FilesAndDirs.NormalizePath sourcePath,wsname,'/',wsname,'.dws'
+     (↑obj)#.⎕CY path
+ :EndFor
+⍝Done

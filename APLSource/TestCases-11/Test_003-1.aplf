@@ -1,0 +1,24 @@
+ R←Test_003(stopFlag batchFlag);⎕TRAP;F;folder;zipFilename;rc;targetFolder;list1;list2
+⍝ Exercise `CopyToSource`
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+ R←∆Failed
+
+ F←##.Maker.FilesAndDirs
+
+ folder←'./Tests/'
+ zipFilename←folder,'myzipfile.zip'
+ rc←##.APLTreeUtils.WriteUtf8File zipFilename'Pretends to be a zip file'
+ →GoToTidyUp 0≠≢rc
+ targetFolder←##.Maker.CopyToSource'./Tests/' 'Maker_Test_003'
+
+ list1←⊃('recursive' 1)F.Dir'./Tests/'
+ list1/⍨←'.zip'∘≢¨##.APLTreeUtils.Lowercase ¯4↑¨list1
+ list1←(⍴'expand'F.NormalizePath'./Tests/')↓¨'expand'∘F.NormalizePath¨list1
+ list2←(⍴##.Maker.U.GetSourceFolder'Maker_Test_003/')↓¨⊃('recursive' 1)F.Dir targetFolder
+ →GoToTidyUp list1≢list2
+
+ R←∆OK
+
+∆TidyUp:
+ F.RmDir targetFolder
+⍝Done
