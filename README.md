@@ -7,6 +7,8 @@
 * The target is always a folder `Dist\`.
 * The project is managed by acre.
 
+It is however closely related to the APLTree library and the APL-cation collection.
+
 Note that all project belonging to [apltree](https://github.com/aplteam/apltree) and [apl-cation](https://github.com/aplteam/apl-cation) fulfil these criteria.
 
 
