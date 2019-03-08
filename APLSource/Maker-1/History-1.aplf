@@ -1,6 +1,6 @@
  History
 ⍝ * 2.2.1
-⍝   * `Squash` now requires a meaningful message.
+⍝   * `IncreaseBuildID` now always commits all changes no matter what.
 ⍝   * Method `DropBuildNumber` added.
 ⍝   * Couple of minor improvements
 ⍝ * 2.2.0

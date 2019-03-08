@@ -1,5 +1,5 @@
  {r}←{filename}IncreaseBuildID fnsName;⎕ML;⎕IO;xml;row;filename;result;buildID;isTest;A;flag;counter;folder
-⍝ Reads XML file `filename` (typically "publish.config") and gets the value of `buildid` from it.
+⍝ Increases the build-ID in the file publish.config and commits all changes.
 ⍝ If there is no such element yet it is injected with the value 0.
 ⍝ The build ID is then increased by 1 and the xml is written back.\\
 ⍝ Then `fnsName` is modified accordingly and acre informed about the change.\\
@@ -36,7 +36,6 @@
  :EndIf
  folder←'expand'FilesAndDirs.NormalizePath{0∊⍴⍵:'./' ⋄ ⍵}1⊃⎕NPARTS filename
  :If ⎕SE.APLGit.IsGitProject folder
- :AndIf 'master'≢⎕SE.APLGit.GetCurrentBranch folder
      {}folder ⎕SE.APLGit.Commit'Changed by "Make"'
  :EndIf
 ⍝Done
