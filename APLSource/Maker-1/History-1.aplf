@@ -1,6 +1,6 @@
  History
 ⍝ * 2.2.1
-⍝   * `IncreaseBuildID` now always commits all changes no matter what.
+⍝   * `IncreaseBuildID` does **not** commit anything any more
 ⍝   * Method `DropBuildNumber` added.
 ⍝   * Couple of minor improvements
 ⍝ * 2.2.0
