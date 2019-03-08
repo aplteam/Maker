@@ -1,4 +1,7 @@
  History
+⍝ * 2.2.1
+⍝   * Method `DropBuildNumber` added.
+⍝   * Couple of minor improvements
 ⍝ * 2.2.0
 ⍝   * Handling of acre change files removed (both the method as such and from the Run_* functions).
 ⍝   * Bug in CreateZipFile regarding the version number fixed.

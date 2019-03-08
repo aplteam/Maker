@@ -1,14 +1,20 @@
  {zipFilename}←(VersionFunction CreateZipFile)(name folder);list;has;buff;rc;more;myZipper;was;version;F
 ⍝ Everything in `folder\` goes into `folder\{name}.zip`.\\
-⍝ `VersionFunction` is supposed to be a `Version` function. If it is then the version is added as a prefix to the zip filename.\\
-⍝ If you don't want that then pass `{''}` as operand.\\
+⍝ `VersionFunction` is supposed to be one of:
+⍝ 1. A niladic `Version` function that returns either a simple text vector or a nested three-element
+⍝    vector with name, version number and version data.
+⍝ 2. A simple text vector like '1.2.3' or just ''.\\
+⍝ If it is either then the version number  is added as a prefix to the zip filename.\\
+⍝ If the `Version` function returns a build number and you don't want
+⍝ that to be added to the filename you can specify `({M.DropBuildNumber YourVersionFns})` as operand.
+⍝ If you don't want a version number to be added at all then just pass `{''}` as operand.\\
 ⍝ If you want to specify a string then you must create a function for this, for example:\\
 ⍝ `⎕FX'r←Version dummy'('r←⍬ '4.3.2 ⍬')`\\
 ⍝ See below why that is necessary.\\
-⍝ It is assumed that any function provided as an operand provides either a three-element vector with the second element
-⍝ being the actual version number (first=name, third=date) or an empty vector.\\
-⍝ **Warning**: this function does temporarily change the current directory. This is necessary because otherwise the relative
-⍝ paths created by "SevenZip" would not be what they are supposed to be.
+⍝ It is assumed that any function provided as an operand provides either a three-element vector with
+⍝ the second element being the actual version number (first=name, third=date) or an empty vector.\\
+⍝ **Warning**: this function does temporarily change the current directory. This is necessary because
+⍝ otherwise the relative paths created by "SevenZip" would not be what they are supposed to be.
  F←FilesAndDirs
  was←F.Cd folder
  :Trap 0
@@ -17,10 +23,13 @@
      :Else
          buff←VersionFunction
      :EndIf
-     :If 0<≢buff
+     zipFilename←name
+     :If 1=≡buff
+         :If 0<≢buff
+             zipFilename←name,'-',buff
+         :EndIf
+     :ElseIf 0<≢buff
          zipFilename←name,'-',2⊃buff
-     :Else
-         zipFilename←name
      :EndIf
      zipFilename,←{'.zip'/⍨'.zip'≢##.Maker.APLTreeUtils.Lowercase ¯4↑⍵}zipFilename
      myZipper←⎕NEW SevenZip(,⊂zipFilename)

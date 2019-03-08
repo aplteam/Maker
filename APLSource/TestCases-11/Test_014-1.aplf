@@ -9,14 +9,15 @@
  #._Foo.Foo.Hello←{'World'}
  wasDir←F.Cd'MoreTests'
  xml←##.Maker.GetPublishConfig 1
- {}F.Cd wasDir
+ xml.needed⌿⍨←xml.needed[;3]≢¨⊂'Tester'         ⍝ We must not overwrite `Tester`: otherwise the remaining tests won't run
 
  ##.Maker.LoadedNeededAndEstablishRefs'Foo'xml
- →PassesIf 2=≢#._Foo.⎕NL 9.1
- →PassesIf 3=≢#._Foo.⎕NL 9.4
- →PassesIf 1=≢#._Foo.Foo.⎕NL⍳16
+ →GoToTidyUp 2≠≢#._Foo.⎕NL 9.1                  ⍝ `Foo` and `APLTreeUtils`
+ →GoToTidyUp 2≠≢#._Foo.⎕NL 9.4                  ⍝ `FilesAndDirs` and `OS`
+ →GoToTidyUp 1≠≢#._Foo.Foo.⎕NL⍳16
 
  R←∆OK
 
 ∆TidyUp:
+ {}F.Cd wasDir
 ⍝Done
