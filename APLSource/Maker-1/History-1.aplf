@@ -1,5 +1,7 @@
  History
 ⍝ * 2.2.1
+⍝   * Bug fix in `CopyToSource`.
+⍝ * 2.2.1
 ⍝   * `IncreaseBuildID` does **not** commit anything any more
 ⍝   * Method `DropBuildNumber` added.
 ⍝   * Couple of minor improvements

@@ -14,8 +14,8 @@
          U.Assert rc←'Create!'F.CheckPath toFolder,(⍴fromFolder)↓file
          dir←((⍴fromFolder)↓file),'/'
      :Else
-         subFolder←{⍵↓⍨2×(('.'=1↑⍵)∧(2⊃⍵)∊'/\')}⊃⎕NPARTS file
-         (rc more)←file F.CopyTo toFolder,dir
+         subFolder←⊃⎕NPARTS(⍴fromFolder)↓file
+         (rc more)←file F.CopyTo toFolder,subFolder
          more U.Assert 0=rc
      :EndIf
  :EndFor
