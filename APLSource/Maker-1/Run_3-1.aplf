@@ -27,12 +27,12 @@
 
  M.EraseStuff parms.erase
  M.Set_LX parms.lx
- {⍵}M.MakeWorkspace'Meddy'parms.needed
+ {⍵}M.MakeWorkspace name parms.needed
  M.UpdateVersionNumberInInno_ISS name
 ⍝ --- Create stand-alone EXE
  wsParms←M.CreateStandAloneExeParms('./',targetPath,'/',name,'.exe')name
  wsParms.icon←name,'.ico'
- wsParms.FileDescription←'Meddy (Markdown Editor)'
+ wsParms.FileDescription←     ⍝ Something like: 'Meddy (Markdown Editor)'
  wsParms.ProductVersion←(1⊃⍎'#.',name,'.Version')
  wsParms.CompanyName←'APL Team Ltd'
  wsParms.ProductName←name
