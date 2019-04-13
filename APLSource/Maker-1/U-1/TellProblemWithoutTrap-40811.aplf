@@ -1,0 +1,9 @@
+ r←{caption}TellProblemWithoutTrap msg;⎕TRAP
+⍝ Used to report a probem from within a function that needs to trap any errors.
+ ⎕TRAP←0 'S'
+ caption←{0<⎕NC ⍵:⍎⍵ ⋄ '*** There is a problem:'}'caption'
+ msg←##.A.Nest msg
+ ⎕←caption
+ ⎕←⍪' ',¨msg
+ r←~0 YesOrNo'Would you like to try again?'
+⍝Done

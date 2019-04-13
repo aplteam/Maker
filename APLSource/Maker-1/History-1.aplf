@@ -1,4 +1,7 @@
  History
+⍝ * 2.3.0
+⍝   * `RunInno` improved.
+⍝   * Bug fix on `U.YesOrNo` .
 ⍝ * 2.2.3
 ⍝   * Bug in `Run_3` fixed.
 ⍝ * 2.2.1
