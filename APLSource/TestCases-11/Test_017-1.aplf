@@ -1,4 +1,4 @@
- R←Test_017(stopFlag batchFlag);⎕TRAP;msg
+ R←Test_017(stopFlag batchFlag);⎕TRAP;msg;dmx
 ⍝ Exercise `RunInno`. The script is supposed to fail.
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
@@ -13,7 +13,12 @@
      msg,←⊂'To carry on press <enter>'
      {}⍞,0/,⍞←⍪msg
 
-     'MoreTests/'##.Maker.RunInno'inno'
+     :Trap 11
+         'MoreTests/'##.Maker.RunInno'inno'
+     :Else
+         dmx←⎕DMX
+         →PassesIf'Attempted 10 times to create the installer EXE, always failed!'≡⊃dmx.DM
+     :EndTrap
 
      R←∆OK
  :EndIf

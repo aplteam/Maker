@@ -1,4 +1,4 @@
- {r}←{path}RunInno name;cmd;rc;batFilename;buff;issFilename;flag;counter;A;F;msg
+ {r}←{path}RunInno name;cmd;rc;batFilename;buff;issFilename;flag;counter;A;F;msg;iss;issTargetRow;targetPath;targetTempFolder;more
 ⍝ Runs the INNO batch compiler in order to create an installer.\\
 ⍝ `name` is the project name; for "Fire" that would be "Fire".\\
 ⍝ This will work under three assumptions:
@@ -7,38 +7,51 @@
 ⍝ 3. The EXE lives in a sub folder of the current directory called `Dist\`.\\
 ⍝ 4. If the Inno ISS file does not exist you can specify the path via the (optional) left argument.
 ⍝ Note that this fails quite freqently for no apparent reason. However, it helps to just try again.
-⍝ Normally after 3-5 times it works but sometimes it takes longer, so we try a max of 10 times.
+⍝ Normally after 3-5 times it works but sometimes it takes longer, so we try a max of 10 times.\\
+⍝ Note that the function does some gymnastics in order to make sure that Inno compiles into a temp
+⍝ folder rather than into the designated folder because since April 2019 Drop caused headache: Inno
+⍝ refused to compile into any DropBox-managed folder since then.
  r←⍬
  counter←flag←0
  A←APLTreeUtils
  F←FilesAndDirs
  path←{0<⎕NC ⍵:⍎⍵ ⋄ F.PWD}'path'
  :Repeat
-     :Trap 0
-         counter+←1
-         ⎕←(⍕counter),' attempt to create the SetUp.exe...'
-         cmd←'"C:\Program Files (x86)\Inno Setup 5\ISCC.exe" '
-         issFilename←'expand'F.NormalizePath path,'\',name,'.iss'
-         cmd,←'"',issFilename,'"'
-         batFilename←F.GetTempFilename''
+     counter+←1
+     ⎕←(⍕counter),' attempt to create the SetUp.exe...'
+     cmd←'"C:\Program Files (x86)\Inno Setup 5\ISCC.exe" '
+     issFilename←'expand'F.NormalizePath path,'\',name,'.iss'
+    ⍝ We now exchange the designated folder againsta temp folder:
+     iss←APLTreeUtils.ReadUtf8File issFilename
+     issTargetRow←'#define TargetDir'{1⍳⍨⍺∘≡¨(≢⍺)↑¨⍵}iss
+     targetPath←1↓¯1↓{⍵/⍨{⍵∨≠\⍵}⍵='"'}issTargetRow⊃iss
+     targetTempFolder←F.GetTempFilename''
+     F.DeleteFile targetTempFolder   ⍝ Because it's a file right nwo
+     ⎕DL 0.2
+     'Could not create temporary target folder'U.Assert'Create!'F.CheckPath targetTempFolder
+     (issTargetRow⊃iss)←'#define TargetDir "',targetTempFolder,'"'
+     APLTreeUtils.WriteUtf8File issFilename iss
+    ⍝ Now we should be save
+
+     cmd,←'"',issFilename,'"'
+     batFilename←F.GetTempFilename''
+     F.DeleteFile batFilename
+     batFilename,←'.bat'
+     A.WriteUtf8File batFilename cmd
+     buff←Execute.Process batFilename
+     msg←2⊃buff
+     :If flag←∨/'Successful compile'⍷∊msg
          F.DeleteFile batFilename
-         batFilename,←'.bat'
-         A.WriteUtf8File batFilename cmd
-         buff←Execute.Process batFilename
-         msg←2⊃buff
-         :If ∨/'Compile aborted'⍷∊' ',¨msg
-         :AndIf '*** Inno run into a problem'U.TellProblemWithoutTrap⍪msg
-             :Return
-         :Else
-             :Continue
-         :EndIf
-         rc←~∨/'Successful compile'⍷∊msg
-         'Creating installer EXE failed'U.Assert 0=⊃rc
-         F.DeleteFile batFilename
-         flag←1
+
+        ⍝ Now we copy the file created by Inno over ...
+         (issTargetRow⊃iss)←'#define TargetDir "',targetPath,'"'
+         APLTreeUtils.WriteUtf8File issFilename iss
+         (rc more)←(⊃F.ListFiles targetTempFolder,'\')F.CopyTo targetPath
+         more U.Assert 0=rc
+        ⍝ ... and get rid of them temp folder.
+         F.RmDir targetTempFolder
      :Else
-         ⎕DL 1
-         'Attempted 10 times to create the installe EXE, always failed!'U.Assert 10≠counter
-     :EndTrap
+         'Attempted 10 times to create the installer EXE, always failed!'U.Assert 10≠counter
+     :EndIf
  :Until flag
 ⍝Done

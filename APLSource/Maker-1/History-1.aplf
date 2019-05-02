@@ -1,4 +1,6 @@
  History
+⍝ * 2.4.0
+⍝   * `RunInno` apparently has problems with DropBox since 2019-04. Fixed with a workarounrd.
 ⍝ * 2.3.0
 ⍝   * `RunInno` improved.
 ⍝   * Bug fix on `U.YesOrNo` .
