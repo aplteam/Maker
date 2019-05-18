@@ -1,0 +1,11 @@
+ {r}←{doNotDelete}RemoveStuffButSetupEXE path;buff;F
+⍝ Deletes everything from `path\` but (by default) `Setup_*.exe`.\\
+⍝ Optionally you can specify  what **not** to delete via the left argument.\\
+⍝ `path` is typically `Dist\`.
+ r←⍬
+ F←FilesAndDirs
+ doNotDelete←path{0<⎕NC ⍵:⍵ ⋄ ⊃F.Dir ⍺,'Setup_*.exe'}'doNotDelete'
+ F.DeleteFile(⊃F.Dir path)~doNotDelete
+ buff←F.RmDir¨F.ListDirs path
+ ('Cleaning up "',path,'" failed!')U.Assert 0=+/⊃¨buff
+⍝Done

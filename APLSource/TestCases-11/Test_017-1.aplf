@@ -14,10 +14,11 @@
      {}⍞,0/,⍞←⍪msg
 
      :Trap 11
-         'MoreTests/'##.Maker.RunInno'inno'
+         {}'MoreTests/'##.Maker.RunInno'inno'
+         →FailsIf 1
      :Else
          dmx←⎕DMX
-         →PassesIf'Attempted 10 times to create the installer EXE, always failed!'≡⊃dmx.DM
+         →PassesIf'Inno compiler did abort'≡⊃dmx.DM
      :EndTrap
 
      R←∆OK
