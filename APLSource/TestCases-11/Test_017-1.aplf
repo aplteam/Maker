@@ -1,18 +1,12 @@
- R←Test_017(stopFlag batchFlag);⎕TRAP;msg;dmx
+ R←Test_017(stopFlag batchFlag);⎕TRAP;dmx
 ⍝ Exercise `RunInno`. The script is supposed to fail.
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  :If batchFlag
      R←∆NoBatchTest
  :Else
-     R←∆Failed
-     msg←''
-     msg,←⊂'This test needed you!'
-     msg,←⊂'When asked whether you want to give the Inno compile a second try just press <enter> (="no")'
-     msg,←⊂''
-     msg,←⊂'To carry on press <enter>'
-     {}⍞,0/,⍞←⍪msg
 
+     R←∆Failed
      :Trap 11
          {}'MoreTests/'##.Maker.RunInno'inno'
          →FailsIf 1
@@ -22,5 +16,6 @@
      :EndTrap
 
      R←∆OK
+
  :EndIf
 ⍝Done
