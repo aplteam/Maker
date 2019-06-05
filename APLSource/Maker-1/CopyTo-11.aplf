@@ -1,20 +1,19 @@
- {r}←x CopyTo y;rc;more;list;this
+ {r}←x CopyTo y;success;more;list;rc
 ⍝ Copy `x` to `y`.\\
 ⍝ `x` can be one of:
 ⍝ * A nested vector of character vectors, each being a filename.
 ⍝ * A simple string representing either a filename or a folder. If it is a folder than all files
-⍝   within that folder are copied over. However, sub-folders are ignored!\\
+⍝   within that folder are copied over including any sub-folders and their content.
+⍝   Sub folders may or may not exist.\\
 ⍝ Checks the return code and throws an error in case something went wrong.\\
-⍝ Returns always `⍬`.
+⍝ Returns '' in case x is not a folder and a list of files and folders copied otherwise.
  r←⍬
  :If FilesAndDirs.IsDir x
-     list←⊃FilesAndDirs.Dir x,'\*'
-     list/⍨←FilesAndDirs.IsFile¨list
-     :For this :In list
-         (rc more)←this FilesAndDirs.CopyTo y
-         more U.Assert 0=rc
-     :EndFor
+     (success more list)←x FilesAndDirs.CopyTree y
+     'Investigate "more" and "list": something went wrong'U.Assert success
+     r←list
  :Else
+     'Could not create target directory'U.Assert'Create!'FilesAndDirs.CheckPath y
      (rc more)←x FilesAndDirs.CopyTo y
      more U.Assert 0=rc
  :EndIf

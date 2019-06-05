@@ -10,7 +10,7 @@
 
  :If 'kai'≡A.Lowercase ⎕AN
      path←##.Maker.GetUserCommandFolder'fire_uc.dyalog'       ⍝ Exists on my PCs, therefore the check for ⎕AN
-     →PassesIf∨/'\usercommands\aplteam\'⍷A.Lowercase path
+     →PassesIf∨/'c:\users\kai\documents\myucmds'⍷A.Lowercase path
  :EndIf
 
  R←∆OK

@@ -1,13 +1,16 @@
- {toFolder}←CopyToSource(fromFolder projectName);rc;en;more;file;files;subFolder;dir;⎕IO;⎕ML;F
-⍝ Copies the contents of `fromFolder` with the exception of any ZIP files to
-⍝ the source folder specified by `U.GetSourceFolder`.\\
+ {toFolder}←{removeZipFiles}CopyToSource(fromFolder projectName);rc;en;more;file;files;subFolder;dir;⎕IO;⎕ML;F
+⍝ Copies the contents of `fromFolder` to the source folder specified by `U.GetSourceFolder`.\\
+⍝ You can exclude any zip files by specifying the string 'nozip' as left argument.\\
 ⍝ Do **not** use this function in case the project results just in a single script file.\\
  ⎕IO←1 ⋄ ⎕ML←1
+ removeZipFiles←'nozip'≡,{0<⎕NC ⍵:⍎⍵ ⋄ ''}'removeZipFiles'
  F←FilesAndDirs
  toFolder←##.Maker.U.GetSourceFolder projectName,'/'
  RecreateFolder toFolder
  files←⊃('recursive' 1)F.Dir fromFolder
- files/⍨←{'.zip'≢APLTreeUtils.Lowercase ¯4↑⍵}¨files       ⍝ Remove all ZIP files
+ :If removeZipFiles
+     files/⍨←{'.zip'≢APLTreeUtils.Lowercase ¯4↑⍵}¨files       ⍝ Remove all ZIP files
+ :EndIf
  dir←''
  :For file :In files
      :If F.IsDir file

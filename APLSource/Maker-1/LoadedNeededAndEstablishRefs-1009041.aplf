@@ -1,4 +1,4 @@
- {r}←{loadInto}LoadedNeededAndEstablishRefs(name XML);needed;ref;sourcePath;bool;neededScripts;attr;obj;path;wsname;target
+ {r}←{loadInto}LoadedNeededAndEstablishRefs(name XML);needed;ref;sourcePath;bool;neededScripts;attr;obj;path;wsname;target;lib
 ⍝ Loads and establishes references to all scripts needed by the project
 ⍝ to be loaded, like `APLTreeUtils`. It also copies needed stuff from workspaces.\\
 ⍝ `loadInto` defaults to '#' but can be the name (NOT a ref!) to any existing namespace.
@@ -8,6 +8,7 @@
  r←⍬
  loadInto←{0<⎕NC ⍵:⍎⍵ ⋄ '#'}'loadInto'
  needed←XML.needed
+ needed←({0=≢⍵:1 ⋄ ind←⍵[;1]⍳⊂'development' ⋄ ind>≢⍵:1 ⋄ ~(⍵[ind;2])∊'true' '1'}¨needed[;4])⌿needed
  bool←needed[;2]≡¨⊂'script'
  sourcePath←U.GetSourceFolder''
  target←'#._',name     ⍝ By naming convention
@@ -20,6 +21,14 @@
  :For wsname attr :In ↓bool⌿needed[;3 4]
      obj←'copy'xml.GetAttributeFrom attr
      path←FilesAndDirs.NormalizePath sourcePath,wsname,'/',wsname,'.dws'
+     :If 0<≢lib←⊃APLTreeUtils.Uppercase'lib'xml.GetAttributeFrom attr
+         :If '[DYALOG]'≡lib
+             path←(2 ⎕NQ'#' 'GetEnvironment' 'DYALOG'),'\ws\',wsname
+         :Else
+             ∘∘∘ ⍝ Not implemented (or documented) yet, and it's not clear whether we have a use case for this.
+         :EndIf
+     :EndIf
      (↑obj)#.⎕CY path
+     ref.{⍎⍵,'←#.',⍵}¨obj
  :EndFor
 ⍝Done

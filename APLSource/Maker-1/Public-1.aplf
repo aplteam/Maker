@@ -4,7 +4,7 @@
 ⍝ They were added in order to make sure that they appear in the documentation.
  r←''
  r,←'CopyToSource' 'CreateZipFile' 'GetPublishConfig' 'Public' 'RecreateFolder' 'GetUserCommandFolder'
- r,←'MakeWorkspace' 'IncreaseBuildID' 'ConvertMarkdownToHtml5In'
+ r,←'MakeWorkspace' 'IncreaseBuildID' 'ConvertMarkdownToHtml5In' 'Distribute2AllUserCommandFolders'
  r,←'UpdateVersionNumberInInno_ISS' 'CopyTo' 'MakeStandAloneRunTimeExe' 'CreateStandAloneExeParms'
  r,←'ProcessSingleScriptProjects' 'LoadedNeededAndEstablishRefs' 'EraseStuff' 'CopyToUserCommandFolderWithPrompt'
  ⍝ Special:

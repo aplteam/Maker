@@ -9,10 +9,12 @@
  #._Foo.Foo.Hello←{'World'}
  wasDir←F.Cd'MoreTests'
  xml←##.Maker.GetPublishConfig 1
- xml.needed⌿⍨←xml.needed[;3]≢¨⊂'Tester'         ⍝ We must not overwrite `Tester`: otherwise the remaining tests won't run
+
+ ⍝ ↓↓↓ We add `DRC` from the "Conga" workspace ↓↓↓
+ xml.needed⍪←2 'ws' 'Conga'(↑('lib' '[DYALOG]')('copy' 'DRC'))5
 
  ##.Maker.LoadedNeededAndEstablishRefs'Foo'xml
- →GoToTidyUp 2≠≢#._Foo.⎕NL 9.1                  ⍝ `Foo` and `APLTreeUtils`
+ →GoToTidyUp 3≠≢#._Foo.⎕NL 9.1                  ⍝ `Foo`, `APLTreeUtils` and `DRC`
  →GoToTidyUp 2≠≢#._Foo.⎕NL 9.4                  ⍝ `FilesAndDirs` and `OS`
  →GoToTidyUp 1≠≢#._Foo.Foo.⎕NL⍳16
 

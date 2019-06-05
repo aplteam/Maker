@@ -1,4 +1,7 @@
  Initial
- ##.Maker.F←##.Maker.FilesAndDirs
- ##.Maker.A←##.Maker.APLTreeUtils
+ ##.Maker.U.LoadAllScriptsNeededByMaker 0
+ :If ~#.WinSys.IsRunningAsAdmin
+     ⎕←'This test suite will be executed without admin rights'
+     ⎕←'How, it should also be executed WITH admin rights.'
+ :EndIf
 ⍝Done

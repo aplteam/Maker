@@ -12,7 +12,6 @@
  targetFolder←##.Maker.CopyToSource'./Tests/' 'Maker_Test_003'
 
  list1←⊃('recursive' 1)F.Dir'./Tests/'
- list1/⍨←'.zip'∘≢¨##.APLTreeUtils.Lowercase ¯4↑¨list1
  list1←(⍴'expand'F.NormalizePath'./Tests/')↓¨'expand'∘F.NormalizePath¨list1
  list2←(⍴##.Maker.U.GetSourceFolder'Maker_Test_003/')↓¨⊃('recursive' 1)F.Dir targetFolder
  →GoToTidyUp list1≢list2

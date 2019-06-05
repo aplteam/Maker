@@ -1,0 +1,27 @@
+ {r}←Distribute2AllUserCommandFolders y;this;path;success;more;list;installPaths;buff
+⍝ Copies either...
+⍝ * everything but ZIP and EXE files from `x\` in case `x` is a folder...
+⍝ * all files installedAPLsed in `x` (simple text vector or vector of text vectors)...
+⍝ ... to the user command folders of all Dyalog installations on the current machine.\\
+⍝ This is typically used for something like ADOC.\\
+⍝ Note that this requires Admin rights.\\
+⍝ Returns an integer with the number of files/folders copied as shy result.
+ installPaths←U.GetAllDyalogInstallFolders
+ r←0
+ :For this :In installPaths
+     path←this,'\SALT\Spice\'
+     :If 1=≡y
+     :AndIf FilesAndDirs.IsDir y
+         (success more list)←y FilesAndDirs.CopyTree path
+         :If ~success
+             buff←' (',(more{0=≢⍺:{⊃{⍺,', ',w}/∪⍵~⊂''}list[;3] ⋄ ⍺,{⊃{⍺,', ',⍵}/∪⍵}list[;3]}list),')'
+             buff←((⍕list[;2]+.≠0),' problems! '),buff,'; check "list"'
+             buff U.Assert 0
+         :EndIf
+         r+←≢list
+     :Else
+         r←≢y←APLTreeUtils.Nest y
+         path∘{⍵ CopyTo ⍺}¨y
+     :EndIf
+ :EndFor
+⍝Done

@@ -1,0 +1,8 @@
+ r←GetAllDyalogInstallFolders;installedAPLs;reg
+⍝ Returns a vector of vectors with the folder names of all versions of Dyalog installed on this machine.
+ r←''
+ reg←##.WinReg.GetAllSubKeyNames'Software\Dyalog\'
+ :If 0<≢reg←('Dyalog '∘{⍺≡(≢⍺)↑⍵}¨reg)/reg
+     r←{##.WinReg.GetValue'Software\Dyalog\',⍵,'\Dyalog'}¨reg
+ :EndIf
+⍝Done
