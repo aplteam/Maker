@@ -10,5 +10,5 @@
      buff←'⍝.* \*\*\* Version'⎕S 2 1⍠('Greedy' 0)⊣⍺
      0∊⍴buff:'Could not establish version number?!'⎕SIGNAL 11
      (item offset)←1⊃buff
-     {⍵↑⍨¯1+⍵⍳' '}APLTreeUtils.dlb offset↓(item+1)⊃⍺
+     {⍵↑⍨¯1+⍵⍳' '}##.APLTreeUtils.dlb offset↓(item+1)⊃⍺
  }

@@ -1,9 +1,5 @@
  History
-⍝ * 2.6.0
-⍝   * `LoadedNeededAndEstablishRefs` now ...
-⍝     * ignores scripts and workspaces that are marked `'development' 'true'`.
-⍝     * understands `[DYALOG]` (in publish.config) for copying stuff from a WS.
-⍝     * provides sensible information in case it fails due the lack of acess rights:
-⍝       this function needs admin rights!
+⍝ * 2.6.1
+⍝   * `U.GetVersioNoFromScript` crashed on `APLTreeUtils`.
 ⍝\\
 ⍝ For information regarding older versions see <https://github.com/aplteam/Maker/releases>
