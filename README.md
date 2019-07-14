@@ -58,5 +58,7 @@ including a call to `LoadAllScriptsNeededByMaker`.
 
 Kai Jaeger 
 
-| Created:       | 2019-01-09|
-| Latest update: | 2019-07-13 |
+What          | Date
+--------------|-----------
+Created       | 2019-01-09
+Latest update | 2019-07-13
