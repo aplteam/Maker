@@ -1,5 +1,3 @@
-[parm]:saveHTML = 0
-
 # Maker
 
 `Maker` is a framework that makes building an application a breeze when certain conditions and assumptions are met:
