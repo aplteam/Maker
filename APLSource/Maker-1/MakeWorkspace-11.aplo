@@ -1,10 +1,14 @@
- {r}←(fns MakeWorkspace)(name xml);⎕ML;⎕IO;needed
+ {r}←{toBeCopied}(fns MakeWorkspace)(name xml);⎕ML;⎕IO;needed
 ⍝ Note: not suitable for root projects!
 ⍝ This function assumes that everything needed for an application is available in the current WS.\\
 ⍝ `name` is the name of the application (not the top namespace!). For example, for Fire it is "Fire".\\
 ⍝ `needed` is a vector of names that identify everything in root that, well, is needed.\\
 ⍝ `fns` is a function to be executed by `MakeWorkspace` after the WS got reorganzied. This function must be
-⍝ monadic. It is supposed to return either no result or a shy result.\\
+⍝ monadic. The function is fed with `name` and `xml` as right argument.\\
+⍝ The function is supposed to return either no result or a shy result.\\
+⍝ The optional left argument `toBeCopied` might be either empty (no action) or a simple text vector specifying
+⍝ the name of a single APL object or a vector of text vectors specifying the names of several APL objects.
+⍝ These objects are then copied from `#._{projectName}` as well.\\
 ⍝ This workspace performs the following steps:
 ⍝ 1. It deletes everything except what's listed in the vector of names `needed`. This includes the
 ⍝    namespace this function lives in.
@@ -16,6 +20,7 @@
 ⍝    This is typically a function like `Fire.Reset` that restores global variables etc.
 ⍝ 7. It saves the current WS.
  r←⍬
+ toBeCopied←{0<⎕NC ⍵:⍎⍵ ⋄ ''}'toBeCopied'
  ⎕IO←1 ⋄ ⎕ML←1
  needed←(xml[;2]≡¨⊂'script')⌿xml[;3]
  needed,←{⊃⍵[;2]/⍨'copy'∘≡¨⍵[;1]}¨(xml[;2]≡¨⊂'ws')⌿xml[;4]
@@ -23,7 +28,11 @@
  ⎕EX'#.',name,'.AcreConfig'
  0 ⎕SAVE ⎕WSID
  ('#._',name,'.',name)#.⎕CY ⎕WSID
+ :If 0<≢toBeCopied
+     toBeCopied←APLTreeUtils.Nest toBeCopied
+     name∘{('#._',⍺,'.',⍵)#.⎕CY ⎕WSID}¨toBeCopied
+ :EndIf
  #.⎕EX'_',name
- {}(fns{0::0 ⋄ ⍺⍺ ⍵})⍬
+ {}(fns{0::0 ⋄ ⍺⍺ ⍵})name xml
  0 ⎕SAVE ⎕WSID
 ⍝Done

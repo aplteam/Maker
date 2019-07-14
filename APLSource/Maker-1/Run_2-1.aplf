@@ -16,7 +16,7 @@
  F.PolishCurrentDir
  M.RecreateFolder targetPath
  parms←M.GetPublishConfig 0
- M.LoadedNeededAndEstablishRefs parms.needed
+ M.LoadNeededAndEstablishRefs parms.needed
  M.U.Assert 0≠≢projName←⎕SE.UCMD'acre.OpenProject ',F.PWD
 
 ⍝ If it is a function within a namespace:

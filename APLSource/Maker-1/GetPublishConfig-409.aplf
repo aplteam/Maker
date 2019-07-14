@@ -1,14 +1,14 @@
  parms←GetPublishConfig isDevelopment;XML;needed;⎕ML;⎕IO
 ⍝ Reads the "publish.config" file and translates it into a namespace with variables.\\
 ⍝ Note that if `isDevelopment` is 0 then anything that's "needed" but carries an attribute
-⍝ `development="1"` is **ignored**!
+⍝ `development="true"` is **ignored**!
  ⎕IO←1 ⋄ ⎕ML←1
  parms←⎕NS''
  XML←⎕XML'flat'APLTreeUtils.ReadUtf8File'publish.config'
  parms.needed←'needs'xml.GetRangeFrom XML
  :If 0=isDevelopment
      ⍝ Remove what's only needed for development:
-     parms.needed⌿⍨←'true'≢⊃∘⊃¨'development'∘xml.GetAttributeFrom¨parms.needed[;4]
+     parms.needed⌿⍨←~(⊃¨'development'∘xml.GetAttributeFrom¨parms.needed[;4])∊,¨'true' '1'
  :EndIf
  parms.files←'files'xml.GetRangeFrom XML
  parms.erase←'erase'xml.GetRangeFrom XML

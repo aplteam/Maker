@@ -1,21 +1,20 @@
- {r}←{loadInto}LoadedNeededAndEstablishRefs(name XML);needed;ref;sourcePath;bool;neededScripts;attr;obj;path;wsname;target;lib
+ {r}←{loadInto}LoadNeededAndEstablishRefs(name XML);needed;ref;sourcePath;bool;neededScripts;attr;obj;path;wsname;target;lib
 ⍝ Loads and establishes references to all scripts needed by the project
 ⍝ to be loaded, like `APLTreeUtils`. It also copies needed stuff from workspaces.\\
-⍝ `loadInto` defaults to '#' but can be the name (NOT a ref!) to any existing namespace.
+⍝ `loadInto` defaults to `#` but can be the name (**not** a ref!) to any existing namespace.
 ⍝ Call this function **before** the acre project is opened!\\
 ⍝ `name` is the name of the project, like "Fire".\\
-⍝ `parms` is the contents of `public.config` as a namespace.\\
+⍝ `XML` is the contents of `public.config` as a namespace.\\
  r←⍬
- loadInto←{0<⎕NC ⍵:⍎⍵ ⋄ '#'}'loadInto'
+ loadInto←{0<⎕NC ⍵:⍕⍎⍵ ⋄ '#'}'loadInto'
  needed←XML.needed
- needed←({0=≢⍵:1 ⋄ ind←⍵[;1]⍳⊂'development' ⋄ ind>≢⍵:1 ⋄ ~(⍵[ind;2])∊'true' '1'}¨needed[;4])⌿needed
  bool←needed[;2]≡¨⊂'script'
  sourcePath←U.GetSourceFolder''
  target←'#._',name     ⍝ By naming convention
  :If 0<≢neededScripts←bool⌿needed[;3]
      ref←⍎target ⎕NS''     ⍝ By naming convention
-     loadInto{⎕SE.SALT.Load sourcePath,⍵,' -target=',⍺}¨neededScripts
-     ref.{⍎⍵,'←#.',⍵}¨neededScripts
+     loadInto∘{⎕SE.SALT.Load sourcePath,⍵,' -target=',⍺}¨neededScripts
+     loadInto∘ref.{⍎⍵,'←',⍺,'.',⍵}¨neededScripts
  :EndIf
  bool←~bool ⍝ The workspaces
  :For wsname attr :In ↓bool⌿needed[;3 4]

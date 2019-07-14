@@ -6,7 +6,7 @@
  r,←'CopyToSource' 'CreateZipFile' 'GetPublishConfig' 'Public' 'RecreateFolder' 'GetUserCommandFolder'
  r,←'MakeWorkspace' 'IncreaseBuildID' 'ConvertMarkdownToHtml5In' 'Distribute2AllUserCommandFolders'
  r,←'UpdateVersionNumberInInno_ISS' 'CopyTo' 'MakeStandAloneRunTimeExe' 'CreateStandAloneExeParms'
- r,←'ProcessSingleScriptProjects' 'LoadedNeededAndEstablishRefs' 'EraseStuff' 'CopyToUserCommandFolderWithPrompt'
+ r,←'ProcessSingleScriptProjects' 'LoadNeededAndEstablishRefs' 'EraseStuff' 'CopyToUserCommandFolderWithPrompt'
  ⍝ Special:
  r2←'Run_1' 'Run_2' 'Run_3'
  ⎕IO←1 ⋄ ⎕ML←1

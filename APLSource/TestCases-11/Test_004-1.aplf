@@ -8,12 +8,12 @@
  wasDir←##.Maker.FilesAndDirs.Cd'MoreTests'
  parms←##.Maker.GetPublishConfig 0
  {}##.Maker.FilesAndDirs.Cd wasDir
- →PassesIf 4=≢parms.needed
+ →PassesIf 3=≢parms.needed
 
  wasDir←##.Maker.FilesAndDirs.Cd'MoreTests'
  parms←##.Maker.GetPublishConfig 1
  {}##.Maker.FilesAndDirs.Cd wasDir
- →PassesIf 4=≢parms.needed
+ →PassesIf 5=≢parms.needed
  →PassesIf 1=⊃∪⍴∘⍴¨parms.{⍴¨⍎¨⎕NL-2}⍬
 
  R←∆OK

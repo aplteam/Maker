@@ -9,7 +9,7 @@
  projName←'ProjectSpace'{{⍵↑⍨¯1+⍵⍳''''}⍵↓⍨(4+⍴⍺)+1⍳⍨⍺⍷⍵}∊A.ReadUtf8File'acre.config'
  RecreateFolder targetPath
  parms←GetPublishConfig 0
- LoadedNeededAndEstablishRefs projName parms
+ LoadNeededAndEstablishRefs projName parms
  {}⎕SE.UCMD'acre.openproject ','expand'FilesAndDirs.NormalizePath'./'
  ref←⍎pathInWS←'#._',projName,'.',projName
  'Not a script-only project!'⎕SIGNAL 11/⍨(,'1')≢,parms.script
