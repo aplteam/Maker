@@ -6,7 +6,7 @@
 
 * It requires an XML file `publish.config` to be around specifying the properties of the project to be build.
 
-   The tags and attributes of `publish.config` are documented in the file `publish-config.md`.
+   The tags and attributes of `publish.config` are documented in the file `publish-config.html`.
   
 * The target is always a folder `Dist\` in the current directory.
 * The project is managed by acre.
