@@ -1,7 +1,13 @@
  R←Test_003(stopFlag batchFlag);⎕TRAP;F;folder;zipFilename;rc;targetFolder;list1;list2
-⍝ Exercise `CopyToSource`
+⍝ Exercise `CopyToSource`.
+⍝ Needs the user.
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←∆Failed
+
+ :If batchFlag
+     R←∆NoBatchTest
+     :Return
+ :EndIf
 
  F←##.Maker.FilesAndDirs
 

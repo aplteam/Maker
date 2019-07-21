@@ -1,0 +1,12 @@
+ R←Test_101(stopFlag batchFlag);⎕TRAP;commandline;buff;expected
+⍝ Exercise `U.GetCommandLineArgs`
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+ R←∆Failed
+
+ commandline←'dyalog.exe /path2ws/myws.dws  -goo=1E4 -abc -foo -maxws=6533 -start="do   it!"     -qwe'
+ buff←commandline ##.Maker.U.GetCommandLineArgs ⍬
+ expected←↑('goo' '1E4' 1 1)('abc'⎕NULL 0 0)('foo'⎕NULL 0 0)('maxws' '6533' 1 1)('start' 'do   it!' 1 0)('qwe'⎕NULL 0 0)
+ →PassesIf expected≡buff
+
+ R←∆OK
+⍝Done

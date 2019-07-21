@@ -1,0 +1,11 @@
+ r←name GetValueFrom keyValueMat;ind
+⍝ `keyValueMat` is a matrix with two columns:
+⍝ [;1] keys
+⍝ [2]; values
+⍝ Return ⎕NULL in case the value could not be found.
+ r←⎕NULL
+ ind←keyValueMat[;1]⍳⊂name
+ :If ind≤≢keyValueMat
+     r←1↓keyValueMat[ind;]
+ :EndIf
+⍝Done

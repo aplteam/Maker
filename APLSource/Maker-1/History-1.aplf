@@ -1,16 +1,5 @@
  History
-⍝ * 3.0.0
-⍝   * `MakeWorkspace` extended:
-⍝     * The user function gets useful information fed now.
-⍝     * New option `<CopyFromProjectNamespace>` is now honoured.
-⍝   * All options of the publish.config file documented.
-⍝   * Bug fixes
-⍝     * `LoadNeededAndEstablishRefs` renamed into `LoadNeededAndEstablishRefs`.
-⍝        This is potentially a  _**breaking change**_.
-⍝     * `LoadNeededAndEstablishRefs` did remove anything marked as `development="true"`; that
-⍝       was wrong as this was already dealt with by `GetPublishConfig`.
-⍝     * The (optional) left argument of `LoadNeededAndEstablishRefs` was not handled correctly.
-⍝     * Documentation of `LoadNeededAndEstablishRefs` corrected.
-⍝     * README.md polished.
+⍝ * 3.1.0
+⍝   * `CopyToSource` now asks the user whether she wants to copy over to the _source\ folder.
 ⍝\\
 ⍝ For information regarding older versions see <https://github.com/aplteam/Maker/releases>

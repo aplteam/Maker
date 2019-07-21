@@ -1,0 +1,22 @@
+ r←{cl}GetCommandLineArgs dummy;cl;A
+⍝ Returns a matrix with three columns
+⍝ [;1] name
+⍝ [;2] value in case [;3] is 1 and ⎕NULL otherwise
+⍝ [;3] flag: 0=options, 1=value
+⍝ [;4] flag: valid numeric representation
+⍝ The left argument is used by test cases only.
+ r←0 3⍴⎕NULL
+ A←##.APLTreeUtils
+ :If 0=⎕NC'cl'
+     cl←2 ⎕NQ'#' 'GetCommandLine'   ⍝ Command line
+ :EndIf
+ cl←{b←{~{⍵∨≠\⍵}⍵='"'}⍵ ⋄ ⍵⊂⍨b\' '=b/⍵}' ',cl
+ cl←A.dlb cl~⊂,' '
+ cl←1↓¨('-'=⊃¨cl)/cl
+ :If 0<≢cl
+     r←↑{'='∊⍵:('='A.Split ⍵),1 ⋄ ⍵ ⎕NULL 0}¨cl
+     r[;2]←{'""'≢2⍴¯1⌽⍵:⍵ ⋄ 1↓¯1↓⍵}¨r[;2]
+     r,←{⎕NULL≡⍵:0 ⋄ ⊃⊃⎕VFI ⍵~' '}¨r[;2]
+     r[;1]←A.Lowercase r[;1]
+ :EndIf
+ ⍝Done
