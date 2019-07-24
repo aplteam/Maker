@@ -1,5 +1,5 @@
  History
-⍝ * 3.1.0
-⍝   * `CopyToSource` now asks the user whether she wants to copy over to the _source\ folder.
+⍝ * 3.1.1
+⍝   * Documentation polished
 ⍝\\
 ⍝ For information regarding older versions see <https://github.com/aplteam/Maker/releases>

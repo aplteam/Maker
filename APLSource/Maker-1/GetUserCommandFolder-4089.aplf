@@ -4,7 +4,7 @@
 ⍝ It will then try to find `userCommandScriptName` in any of these folders. If it is a re-install
 ⍝ then it will find it and return the directory it was previously installed in.\\
 ⍝ If it does not then it will return the default directory for user defined user commands
-⍝ which is `%USERPROFILE%Documents\MyUCMDs`.\\
+⍝ which is `%USERPROFILE%\Documents\MyUCMDs`.\\
 ⍝ However, do not confuse the name `userCommandScriptName` with the name of a user command:
 ⍝ it is the full name of the **script**. For example, for `]Fire` it is `fire_uc.dyalog`!
  ⎕IO←1 ⋄ ⎕ML←1

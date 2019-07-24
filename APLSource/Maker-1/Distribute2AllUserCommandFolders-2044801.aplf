@@ -1,10 +1,10 @@
  {r}←Distribute2AllUserCommandFolders y;this;path;success;more;list;installPaths;buff
 ⍝ Copies either...
-⍝ * everything but ZIP and EXE files from `x\` in case `x` is a folder...
-⍝ * all files installedAPLsed in `x` (simple text vector or vector of text vectors)...
-⍝ ... to the user command folders of all Dyalog installations on the current machine.\\
+⍝ * everything but ZIP and EXE files from `x\` in case `x` is a folder
+⍝ * all files installed in `x` (simple text vector or vector of text vectors)
+⍝ ... to the user command folders of all **_Dyalog installations_** on the current machine.\\
 ⍝ This is typically used for something like ADOC.\\
-⍝ Note that this requires Admin rights.\\
+⍝ Note that executing this function requires Admin rights.\\
 ⍝ Returns an integer with the number of files/folders copied as shy result.
  installPaths←U.GetAllDyalogInstallFolders
  r←0
