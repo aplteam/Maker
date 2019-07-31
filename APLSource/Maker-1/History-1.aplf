@@ -1,4 +1,10 @@
  History
+⍝ * 3.2.0
+⍝   * publish-config.md polished.
+⍝   * `CopyToUserCommandFolderWithPrompt` now accepts an optional left argument.
+⍝   * Bug fixes:
+⍝     * `CopyToUserCommandFolderWithPrompt` did not prompt the user.
+⍝     * `Run_2` and `Run_3` updated.
 ⍝ * 3.1.1
 ⍝   * Documentation polished
 ⍝\\

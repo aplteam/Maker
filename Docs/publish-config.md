@@ -148,7 +148,7 @@ This is an example: `<lx>#.AutoHotkey.Run</lx>`
 
 This tag should carry either 0 or 1 as value. 
 
-If it is a 1 then the user command `]RunMake` makes sure that the instance of Dyalog that will load the workspace `Make.dws` and run its `⎕LX` will require admin rights.
+If it is a 1 then the user command `]RunMake` makes sure that the instance of Dyalog that will load the workspace `Make.dws` and run its `⎕LX` will be started in elevated mode.
 
 ### The `<initial>` tag
 

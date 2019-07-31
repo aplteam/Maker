@@ -16,7 +16,7 @@
  F.PolishCurrentDir
  M.RecreateFolder targetPath
  parms←M.GetPublishConfig 0
- M.LoadNeededAndEstablishRefs parms.needed
+ M.LoadNeededAndEstablishRefs parms
  M.U.Assert 0≠≢projName←⎕SE.UCMD'acre.OpenProject ',F.PWD
 
 ⍝ If it is a function within a namespace:
@@ -27,9 +27,9 @@
 
  M.EraseStuff parms.erase
  M.Set_LX parms.lx                          ⍝ or ⎕LX←''
- {⍵}M.MakeWorkspace name parms.needed
+ {⍵}M.MakeWorkspace name parms
  (targetPath,name,'/')M.ConvertMarkdownToHtml5In'Docs/'
- (name,'dws')M.CopyTo targetPath
+ (name,'.dws')M.CopyTo targetPath
  ({⍬}M.CreateZipFile)name targetPath
  M.CopyToSource targetPath name
  M.CopyToUserCommandFolderWithPrompt targetPath
