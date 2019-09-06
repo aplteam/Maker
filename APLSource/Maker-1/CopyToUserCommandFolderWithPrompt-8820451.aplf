@@ -23,7 +23,7 @@
      :If 0=⎕NC'toFolder'
          toFolder←(GetUserCommandFolder⊃list),(~copyContent)/'/',⊃¯1↑('/'APLTreeUtils.Split path)~⊂''
      :Else
-         toFolder←(GetUserCommandFolder''),'\',toFolder
+         toFolder←(GetUserCommandFolder''),'\',⍕toFolder
      :EndIf
      ⎕←'*** To be copied:'
      ⎕←' ',' ',↑list

@@ -156,5 +156,9 @@ If this tag exists at all it must carry the name of a fully qualified function n
 
 The user command `]OpenMyProject` will execute that function automatically after the acre project was opened.
 
+### The `<scriptonly>` tag
+
+This is either 1 or 0. A 1 means that the project consists of a single script and nothing else.
+
 
 [^appr]: "Appropriate" is the oldest version of Dyalog APL supported for a given project.

@@ -25,13 +25,13 @@
  ##.APLTreeUtils.WriteUtf8File(tempFolder,'\______TestFile2.dyalog')'Second file'
  ##.APLTreeUtils.WriteUtf8File(tempFolder,'\______TestFile3.dyalog')'Third file'
  ##.APLTreeUtils.WriteUtf8File(tempFolder,'\______TestFile4.zip')'Pretends to be a zip file'
- 1 ##.Maker.CopyToUserCommandFolderWithPrompt tempFolder
+ ##.Maker.CopyToUserCommandFolderWithPrompt tempFolder
  →GoToTidyUp 1≠F.IsFile userCommandFolder,'/',(⊃¯1↑('\'##.APLTreeUtils.Split tempFolder)~⊂''),'\______TestFile1.dyalog'
  →GoToTidyUp 1≠F.IsFile userCommandFolder,'/',(⊃¯1↑('\'##.APLTreeUtils.Split tempFolder)~⊂''),'\______TestFile2.dyalog'
  →GoToTidyUp 1≠F.IsFile userCommandFolder,'/',(⊃¯1↑('\'##.APLTreeUtils.Split tempFolder)~⊂''),'\______TestFile3.dyalog'
  →GoToTidyUp 0≠F.IsFile userCommandFolder,'/',(⊃¯1↑('\'##.APLTreeUtils.Split tempFolder)~⊂''),'\______TestFile4.zip'
 
- 1 ##.Maker.CopyToUserCommandFolderWithPrompt tempFolder,'\*'
+ ##.Maker.CopyToUserCommandFolderWithPrompt tempFolder,'\*'
  →GoToTidyUp 1≠F.IsFile userCommandFolder,'/______TestFile1.dyalog'
  →GoToTidyUp 1≠F.IsFile userCommandFolder,'/______TestFile2.dyalog'
  →GoToTidyUp 1≠F.IsFile userCommandFolder,'/______TestFile3.dyalog'

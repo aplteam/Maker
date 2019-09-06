@@ -1,4 +1,8 @@
  History
+⍝ * 3.2.1
+⍝   * Bug fixes:
+⍝     * The new format of the acre.config file (JSON!) crashed `ProcessSingleScriptProjects`.
+⍝     * Documentation polished (`<scriptOnly>` tag).
 ⍝ * 3.2.0
 ⍝   * publish-config.md polished.
 ⍝   * `CopyToUserCommandFolderWithPrompt` now accepts an optional left argument.

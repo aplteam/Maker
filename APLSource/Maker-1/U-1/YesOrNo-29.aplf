@@ -1,5 +1,5 @@
  yesOrNo←{default}YesOrNo question;isOkay;answer;add
-⍝ Ask a simple question and allows just "Y"(es) or "N"(o) as answers.
+⍝ Ask a simple question and allows just "Yes" or "No" as answers.
 ⍝ You may specify a default via the optional left argument which when specified
 ⍝ rules what happens when the user just presses <enter>.
 ⍝ `default` must be either 1 (yes) or 0 (no).
@@ -30,8 +30,9 @@
  :Repeat
      ⍞←question
      answer←⍞
-     :If (≢answer)=¯1+≢question     ⍝ Did the user...
-     :OrIf 0=≢answer                ⍝ ...just press <enter>?
+     :If (≢answer)=¯1+≢question                 ⍝ Did the...
+     :OrIf 0=≢answer                            ⍝ ...user just...
+     :OrIf answer≡{⍵↓⍨-+/∧\' '=⌽⍵}⎕PW↓question  ⍝ ...press <enter>?
          :If 0≠≢default
              yesOrNo←default
              isOkay←1
