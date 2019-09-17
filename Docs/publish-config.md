@@ -12,9 +12,9 @@ The XML file `publish.config` is used by two different processes:
 
 2. When running the user command `]RunMake`. 
 
-   This user command run a BAT script `Make.bat` which starts an instance of Dyalog APL with the appropriate version[^appr]. It then loads the workspace `Make.dws` and runs `⎕LX` which is always `#.Make.Run`.
+   This user command runs a BAT script `Make.bat` which starts an instance of Dyalog APL with the appropriate version[^appr]. It then loads the workspace `Make.dws` and runs `⎕LX` which is always `#.Make.Run`.
 
-   This function uses the definitions in `publish.config` for compiling whatever is needed to make the project "consumable". Naturally it will be very different depending on whether it is a single class / single namespace script (like `APLTreeUtils`) or an application like `Fire`.
+   This function uses the definitions in `publish.config` for compiling whatever is needed to make the project "consumable". Naturally it will be very different depending on whether it is a single class / single namespace script (like `APLTreeUtils`) or an application like `Fire` or something in between like `Laguntza`.
 
 ## Example
 
@@ -24,7 +24,7 @@ This is a `publish.config` file that takes advantage of all features on offer. W
 <tool name="Foo">    
   <version>1.2.1</version>    
   <date>2019-06-20</date>
-  <container>#._APLGUI</container>
+  <container>#.APLGUI</container>
   <needs>
     <script>APLTreeUtils</script>
     <script>OS</script>
@@ -47,9 +47,9 @@ This is a `publish.config` file that takes advantage of all features on offer. W
 
 This is the outmost tag. Its "name" attribute defines the name of the project.
 
-Note that these days the value of the `<container>` tag is determined by naming convention: the name of the project plus a leading underscore. That means that a project "Foo" lives in `#._Foo`. This is true for almost all APL Team projects but not necessarily for, say, Dyalog projects.
+Note a project "Foo" usually lives in `#.Foo`. This is true for almost all APL Team projects except `APLTreeUtils` (that lives for technical reasons in `#._APLTreeUtils`) but not necessarily for, say, Dyalog projects.
 
-The namespace `#._Foo` usually contains test cases and references to any dependencies and might also contain stuff like helpers.
+The namespace `#.Foo` usually contains test cases and references to any dependencies and might also contain stuff like helpers.
 
 
 ### The tags `<version>`, `<buildid>`, `<date>`

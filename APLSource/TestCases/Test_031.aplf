@@ -6,11 +6,11 @@
  R←∆Failed
 
  F←##.Maker.FilesAndDirs
- #.⎕SHADOW'_Foo'
- '_Foo.Foo'#.⎕NS''
+ #.⎕SHADOW'Foo'
+ 'Foo.Foo'#.⎕NS''
  #.⎕SHADOW'TEMP'
  'TEMP'#.⎕NS''
- #._Foo.Foo.Hello←{'World'}
+ #.Foo.Foo.Hello←{'World'}
  wasDir←F.Cd'MoreTests'
  xml←##.Maker.GetPublishConfig 1
 
@@ -18,9 +18,9 @@
  xml.needed⍪←2 'ws' 'Conga'(↑('lib' '[DYALOG]')('copy' 'DRC'))5
 
  #.TEMP ##.Maker.LoadNeededAndEstablishRefs'Foo'xml
- →GoToTidyUp 3≠≢#._Foo.⎕NL 9.1                  ⍝ `Foo`, `APLTreeUtils` and `DRC`
- →GoToTidyUp 4≠≢#._Foo.⎕NL 9.4                  ⍝ `FilesAndDirs`, `OS`, `Tester` and `WinReg`
- →GoToTidyUp 1≠≢#._Foo.Foo.⎕NL⍳16
+ →GoToTidyUp 3≠≢#.Foo.⎕NL 9.1                  ⍝ `Foo`, `APLTreeUtils` and `DRC`
+ →GoToTidyUp 4≠≢#.Foo.⎕NL 9.4                  ⍝ `FilesAndDirs`, `OS`, `Tester` and `WinReg`
+ →GoToTidyUp 1≠≢#.Foo.Foo.⎕NL⍳16
 
  R←∆OK
 

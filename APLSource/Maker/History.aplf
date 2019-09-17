@@ -1,0 +1,8 @@
+ History
+⍝ * 3.3.0
+⍝   * New global `∆WithUnderscore` introduced which defaults to 0.\\
+⍝     Background is that from 2019-09 the container namespace of a project `Foo` (which so far
+⍝     defaulted to `_Foo`) will be `Foo`. Only for `APLTreeUtils` we must make an exception
+⍝     for technical reasons.
+⍝\\
+⍝ For information regarding older versions see <https://github.com/aplteam/Maker/releases>

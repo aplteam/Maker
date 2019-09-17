@@ -3,7 +3,7 @@
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←∆Failed
 
- rf←#._Maker.Maker
+ rf←#.Maker.Maker
 
 ⍝ First we check whether "Version" returns a valid result:
  (n v d)←rf.Version

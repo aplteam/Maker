@@ -10,7 +10,7 @@
  needed←XML.needed
  bool←needed[;2]≡¨⊂'script'
  sourcePath←U.GetSourceFolder''
- target←'#._',name     ⍝ By naming convention
+ target←'#.',(∆WithUnderscore/'_'),name     ⍝ By naming convention
  :If 0<≢neededScripts←bool⌿needed[;3]
      ref←⍎target ⎕NS''     ⍝ By naming convention
      loadInto∘{⎕SE.SALT.Load sourcePath,⍵,' -target=',⍺}¨neededScripts

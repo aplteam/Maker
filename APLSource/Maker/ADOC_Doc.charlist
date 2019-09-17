@@ -14,7 +14,12 @@ Several assumptions must be met:
 * We expect a file `..\\publish.config` specific to the current project to be available from
   the folder `Make.dws` lives in. It's supposed to define the specifics of a project.
 
-* Any project (say `Foo`) is hosted in a namespace ("container" in publish.config) `#._Foo`.
+* By default any project (say `Foo`) is hosted in a namespace ("container" in publish.config) 
+  `#.Foo`. This is ruled by the global `∆WithUnderscore` which defaults to 0. 
+  
+  Some projects require a leading `_`, so rather than `#.Foo` it would be `#._Foo`. This is
+  particularly true for the `APLTreeUtils` project. In order to achieve that set 
+  `∆WithUnderscore←1`.
 
 * Acre's configuration file must be named `acre.config` (rather than the deprecated name
   `acreconfig.txt`).
@@ -29,8 +34,8 @@ The following namespaces contain helper functions:
 Note that `Maker` comes with three template functions: `Run_1`, `Run_2` and `Run_3`.
 They are dealing with different scenarios; see comments in those functions to find out more.
 
-These functions are noted in `Public` (though strictly speaking they are not public
-functions but just templates) in order to make them appear in the documentation.
+Although these functions are strictly speaking not public but just templates they are noted in 
+`Public` anyway in order to make them appear in the documentation.
 
 ## Development
 
@@ -45,4 +50,5 @@ However, when developing/debugging `Maker` you can instead execute the niladic f
 `Maker.TestCases.Prepare` which performs all necessary steps needed for executing any test case,
 including a call to `LoadAllScriptsNeededByMaker`.
 
-Kai Jaeger ⋄ 2019-02-12
+Kai Jaeger ⋄ 2019-02-12   
+Last update 2019-09-17

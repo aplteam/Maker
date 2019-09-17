@@ -29,8 +29,8 @@ html{line-height:1.15;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;}b
 <p>This user command is a super set of acre's user command <code>]acre.OpenProject</code>.</p>
 <p>The file defines dependencies and the user commands makes sure that they are loaded into the workspace and references are created at the proper places.</p></li>
 <li>When running the user command <code>]RunMake</code>.
-<p>This user command run a BAT script <code>Make.bat</code> which starts an instance of Dyalog APL with the appropriate version[<a href="#fnref1" class="footnote_link"><sup>1</sup></a>]. It then loads the workspace <code>Make.dws</code> and runs <code>⎕LX</code> which is always <code>#.Make.Run</code>.</p>
-<p>This function uses the definitions in <code>publish.config</code> for compiling whatever is needed to make the project “consumable”. Naturally it will be very different depending on whether it is a single class / single namespace script (like <code>APLTreeUtils</code>) or an application like <code>Fire</code>.</p></li>
+<p>This user command runs a BAT script <code>Make.bat</code> which starts an instance of Dyalog APL with the appropriate version[<a href="#fnref1" class="footnote_link"><sup>1</sup></a>]. It then loads the workspace <code>Make.dws</code> and runs <code>⎕LX</code> which is always <code>#.Make.Run</code>.</p>
+<p>This function uses the definitions in <code>publish.config</code> for compiling whatever is needed to make the project “consumable”. Naturally it will be very different depending on whether it is a single class / single namespace script (like <code>APLTreeUtils</code>) or an application like <code>Fire</code> or something in between like <code>Laguntza</code>.</p></li>
 </ol>
 <div class="h_tag">
 <a href="#Example" id="Example" class="autoheader_anchor">
@@ -41,7 +41,7 @@ html{line-height:1.15;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;}b
 <pre><code>&lt;tool name="Foo"&gt;
   &lt;version&gt;1.2.1&lt;/version&gt;
   &lt;date&gt;2019-06-20&lt;/date&gt;
-  &lt;container&gt;#._APLGUI&lt;/container&gt;
+  &lt;container&gt;#.APLGUI&lt;/container&gt;
   &lt;needs&gt;
     &lt;script&gt;APLTreeUtils&lt;/script&gt;
     &lt;script&gt;OS&lt;/script&gt;
@@ -66,8 +66,8 @@ html{line-height:1.15;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;}b
 </a>
 </div>
 <p>This is the outmost tag. Its “name” attribute defines the name of the project.</p>
-<p>Note that these days the value of the <code>&lt;container&gt;</code> tag is determined by naming convention: the name of the project plus a leading underscore. That means that a project “Foo” lives in <code>#._Foo</code>. This is true for almost all APL Team projects but not necessarily for, say, Dyalog projects.</p>
-<p>The namespace <code>#._Foo</code> usually contains test cases and references to any dependencies and might also contain stuff like helpers.</p>
+<p>Note a project “Foo” usually lives in <code>#.Foo</code>. This is true for almost all APL Team projects except <code>APLTreeUtils</code> (that lives for technical reasons in <code>#._APLTreeUtils</code>) but not necessarily for, say, Dyalog projects.</p>
+<p>The namespace <code>#.Foo</code> usually contains test cases and references to any dependencies and might also contain stuff like helpers.</p>
 <div class="h_tag">
 <a href="#The-tags" id="The-tags" class="autoheader_anchor">
 <h3>The tags <code>&lt;version&gt;</code>, <code>&lt;buildid&gt;</code>, <code>&lt;date&gt;</code></h3>

@@ -4,16 +4,16 @@
  R←∆Failed
 
  F←##.Maker.FilesAndDirs
- #.⎕SHADOW'_Foo'
- '_Foo.Foo'#.⎕NS''
- #._Foo.Foo.Hello←{'World'}
+ #.⎕SHADOW'Foo'
+ 'Foo.Foo'#.⎕NS''
+ #.Foo.Foo.Hello←{'World'}
  wasDir←F.Cd'MoreTests'
  xml←##.Maker.GetPublishConfig 0
 
  ##.Maker.LoadNeededAndEstablishRefs'Foo'xml
- →GoToTidyUp 2≠≢#._Foo.⎕NL 9.1                  ⍝ `Foo` and `APLTreeUtils`
- →GoToTidyUp 2≠≢#._Foo.⎕NL 9.4                  ⍝ `FilesAndDirs` and `OS`; `Tester` and `WinReg` are NOT loaded!
- →GoToTidyUp 1≠≢#._Foo.Foo.⎕NL⍳16
+ →GoToTidyUp 2≠≢#.Foo.⎕NL 9.1                  ⍝ `Foo` and `APLTreeUtils`
+ →GoToTidyUp 2≠≢#.Foo.⎕NL 9.4                  ⍝ `FilesAndDirs` and `OS`; `Tester` and `WinReg` are NOT loaded!
+ →GoToTidyUp 1≠≢#.Foo.Foo.⎕NL⍳16
 
  R←∆OK
 

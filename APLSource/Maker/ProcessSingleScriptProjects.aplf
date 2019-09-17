@@ -11,7 +11,7 @@
  parms←GetPublishConfig 0
  LoadNeededAndEstablishRefs projName parms
  {}⎕SE.UCMD'acre.openproject ','expand'FilesAndDirs.NormalizePath'./'
- ref←⍎pathInWS←'#._',projName,'.',projName
+ ref←⍎pathInWS←'#.',(∆WithUnderscore/'_'),projName,'.',projName
  'Not a script-only project!'⎕SIGNAL 11/⍨(,'1')≢,parms.script
  :If 'APLTreeUtils'≢projName
      IncreaseBuildID ref
