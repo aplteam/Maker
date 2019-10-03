@@ -1,20 +1,21 @@
- R←Test_012(stopFlag batchFlag);⎕TRAP;F;filename;userCommandFolder;tempFolder;trapFlag
-⍝ Exercise `CopyToUserCommandFolderWithPrompt`
+ R←Test_033(stopFlag batchFlag);⎕TRAP;F;filename;userCommandFolder;tempFolder;sourceFolder;trapFlag
+⍝ Exercise `CopyToMyUCMDsFolderWithPrompt`
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←∆Failed
 
  F←##.Maker.FilesAndDirs
 
  filename←'_____ThisAlmostCertainlyDoesNotExist.dyalog'
- userCommandFolder←##.Maker.GetUserCommandFolder''
+ userCommandFolder←'%USERPROFILE%\Documents\MyUCMDS\'
  F.DeleteFile userCommandFolder,'\',filename
- ##.APLTreeUtils.WriteUtf8File('MoreTests\',filename)'Some file'
- 1 ##.Maker.CopyToUserCommandFolderWithPrompt'MoreTests\',filename
+ sourceFolder←'MoreTests\'
+ ##.APLTreeUtils.WriteUtf8File(sourceFolder,filename)'Some file'
+ 1 ##.Maker.CopyToMyUCMDsFolderWithPrompt sourceFolder,filename
  →GoToTidyUp 0=F.IsFile userCommandFolder,'\',filename
  F.DeleteFile userCommandFolder,'\',filename
 
  ##.APLTreeUtils.WriteUtf8File filename'Some file'
- 1 ##.Maker.CopyToUserCommandFolderWithPrompt filename
+ 1 ##.Maker.CopyToMyUCMDsFolderWithPrompt filename
  →GoToTidyUp 0=F.IsFile userCommandFolder,'\',filename
 
  tempFolder←F.GetTempSubDir⊃⎕SI
@@ -22,20 +23,20 @@
  ##.APLTreeUtils.WriteUtf8File(tempFolder,'\______TestFile2.dyalog')'Second file'
  ##.APLTreeUtils.WriteUtf8File(tempFolder,'\______TestFile3.dyalog')'Third file'
  ##.APLTreeUtils.WriteUtf8File(tempFolder,'\______TestFile4.zip')'Pretends to be a zip file'
- ##.Maker.CopyToUserCommandFolderWithPrompt tempFolder
+ ##.Maker.CopyToMyUCMDsFolderWithPrompt tempFolder
  →GoToTidyUp 1≠F.IsFile userCommandFolder,'/',(⊃¯1↑('\'##.APLTreeUtils.Split tempFolder)~⊂''),'\______TestFile1.dyalog'
  →GoToTidyUp 1≠F.IsFile userCommandFolder,'/',(⊃¯1↑('\'##.APLTreeUtils.Split tempFolder)~⊂''),'\______TestFile2.dyalog'
  →GoToTidyUp 1≠F.IsFile userCommandFolder,'/',(⊃¯1↑('\'##.APLTreeUtils.Split tempFolder)~⊂''),'\______TestFile3.dyalog'
  →GoToTidyUp 0≠F.IsFile userCommandFolder,'/',(⊃¯1↑('\'##.APLTreeUtils.Split tempFolder)~⊂''),'\______TestFile4.zip'
 
- ##.Maker.CopyToUserCommandFolderWithPrompt tempFolder,'\*'
+ ##.Maker.CopyToMyUCMDsFolderWithPrompt tempFolder,'\*'
  →GoToTidyUp 1≠F.IsFile userCommandFolder,'/______TestFile1.dyalog'
  →GoToTidyUp 1≠F.IsFile userCommandFolder,'/______TestFile2.dyalog'
  →GoToTidyUp 1≠F.IsFile userCommandFolder,'/______TestFile3.dyalog'
  →GoToTidyUp 0≠F.IsFile userCommandFolder,'/______TestFile4.zip'
 
  :Trap 11
-     1 ##.Maker.CopyToUserCommandFolderWithPrompt filename'_____doesnotexist' '_____doesnotexisteither'
+     1 ##.Maker.CopyToMyUCMDsFolderWithPrompt filename'_____doesnotexist' '_____doesnotexisteither'
      →GoToTidyUp 1
  :EndTrap
 
