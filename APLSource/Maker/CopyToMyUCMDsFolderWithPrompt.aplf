@@ -13,7 +13,7 @@
  r←⍬
  :If 0 1∊⍨≡y
  :AndIf isFolder←FilesAndDirs.IsDir(¯1×'*'=¯1↑y)↓y
-     path←y
+     path←FilesAndDirs.NormalizePath y
      (('\'=path)/path)←'/'
      copyContent←'*'=¯1↑path
      'Invalid right argument'⎕SIGNAL 11/⍨copyContent∧'/'≠⊃¯2↑path

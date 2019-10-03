@@ -1,5 +1,6 @@
  History
-⍝ * 3.4.0
-⍝   * Method `CopyToMyUCMDsFolderWithPrompt` introduced.
+⍝ * 3.4.1
+⍝   * The two methods `CopyToUserCommandFolderWithPrompt` and `CopyToMyUCMDsFolderWithPrompt` caused
+⍝     havoc when given `folder\\*` as right argument.
 ⍝\\
 ⍝ For information regarding older versions see <https://github.com/aplteam/Maker/releases>
