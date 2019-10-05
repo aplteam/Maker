@@ -3,7 +3,7 @@
 ⍝ Note however that `Run_1`, `Run_2` and `Run_3` are just templates rather than public methods in the real sense.
 ⍝ They were added in order to make sure that they appear in the documentation.
  r←''
- r,←'CopyToSource' 'CreateZipFile' 'GetPublishConfig' 'Public' 'RecreateFolder' 'GetUserCommandFolder'
+ r,←'CopyToSource' 'CreateZipFile' 'EstablishRefs' 'GetPublishConfig' 'Public' 'RecreateFolder' 'GetUserCommandFolder'
  r,←'MakeWorkspace' 'IncreaseBuildID' 'ConvertMarkdownToHtml5In' 'Distribute2AllUserCommandFolders'
  r,←'UpdateVersionNumberInInno_ISS' 'CopyTo' 'MakeStandAloneRunTimeExe' 'CreateStandAloneExeParms'
  r,←'ProcessSingleScriptProjects' 'LoadNeededAndEstablishRefs' 'EraseStuff' 'CopyToUserCommandFolderWithPrompt'

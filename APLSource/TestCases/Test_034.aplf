@@ -1,0 +1,32 @@
+ R←Test_034(stopFlag batchFlag);⎕TRAP;xml;noOf
+⍝ Exercise `CopyToMyUCMDsFolderWithPrompt`
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+ R←∆Failed
+
+ ⍝ F←##.Maker.FilesAndDirs
+
+ #.⎕SHADOW'TEMP'
+ 'TEMP'#.⎕NS''
+ xml←''
+ xml,←⊂'<tool name="TEMP">'
+ xml,←⊂'  <version>1.0.0</version>'
+ xml,←⊂'  <date>2019-10-03</date>'
+ xml,←⊂'  <container>#.TEMP</container>'
+ xml,←⊂'  <needs>'
+ xml,←⊂'    <script>APLTreeUtils</script>'
+ xml,←⊂'    <script development="1">WinSys</script>'
+ xml,←⊂'  </needs>'
+ xml,←⊂'  <autoload>1</autoload>'
+ xml,←⊂'  <refs>'
+ xml,←⊂'    <ref>#.TEMP.APLTreeUtils←#.APLTreeUtils</ref>'
+ xml,←⊂'    <ref>#.TEMP.Tester←#.Tester</ref>'
+ xml,←⊂'  </refs>'
+ xml,←⊂'</tool>'
+ xml,←⊂''
+ xml←⎕XML 1↓⊃,/(⎕UCS 10),¨xml
+
+ noOf←##.Maker.EstablishRefs xml
+ →PassesIf 2=noOf
+
+ R←∆OK
+⍝Done

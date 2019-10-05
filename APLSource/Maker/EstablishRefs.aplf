@@ -1,0 +1,7 @@
+ {r}←EstablishRefs _xml;def
+⍝ Takes publish.config (xml) and honours the <refs> tags.\\
+⍝ Returns the number of references established.
+ :If 0<r←≢def←'refs'xml.GetRangeFrom _xml
+     ⍎¨def[;3]
+ :EndIf
+⍝Done

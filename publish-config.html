@@ -184,6 +184,16 @@ html{line-height:1.15;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;}b
 </a>
 </div>
 <p>This is either 1 or 0. A 1 means that the project consists of a single script and nothing else.</p>
+<div class="h_tag">
+<a href="#The--tag-7" id="The--tag-7" class="autoheader_anchor">
+<h3>The <code>&lt;refs&gt;</code> tag</h3>
+</a>
+</div>
+<p>This may contain zeros to many <code>&lt;ref&gt;</code> tags. The purpose of a <code>&lt;ref&gt;</code> tag is to establish references that cannot be derived from a project name. For example, the APL-cation project <code>APLGUI</code> contains a sub-namespace <code>GUI</code> that contains the real stuff.</p>
+<p>In a project <code>Foo</code> normally a ref <code>APLGUI</code> would be established in <code>#.Foo</code> but in this case that would not work. Therefore you should put this into your publish.config file:</p>
+<pre><code>&lt;refs&gt;
+    &lt;ref&gt;#.Foo.GUI←#.APLGUI.GUI&lt;/ref&gt;
+&lt;/refs&gt;</code></pre>
 <div id="footnotes_div">
 <hr>
 <p><strong>Footnotes</strong></p>

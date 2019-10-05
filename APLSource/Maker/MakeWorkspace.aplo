@@ -9,14 +9,14 @@
 ⍝ The optional left argument `toBeCopied` might be either empty (no action) or a simple text vector specifying
 ⍝ the name of a single APL object or a vector of text vectors specifying the names of several APL objects.
 ⍝ These objects are then copied from `#._{projectName}` as well.\\
-⍝ This workspace performs the following steps:
+⍝ This function performs the following steps:
 ⍝ 1. It deletes everything except what's listed in the vector of names `needed`. This includes the
 ⍝    namespace this function lives in.
 ⍝ 2. It deletes the `AcreConfig` namespace. This step might become superfluous in a future version of acre.
 ⍝ 3. It saves the current WS, meaning that the `⎕WSID` must already be set before `MakeWorkspace` is called.
-⍝ 4. It copies the main namespace. For example, if `name` is `Foo` then it copies either from `#._Foo.Foo`
+⍝ 4. #.⎕EX (∆WithUnderscore/'_')name
+⍝ 5. It copies the main namespace. For example, if `name` is `Foo` then it copies either from `#._Foo.Foo`
 ⍝    (∆WithUnderscore←→1) or `#.Foo.Foo` ((∆WithUnderscore←→0) (naming conventions).
-⍝ 5. It executes `#.⎕EX (∆WithUnderscore/'_'),name
 ⍝ 6. It executes `fns` which is expected to be a niladic function that returns no or a shy result.\\
 ⍝    This is typically a function like `Fire.Reset` that restores global variables etc.
 ⍝ 7. It saves the current WS.
@@ -28,12 +28,13 @@
  #.⎕EX↑(needed,⊂(∆WithUnderscore/'_'),name)~⍨' '~¨⍨↓#.⎕NL⍳16
  ⎕EX'#.',name,'.AcreConfig'
  0 ⎕SAVE ⎕WSID
+ #.⎕EX(∆WithUnderscore/'_')name
  ('#.',(∆WithUnderscore/'_'),name,'.',name)#.⎕CY ⎕WSID
  :If 0<≢toBeCopied
      toBeCopied←APLTreeUtils.Nest toBeCopied
      name∘{('#.',(∆WithUnderscore/'_'),⍺,'.',⍵)#.⎕CY ⎕WSID}¨toBeCopied
  :EndIf
- #.⎕EX'_',name
+
  {}(fns{0::0 ⋄ ⍺⍺ ⍵})name xml
  0 ⎕SAVE ⎕WSID
 ⍝Done

@@ -1,6 +1,7 @@
  History
-⍝ * 3.4.1
-⍝   * The two methods `CopyToUserCommandFolderWithPrompt` and `CopyToMyUCMDsFolderWithPrompt` caused
-⍝     havoc when given `folder\\*` as right argument.
+⍝ * 3.5.0
+⍝   * New tag `<ref>` (inside `<refs>`) introduced and documented.
+⍝   * New function `EstablishRefs` introduced. It takes `publish.config` as argument and honours any `<ref>` tags.
+⍝   * Bug fix: `MakeWorkspace` did not honour `∆WithUnderscore` when erasing the namespace that hosts the project.
 ⍝\\
 ⍝ For information regarding older versions see <https://github.com/aplteam/Maker/releases>

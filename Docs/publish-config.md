@@ -160,5 +160,18 @@ The user command `]OpenMyProject` will execute that function automatically after
 
 This is either 1 or 0. A 1 means that the project consists of a single script and nothing else.
 
+### The `<refs>` tag
+
+This may contain zeros to many `<ref>` tags. The purpose of a `<ref>` tag is to establish references that cannot be derived from a project name. For example, the APL-cation project `APLGUI` contains a sub-namespace `GUI` that contains the real stuff.
+
+In a project `Foo` normally a ref `APLGUI` would be established in `#.Foo` but in this case that would not work. Therefore you should put this into your publish.config file:
+
+```
+<refs>
+    <ref>#.Foo.GUI←#.APLGUI.GUI</ref>
+</refs>
+```
+
+
 
 [^appr]: "Appropriate" is the oldest version of Dyalog APL supported for a given project.
