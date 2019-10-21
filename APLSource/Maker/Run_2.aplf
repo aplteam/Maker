@@ -1,4 +1,4 @@
- Run_2;pathToAPLTreeSource;pathToSource;targetPath;M;A;parms;name;projName;F
+ Run_2;pathToAPLTreeSource;pathToSource;targetPath;M;A;parms;name;projName;F;dependencyNS
 ⍝ This is a template for how to create a workspace and a zip file.
 ⍝ The template stems from the Fire project (<https://github.com/aplteam/Fire>). All specifics
 ⍝ are either replaced by "???" or commented out.\\
@@ -16,7 +16,7 @@
  F.PolishCurrentDir
  M.RecreateFolder targetPath
  parms←M.GetPublishConfig 0
- M.LoadNeededAndEstablishRefs parms
+ dependencyNS←M.LoadNeededAndEstablishRefs parms
  M.U.Assert 0≠≢projName←⎕SE.UCMD'acre.OpenProject ',F.PWD
 
 ⍝ If it is a function within a namespace:
@@ -27,6 +27,9 @@
 
  M.EraseStuff parms.erase
  M.Set_LX parms.lx                          ⍝ or ⎕LX←''
+ parms←M.GetPublishConfig 0
+ M.EstablishRefsInRoot dependencyNS
+ M.SaveProjectWorkpace name
  {⍵}M.MakeWorkspace name parms
  (targetPath,name,'/')M.ConvertMarkdownToHtml5In'Docs/'
  (name,'.dws')M.CopyTo targetPath

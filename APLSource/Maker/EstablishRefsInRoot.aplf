@@ -1,0 +1,5 @@
+ {r}←EstablishRefsInRoot source;list
+⍝ Establishes refs for every script found in `source` in the root. `source` is usually `#._dependencies`.
+ r←0
+ source.{⍺←'#' ⋄ ⍎⍺,'.',⍵,'←',⍵}¨' '~¨⍨↓source.⎕NL 9
+⍝Done

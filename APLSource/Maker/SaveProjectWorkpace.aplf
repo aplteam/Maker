@@ -1,0 +1,22 @@
+ {r}←{saveAs}SaveProjectWorkpace name;rc;msg;lx
+⍝ Save the current workspace without `#.Make` and without the stack under the name "project.dws".
+⍝ `#.Make` must be deleted before calling this function.\\
+⍝ By default ⎕WSID is used to save the WS and the it is moved to "project.dws". However, you can define
+⍝ a different source workspace name via `saveAs`. The name of the target workspace is fixed: project.dws!\\
+⍝ The WS contains the whole project including dependencies, development tools and test cases.
+⍝ If the `Tester` class is around and there is a namespace `TestCases` within `#.`,name then
+⍝ the test helpers are established within that namespace.
+⍝ ⎕LX is set to `#.FilesAndDirs.PolishCurrentDir` temporarily before the ⎕SAVE and restored afterwards.
+ r←⍬
+ saveAs←{0<⎕NC ⍵:⍎⍵ ⋄ ⎕WSID}'saveAs'
+ :If 9=⎕NC'#.',name,'.TestCases'
+ :AndIf 9=⎕NC'#.',name,'.Tester'
+     {⍵.Tester.EstablishHelpersIn ⍵.TestCases}⍎'#.',name
+ :EndIf
+ lx←#.⎕LX
+ #.⎕LX←'#.FilesAndDirs.PolishCurrentDir'
+ 0 ⎕SAVE saveAs
+ ⎕LX←lx
+ (rc msg)←saveAs FilesAndDirs.MoveTo'project.dws'
+ msg U.Assert 0=rc
+⍝Done

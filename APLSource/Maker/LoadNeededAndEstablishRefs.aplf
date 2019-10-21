@@ -1,12 +1,12 @@
  {r}←{loadInto}LoadNeededAndEstablishRefs(name XML);needed;ref;sourcePath;bool;neededScripts;attr;obj;path;wsname;target;lib
-⍝ Loads and establishes references to all scripts needed by the project
-⍝ to be loaded, like `APLTreeUtils`. It also copies needed stuff from workspaces.\\
-⍝ `loadInto` defaults to `#` but can be the name (**not** a ref!) to any existing namespace.
+⍝ Loads and establishes references to all scripts needed by the project to be loaded, like
+⍝ `APLTreeUtils`, into, by default, #._dependencies. It also copies needed stuff from workspaces.\\
+⍝ `loadInto` defaults to `#._dependencies` but can be the name (**not** a ref!) to any existing namespace.
+⍝ Whatever it is, a reference pointing to it is returned.\\
 ⍝ Call this function **before** the acre project is opened!\\
-⍝ `name` is the name of the project, like "Fire".\\
-⍝ `XML` is the contents of `public.config` as a namespace.\\
- r←⍬
- loadInto←{0<⎕NC ⍵:⍕⍎⍵ ⋄ '#'}'loadInto'
+⍝ * `name` is the name of the project, like "Fire"
+⍝ * `XML` is the contents of `public.config` as a namespace
+ loadInto←{0<⎕NC ⍵:⍕⍎⍵ ⋄ _←'_dependencies'#.⎕NS'' ⋄ '#._dependencies'}'loadInto'
  needed←XML.needed
  bool←needed[;2]≡¨⊂'script'
  sourcePath←U.GetSourceFolder''
@@ -30,4 +30,5 @@
      (↑obj)#.⎕CY path
      ref.{⍎⍵,'←#.',⍵}¨obj
  :EndFor
+ r←⍎loadInto
 ⍝Done

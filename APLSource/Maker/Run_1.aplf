@@ -1,15 +1,19 @@
- Run_1;⎕IO;⎕ML;⎕WX;pathToSource;targetPath
+ Run_1;⎕IO;⎕ML;⎕WX;pathToSource;targetPath;M
 ⍝ This is a template for a script-only project. This needs no input whatsoever, it rather
 ⍝ works everything out itself. For that to work the current directory must be where the
 ⍝ project lives.\\
+⍝ This function does two different things:
+⍝ 1. It saves a "project workspace" in the current directory.
+⍝ 2. It loads the standard "Make" WS for stand-alone namespace scripts and classes (APLTree only).\\
 ⍝ If this is executed on a non-scripted project an error is thrown.\\
 ⍝ ⍝ For other, more complex scenarios see `Run_2` and `Run_3`.\\
 ⍝ Note that this function needs nothing but the `Maker` and a couple of scripts which are
 ⍝ defined in and can be loaded by calling `Maker.U.LoadAllScriptsNeededByMaker`.
  ⎕IO←1 ⋄ ⎕ML←1 ⋄ ⎕WX←3
+ ⎕CY'C:\Users\',⎕AN,'\Documents\MyUCMDs\Maker.dws'
+ M←Maker
  pathToSource←(⎕SE.UCMD'GetAcreProjectPath'),'_Source\'
  targetPath←'Dist\'
- ⎕CY'C:\Users\',⎕AN,'\Documents\MyUCMDs\Maker.dws'
- #.Make.Maker.Maker.ProcessSingleScriptProjects(pathToSource targetPath)
+ M.ProcessSingleScriptProjects(pathToSource targetPath)
  ⎕OFF
 ⍝Done

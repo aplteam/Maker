@@ -36,5 +36,5 @@
      F.DeleteFile batFilename   ⍝ Delete the BAT file
  :Until success∨10=counter
  'Attempted 10 times to create the installer EXE, always failed!'U.Assert 10>counter
- setupFilename←tempdir,'\',⊃{⍺,⍵}/1↓⎕NPARTS⊃¯1↑msg
+ setupFilename←⊃¯1↑msg
 ⍝Done

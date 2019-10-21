@@ -1,6 +1,6 @@
- parms←{XML}GetPublishConfig isDevelopment;XML;needed;⎕ML;⎕IO
+ parms←{XML}GetPublishConfig keepDevelopmentTools;XML;needed;⎕ML;⎕IO
 ⍝ Reads the "publish.config" file and translates it into a namespace with variables.\\
-⍝ Note that if `isDevelopment` is 0 then anything that's "needed" but carries an attribute
+⍝ Note that if `keepDevelopmentTools` is 0 then anything that's "needed" but carries an attribute
 ⍝ `development="true"` is **ignored**!\\
 ⍝ By defaults the function reads the `publish.config` file in the current directory. Instead
 ⍝ you can pass the XML as left argument.
@@ -8,7 +8,7 @@
  parms←⎕NS''
  XML←{0<⎕NC ⍵:⍎⍵ ⋄ ⎕XML'flat'APLTreeUtils.ReadUtf8File'publish.config'}'XML'
  parms.needed←'needs'xml.GetRangeFrom XML
- :If 0=isDevelopment
+ :If 0=keepDevelopmentTools
      ⍝ Remove what's only needed for development:
      parms.needed⌿⍨←~(⊃¨'development'∘xml.GetAttributeFrom¨parms.needed[;4])∊,¨'true' '1'
  :EndIf
@@ -17,6 +17,6 @@
  parms.script←'scriptOnly'xml.GetValueFrom XML
  parms.script←'scriptOnly'xml.GetValueFrom XML
  parms.wsid←'wsid'xml.GetValueFrom XML
- parms.refs←'refs'xml.GetValueFrom XML
+ parms.refs←'refs'xml.GetRangeFrom XML
  parms.lx←'lx'xml.GetValueFrom XML
 ⍝Done

@@ -1,7 +1,5 @@
  History
-⍝ * 3.5.0
-⍝   * New tag `<ref>` (inside `<refs>`) introduced and documented.
-⍝   * New function `EstablishRefs` introduced. It takes `publish.config` as argument and honours any `<ref>` tags.
-⍝   * Bug fix: `MakeWorkspace` did not honour `∆WithUnderscore` when erasing the namespace that hosts the project.
+⍝ * 3.6.1
+⍝   * Bug fix: `RunInno` did not return the full path of the setup.exe it created.
 ⍝\\
 ⍝ For information regarding older versions see <https://github.com/aplteam/Maker/releases>

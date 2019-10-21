@@ -1,7 +1,7 @@
- {r}←EstablishRefs _xml;def
-⍝ Takes publish.config (xml) and honours the <refs> tags.\\
+ {r}←EstablishRefs parms;def
+⍝ Takes `parms` (publish.config) and processes the `refs` variables.
 ⍝ Returns the number of references established.
- :If 0<r←≢def←'refs'xml.GetRangeFrom _xml
-     ⍎¨def[;3]
+ :If 0<r←≢parms.refs
+     ⍎¨parms.refs[;3]
  :EndIf
 ⍝Done

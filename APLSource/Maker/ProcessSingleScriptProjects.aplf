@@ -6,9 +6,10 @@
  ⎕IO←1 ⋄ ⎕ML←1 ⋄ ⎕WX←3
  r←⍬
  A←APLTreeUtils
- projName←3↓{⍵↑⍨¯1+⍵⍳'"'}{⍵↑⍨¯1+⍵⍳','}'ProjectSpace'{{⍵↑⍨¯1+⍵⍳''''}⍵↓⍨(4+⍴⍺)+1⍳⍨⍺⍷⍵}∊'flat'A.ReadUtf8File'acre.config'
+ projName←2↓{⍵↑⍨¯1+⍵⍳'"'}{⍵↑⍨¯1+⍵⍳','}'ProjectSpace'{{⍵↑⍨¯1+⍵⍳''''}⍵↓⍨(4+⍴⍺)+1⍳⍨⍺⍷⍵}∊'flat'A.ReadUtf8File'acre.config'
  RecreateFolder targetPath
  parms←GetPublishConfig 0
+ projName #.⎕NS''
  LoadNeededAndEstablishRefs projName parms
  {}⎕SE.UCMD'acre.openproject ','expand'FilesAndDirs.NormalizePath'./'
  ref←⍎pathInWS←'#.',(∆WithUnderscore/'_'),projName,'.',projName

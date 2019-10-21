@@ -1,4 +1,4 @@
- Run_3;pathToSource;M;A;targetPath;parms;wsParms;name;projName;F
+ Run_3;pathToSource;M;A;targetPath;parms;wsParms;name;projName;F;dependencyNS
 ⍝ This is a template for how to create a stand-alone EXE and an installer for that EXE.
 ⍝ The template stems from the Meddy project (<https://github.com/aplteam/Meddy>). All specifics
 ⍝ are either replaced by "???" or commented out.\\
@@ -16,7 +16,7 @@
  F.PolishCurrentDir
  M.RecreateFolder targetPath
  parms←M.GetPublishConfig 0
- M.LoadNeededAndEstablishRefs parms
+ dependencyNS←M.LoadNeededAndEstablishRefs parms
  M.U.Assert 0≠≢projName←⎕SE.UCMD'acre.OpenProject ',F.PWD
 
 ⍝ If it is a function within a namespace:
@@ -27,6 +27,9 @@
 
  M.EraseStuff parms.erase
  M.Set_LX parms.lx
+ parms←M.GetPublishConfig 0
+ M.EstablishRefsInRoot dependencyNS
+ M.SaveProjectWorkpace name
  {⍵}M.MakeWorkspace name parms.needed
  M.UpdateVersionNumberInInno_ISS name
 ⍝ --- Create stand-alone EXE

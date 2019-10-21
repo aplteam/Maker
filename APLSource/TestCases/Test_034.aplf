@@ -1,4 +1,4 @@
- R←Test_034(stopFlag batchFlag);⎕TRAP;xml;noOf
+ R←Test_034(stopFlag batchFlag);⎕TRAP;xml;noOf;parms
 ⍝ Exercise `CopyToMyUCMDsFolderWithPrompt`
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←∆Failed
@@ -25,7 +25,9 @@
  xml,←⊂''
  xml←⎕XML 1↓⊃,/(⎕UCS 10),¨xml
 
- noOf←##.Maker.EstablishRefs xml
+ parms←xml ##.Maker.GetPublishConfig 0
+
+ noOf←##.Maker.EstablishRefs parms
  →PassesIf 2=noOf
 
  R←∆OK
