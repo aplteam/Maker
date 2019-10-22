@@ -1,5 +1,5 @@
  History
-⍝ * 3.6.1
-⍝   * Bug fix: `RunInno` did not return the full path of the setup.exe it created.
+⍝ * 3.6.2
+⍝   * Bug fix: new version of MarkAPL
 ⍝\\
 ⍝ For information regarding older versions see <https://github.com/aplteam/Maker/releases>
