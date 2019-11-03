@@ -1,6 +1,6 @@
  Initial
  ##.Maker.U.LoadAllScriptsNeededByMaker 0
- :If ~#.WinSys.IsRunningAsAdmin
+ :If ~##.WinSys.IsRunningAsAdmin
      ⎕←'This test suite will be executed without admin rights'
      ⎕←'How, it should also be executed WITH admin rights.'
  :EndIf

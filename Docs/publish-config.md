@@ -1,3 +1,6 @@
+[parm]:toc = 6
+
+
 # The XML file `publish.config`
 
 ## Overview
@@ -67,7 +70,7 @@ This tag might be empty. If it is not empty it will contain either `<script>` or
 
 The tag is used to define dependencies for both loading a project as well as "Making" the project.
 
-### The tags `<script>` and `<ws>`
+#### The tags `<script>` and `<ws>`
 
 These tags may occur only as children of the `<needs>` tag.
 
@@ -87,13 +90,17 @@ This would work because both projects ("FilesAndDirs" and "APLTreeUtils") are pa
 
 In order to define a dependency that lives in a different library you need to define the library.
 
-#### The `library` attribute
+##### The tag `<script>`
+
+This tag is used in case the dependency is simply a single script. It may carry the `library` and the `development` attribute but no other attributes.
+
+###### The `library` attribute
 
 This value, when specified, is **not** a fully qualified path but simply the name of one of the sub-folders within the folder where all libraries and their projects live.
 
 This is an example: `<script library="APLTree">APLTreeUtils</script>`
 
-#### The `development` attribute
+###### The `development` attribute
 
 By default a dependency is loaded no matter what. By setting `development="true"` you can make sure that the dependency is loaded when `]OpenMyAcreProject` is executed but ignored when `]RunMake` is executed.
 
@@ -101,11 +108,11 @@ This is an example: `<script development="true">Tester</script>`
 
 Note: `<script development="1">` achieves the same but is now deprecated.
 
-#### The tag `<script>`
+###### The `target` attribute
 
-This tag is used in case the dependency is simply a single script. It may carry the `library` and the `development` attribute but no other attributes.
+This defaults to `#._dependencies`.
 
-#### The tag `<ws>`
+##### The tag `<ws>`
 
 This tag is used in case the dependency is something that is available as a workspace. It may carry the `library` and the `development` attributes but also the `copy` attribute. 
 
@@ -113,7 +120,7 @@ This tag is used in case the dependency is something that is available as a work
 
 This is an example: `<ws copy="GUI">APLGUI</ws>`.
 
-##### The tag `<erase>`
+###### The tag `<erase>`
 
 It might well be that a copy operation triggered by the `<ws>` tag copied more objects than actually required. In this case the `<erase>` objects with its sub-tag `<obj>` can be used to ridden any unwanted objects.
 

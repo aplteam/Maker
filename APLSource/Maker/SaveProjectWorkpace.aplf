@@ -6,7 +6,7 @@
 ⍝ The WS contains the whole project including dependencies, development tools and test cases.
 ⍝ If the `Tester` class is around and there is a namespace `TestCases` within `#.`,name then
 ⍝ the test helpers are established within that namespace.
-⍝ ⎕LX is set to `#.FilesAndDirs.PolishCurrentDir` temporarily before the ⎕SAVE and restored afterwards.
+⍝ ⎕LX is set to `` temporarily before the ⎕SAVE and restored afterwards.
  r←⍬
  saveAs←{0<⎕NC ⍵:⍎⍵ ⋄ ⎕WSID}'saveAs'
  :If 9=⎕NC'#.',name,'.TestCases'
@@ -14,9 +14,11 @@
      {⍵.Tester.EstablishHelpersIn ⍵.TestCases}⍎'#.',name
  :EndIf
  lx←#.⎕LX
- #.⎕LX←'#.FilesAndDirs.PolishCurrentDir'
+ #.⎕LX←''
  0 ⎕SAVE saveAs
  ⎕LX←lx
- (rc msg)←saveAs FilesAndDirs.MoveTo'project.dws'
- msg U.Assert 0=rc
+ :If saveAs≢'project.dws'
+     (rc msg)←saveAs FilesAndDirs.MoveTo'project.dws'
+     msg U.Assert 0=rc
+ :EndIf
 ⍝Done

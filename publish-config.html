@@ -13,6 +13,47 @@ html{line-height:1.15;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;}b
 
 </head>
 <body>
+<nav id="main_nav_no_collapse">
+<div class="toc-container">
+<h3>Table of contents</h3>
+<ul>
+<li><a href="#The-XML-file-publishconfig">The XML file <code>publish.config</code></a>
+<ul>
+<li><a href="#Overview">Overview</a></li>
+<li><a href="#Example">Example</a></li>
+<li><a href="#The-contents-of-publishconfig">The contents of <code>publish.config</code></a>
+<ul>
+<li><a href="#The--tag">The <code>&lt;tool&gt;</code> tag</a></li>
+<li><a href="#The-tags">The tags <code>&lt;version&gt;</code>, <code>&lt;buildid&gt;</code>, <code>&lt;date&gt;</code></a></li>
+<li><a href="#The-tag">The tag <code>&lt;container&gt;</code></a></li>
+<li><a href="#The-tag-1">The tag <code>&lt;needs&gt;</code></a>
+<ul>
+<li><a href="#The-tags--and">The tags <code>&lt;script&gt;</code> and <code>&lt;ws&gt;</code></a>
+<ul>
+<li><a href="#The-tag-2">The tag <code>&lt;script&gt;</code></a>
+<ul>
+<li><a href="#The-library-attribute">The <code>library</code> attribute</a></li>
+<li><a href="#The-development-attribute">The <code>development</code> attribute</a></li>
+<li><a href="#The-target-attribute">The <code>target</code> attribute</a></li>
+</ul></li>
+<li><a href="#The-tag-3">The tag <code>&lt;ws&gt;</code></a>
+<ul>
+<li><a href="#The-tag-4">The tag <code>&lt;erase&gt;</code></a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><a href="#The--tag-1">The <code>&lt;autoload&gt;</code> tag</a></li>
+<li><a href="#The--tag-2">The <code>&lt;buildid&gt;</code> tag</a></li>
+<li><a href="#The--tag-3">The <code>&lt;lx&gt;</code> tag</a></li>
+<li><a href="#The--tag-4">The <code>&lt;admin&gt;</code> tag</a></li>
+<li><a href="#The--tag-5">The <code>&lt;initial&gt;</code> tag</a></li>
+<li><a href="#The--tag-6">The <code>&lt;scriptonly&gt;</code> tag</a></li>
+<li><a href="#The--tag-7">The <code>&lt;refs&gt;</code> tag</a>
+</li></ul></li>
+</li></ul></li>
+</ul>
+</div>
+</nav>
 <div class="h_tag">
 <a href="#The-XML-file-publishconfig" id="The-XML-file-publishconfig" class="autoheader_anchor">
 <h1>The XML file <code>publish.config</code></h1>
@@ -89,7 +130,7 @@ html{line-height:1.15;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;}b
 <p>The tag is used to define dependencies for both loading a project as well as “Making” the project.</p>
 <div class="h_tag">
 <a href="#The-tags--and" id="The-tags--and" class="autoheader_anchor">
-<h3>The tags <code>&lt;script&gt;</code> and <code>&lt;ws&gt;</code></h3>
+<h4>The tags <code>&lt;script&gt;</code> and <code>&lt;ws&gt;</code></h4>
 </a>
 </div>
 <p>These tags may occur only as children of the <code>&lt;needs&gt;</code> tag.</p>
@@ -103,29 +144,35 @@ html{line-height:1.15;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;}b
 <p>This would work because both projects (“FilesAndDirs” and “APLTreeUtils”) are part of the APLTree library and therefore siblings.</p>
 <p>In order to define a dependency that lives in a different library you need to define the library.</p>
 <div class="h_tag">
+<a href="#The-tag-2" id="The-tag-2" class="autoheader_anchor">
+<h5>The tag <code>&lt;script&gt;</code></h5>
+</a>
+</div>
+<p>This tag is used in case the dependency is simply a single script. It may carry the <code>library</code> and the <code>development</code> attribute but no other attributes.</p>
+<div class="h_tag">
 <a href="#The-library-attribute" id="The-library-attribute" class="autoheader_anchor">
-<h4>The <code>library</code> attribute</h4>
+<h6>The <code>library</code> attribute</h6>
 </a>
 </div>
 <p>This value, when specified, is <strong>not</strong> a fully qualified path but simply the name of one of the sub-folders within the folder where all libraries and their projects live.</p>
 <p>This is an example: <code>&lt;script library="APLTree"&gt;APLTreeUtils&lt;/script&gt;</code></p>
 <div class="h_tag">
 <a href="#The-development-attribute" id="The-development-attribute" class="autoheader_anchor">
-<h4>The <code>development</code> attribute</h4>
+<h6>The <code>development</code> attribute</h6>
 </a>
 </div>
 <p>By default a dependency is loaded no matter what. By setting <code>development="true"</code> you can make sure that the dependency is loaded when <code>]OpenMyAcreProject</code> is executed but ignored when <code>]RunMake</code> is executed.</p>
 <p>This is an example: <code>&lt;script development="true"&gt;Tester&lt;/script&gt;</code></p>
 <p>Note: <code>&lt;script development="1"&gt;</code> achieves the same but is now deprecated.</p>
 <div class="h_tag">
-<a href="#The-tag-2" id="The-tag-2" class="autoheader_anchor">
-<h4>The tag <code>&lt;script&gt;</code></h4>
+<a href="#The-target-attribute" id="The-target-attribute" class="autoheader_anchor">
+<h6>The <code>target</code> attribute</h6>
 </a>
 </div>
-<p>This tag is used in case the dependency is simply a single script. It may carry the <code>library</code> and the <code>development</code> attribute but no other attributes.</p>
+<p>This defaults to <code>#._dependencies</code>.</p>
 <div class="h_tag">
 <a href="#The-tag-3" id="The-tag-3" class="autoheader_anchor">
-<h4>The tag <code>&lt;ws&gt;</code></h4>
+<h5>The tag <code>&lt;ws&gt;</code></h5>
 </a>
 </div>
 <p>This tag is used in case the dependency is something that is available as a workspace. It may carry the <code>library</code> and the <code>development</code> attributes but also the <code>copy</code> attribute.</p>
@@ -133,7 +180,7 @@ html{line-height:1.15;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;}b
 <p>This is an example: <code>&lt;ws copy="GUI"&gt;APLGUI&lt;/ws&gt;</code>.</p>
 <div class="h_tag">
 <a href="#The-tag-4" id="The-tag-4" class="autoheader_anchor">
-<h5>The tag <code>&lt;erase&gt;</code></h5>
+<h6>The tag <code>&lt;erase&gt;</code></h6>
 </a>
 </div>
 <p>It might well be that a copy operation triggered by the <code>&lt;ws&gt;</code> tag copied more objects than actually required. In this case the <code>&lt;erase&gt;</code> objects with its sub-tag <code>&lt;obj&gt;</code> can be used to ridden any unwanted objects.</p>

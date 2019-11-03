@@ -14,7 +14,7 @@
  APLs←##.Maker.U.GetAllDyalogInstallFolders
 
 ⍝ I. A Folder
- :If #.WinSys.IsRunningAsAdmin
+ :If ##.WinSys.IsRunningAsAdmin
      noOf←##.Maker.Distribute2AllUserCommandFolders tempFolder
      →GoToTidyUp noOf≠3×≢APLs
      →GoToTidyUp~∧/F.IsFile⊃,/tempFilename1 tempFilename2{⍵,¨,/1↓⎕NPARTS ⍺}¨⊂{⍵,'\Salt\Spice\'}¨APLs
@@ -22,7 +22,7 @@
  :Else
      :Trap 11
          ##.Maker.Distribute2AllUserCommandFolders tempFolder
-         →GoToTidyUp #.WinSys.IsRunningAsAdmin
+         →GoToTidyUp ##.WinSys.IsRunningAsAdmin
      :Else
          dmx←⎕DMX
          →GoToTidyUp'2 problems!  (Access is denied.)'{⍺≢(≢⍺)↑⊃,/⍵}dmx.DM  ⍝ Fails because of the lack of admin rights.
@@ -30,7 +30,7 @@
  :EndIf
 
 ⍝ II. A single file
- :If #.WinSys.IsRunningAsAdmin
+ :If ##.WinSys.IsRunningAsAdmin
      noOf←##.Maker.Distribute2AllUserCommandFolders tempFilename1
      →GoToTidyUp noOf≠1
      →GoToTidyUp~∧/F.IsFile({⍵,'\Salt\Spice\'}¨APLs),¨,/1↓⎕NPARTS tempFilename1
@@ -38,7 +38,7 @@
  :Else
      :Trap 11
          ##.Maker.Distribute2AllUserCommandFolders tempFilename1
-         →GoToTidyUp #.WinSys.IsRunningAsAdmin
+         →GoToTidyUp ##.WinSys.IsRunningAsAdmin
      :Else
          dmx←⎕DMX
          →GoToTidyUp'Access is denied.'{⍺≢(≢⍺)↑⊃,/⍵}dmx.DM  ⍝ Fails because of the lack of admin rights.
@@ -46,7 +46,7 @@
  :EndIf
 
 ⍝ III. Two files
- :If #.WinSys.IsRunningAsAdmin
+ :If ##.WinSys.IsRunningAsAdmin
      noOf←##.Maker.Distribute2AllUserCommandFolders tempFilename1 tempFilename2
      →GoToTidyUp noOf≠2
      →GoToTidyUp~∧/F.IsFile({⍵,'\Salt\Spice\'}¨APLs),¨,/1↓⎕NPARTS tempFilename1
@@ -56,7 +56,7 @@
  :Else
      :Trap 11
          ##.Maker.Distribute2AllUserCommandFolders tempFilename1
-         →GoToTidyUp #.WinSys.IsRunningAsAdmin
+         →GoToTidyUp ##.WinSys.IsRunningAsAdmin
      :Else
          dmx←⎕DMX
          →GoToTidyUp'Access is denied.'{⍺≢(≢⍺)↑⊃,/⍵}dmx.DM  ⍝ Fails because of the lack of admin rights.

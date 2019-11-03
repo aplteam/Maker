@@ -1,5 +1,5 @@
  History
-⍝ * 3.6.2
-⍝   * Bug fix: new version of MarkAPL
+⍝ * 3.6.3
+⍝   * `SaveProjectWorkpace` now sets `⎕LX` to empty.
 ⍝\\
 ⍝ For information regarding older versions see <https://github.com/aplteam/Maker/releases>

@@ -3,8 +3,6 @@
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←∆Failed
 
- ⍝ F←##.Maker.FilesAndDirs
-
  #.⎕SHADOW'TEMP'
  'TEMP'#.⎕NS''
  xml←''
@@ -18,8 +16,7 @@
  xml,←⊂'  </needs>'
  xml,←⊂'  <autoload>1</autoload>'
  xml,←⊂'  <refs>'
- xml,←⊂'    <ref>#.TEMP.APLTreeUtils←#.APLTreeUtils</ref>'
- xml,←⊂'    <ref>#.TEMP.Tester←#.Tester</ref>'
+ xml,←⊂'    <ref>#.TEMP.APLTreeUtils←#._dependencies.APLTreeUtils</ref>'
  xml,←⊂'  </refs>'
  xml,←⊂'</tool>'
  xml,←⊂''
@@ -28,7 +25,7 @@
  parms←xml ##.Maker.GetPublishConfig 0
 
  noOf←##.Maker.EstablishRefs parms
- →PassesIf 2=noOf
+ →PassesIf 1=noOf
 
  R←∆OK
 ⍝Done
