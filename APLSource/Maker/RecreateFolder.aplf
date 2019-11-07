@@ -5,6 +5,7 @@
  F←FilesAndDirs
  :If F.IsDir targetFolder
      U.Assert 0=⊃rc←F.RmDir targetFolder
+     ⎕DL 0.25
  :EndIf
  'Could not create the target folder'U.Assert'Create!'F.CheckPath targetFolder
 ⍝Done

@@ -1,4 +1,4 @@
- {setupFilename}←{path}RunInno name;A;F;counter;tempdir;cmd;issFilename;batFilename;buff;msg;success;setupFilename;flag
+ {setupFilename}←{path}RunInno name;A;F;counter;tempdir;cmd;issFilename;batFilename;buff;msg;success;setupFilename;flag;inno
 ⍝ Runs the INNO batch compiler in order to create an installer.\\
 ⍝ `name` is the project name; for "Fire" that would be "Fire".\\
 ⍝ Note that the Inno script is modified in case there is an assignment found to `MyAppVersion`: it gets the version number.\\
@@ -15,8 +15,8 @@
  path←{0<⎕NC ⍵:⍎⍵ ⋄ F.PWD}'path'
  issFilename←'expand'F.NormalizePath path,'\',name,'.iss'
  U.UpdateVersionName issFilename name
- cmd←'"C:\Program Files (x86)\Inno Setup 5\ISCC.exe" '
- cmd,←'"',issFilename,'"'
+ inno←U.SelectInno ⍬
+ cmd←'"',inno,'" ',issFilename,'"'
  tempdir←(WinSys.ExpandEnv'%localAppData%'),'\Temp\InnoTempDir'
  'Could not create temp directory'U.Assert'Create!'F.CheckPath tempdir
  :Repeat

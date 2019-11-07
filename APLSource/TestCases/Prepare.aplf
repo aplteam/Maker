@@ -1,4 +1,0 @@
- Prepare
- ##.Maker.U.LoadAllScriptsNeededByMaker 1
- ##.Maker.Tester.EstablishHelpersIn ⎕THIS
- #.Tester←##.Maker.Tester
