@@ -1,5 +1,6 @@
  History
-⍝ * 3.7.0
-⍝   * In case there is more than one version of Inno installed the user is asked to select one.
+⍝ * 3.7.1
+⍝   * `MakeStandAloneRunTimeExe` improved.
+⍝   * Bug in `ProcessSingleScriptProjects` fixed.
 ⍝\\
 ⍝ For information regarding older versions see <https://github.com/aplteam/Maker/releases>

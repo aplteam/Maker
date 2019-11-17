@@ -1,11 +1,17 @@
- {rc}←MakeStandAloneRunTimeExe p;counter;success;RUNTIME;⎕IO;⎕ML;details
+ {rc}←{testFlag}MakeStandAloneRunTimeExe p;counter;success;RUNTIME;⎕IO;⎕ML;details;sw
 ⍝ Attempts to create a stand-alone EXE from the current workspace.\\
 ⍝ `p` is a parameter space, typically created by calling `CreateStandAloneExeParms`.\\
 ⍝ `←` is what the `Bind` method returns or `⍬` in case something goes wrong without throwing an error.\\
-⍝ Because the creation of a stand-alone EXE quite often fails for no apparent reason this function repeats the attempt up to 50 times.
-⍝ If it fails that often then the likelyhood is that the EXE is running and therefore cannot be overwritten.
+⍝ Because the creation of a stand-alone EXE quite often fails for no apparent reason this function
+⍝ repeats the attempt up to 10 times. However, the most common reason for a failure is that the EXE
+⍝ is actually running and therefore cannot be overwritten. In case "Autostatus" in the "Options"
+⍝ of the session is ticked the error message "" would be displayed. This function will check for
+⍝ this and tell the user. (There is an REF 13574 to make this accessible via ⎕DMX; 2019-11)\\
+⍝ When the options ⍺ `testFlag` is `1` then only **one** ettempt is made to create the EXE, and
+⍝ in case of the aformentioned problem no intercation with the user is attempted and a `¯1` is returned.
  rc←⍬
  ⎕IO←1 ⋄ ⎕ML←1
+ testFlag←{0<⎕NC ⍵:⍎⍵ ⋄ 0}'testFlag'
  'Right argument is not a parameter space'⎕SIGNAL 11/⍨9.1≠⎕NC⊂,'p'
  'Parameter space does not provide a filename'⎕SIGNAL 11/⍨0=p.⎕NC'Filename'
  '"Filename" is empty'⎕SIGNAL 11/⍨0=≢p.Filename
@@ -24,8 +30,24 @@
          rc←2 ⎕NQ'#' 'Bind'p.Filename'StandaloneNativeExe'RUNTIME p.Resource p.Icon p.Commandline details
          success←1
      :Else
-         ⎕DL 0.2
+         :Trap 0
+             sw←⎕SE.⎕WG'StatusWindow'
+             :If 0<≢sw.⎕WG'Text'
+                 :If ∨/'Could not copy stub exe'⍷⊃⌽{⍵/⍨0<≢¨⍵}sw.⎕WG'Text'
+                     :If testFlag
+                         rc←¯1
+                     :Else
+                         ⎕←'It seeems that the EXE that should be created is currently running - that cannot work!'
+                         ⎕←'Please make sure the EXE (',p.Filename,') is not running any more and the press <enter>.'
+                         {}⍞
+                     :EndIf
+                 :EndIf
+             :EndIf
+         :EndTrap
+         ⎕DL 0.25
      :EndTrap
- :Until success∨50<counter←counter+1
- 'Creating stand-alone EXE failed'U.Assert success
+ :Until testFlag∨success∨10<⎕←counter←counter+1
+ :If ¯1≢rc
+     'Creating stand-alone EXE failed even after 10 attempts'U.Assert success
+ :EndIf
 ⍝Done

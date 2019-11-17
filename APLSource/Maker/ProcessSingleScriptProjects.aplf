@@ -1,4 +1,4 @@
- {r}←ProcessSingleScriptProjects(pathToSource targetPath);M;⎕IO;⎕ML;⎕WX;A;projName;body;ref;filename;pathInWS;version;filename2;parms;fns;Version
+ {r}←ProcessSingleScriptProjects(pathToSource targetPath);M;⎕IO;⎕ML;⎕WX;A;projName;body;ref;filename;pathInWS;version;filename2;parms;fns;Version;acreConfig
 ⍝ This function needs no input whatsoever, it rather works everything out itself.\\
 ⍝ If this is executed on a non-scripted project an error is thrown.
 ⍝ For that to work it relies on the current directory being the project folder.\\
@@ -6,7 +6,10 @@
  ⎕IO←1 ⋄ ⎕ML←1 ⋄ ⎕WX←3
  r←⍬
  A←APLTreeUtils
- projName←2↓{⍵↑⍨¯1+⍵⍳'"'}{⍵↑⍨¯1+⍵⍳','}'ProjectSpace'{{⍵↑⍨¯1+⍵⍳''''}⍵↓⍨(4+⍴⍺)+1⍳⍨⍺⍷⍵}∊'flat'A.ReadUtf8File'acre.config'
+ acreConfig←'flat'A.ReadUtf8File'acre.config'
+ acreConfig←A.dlb'"ProjectSpace":'{⍵↓⍨(≢⍺)+1⍳⍨⍺⍷⍵}acreConfig
+ acreConfig←1↓{⍵/⍨2>+\⍵='"'}acreConfig
+ projName←{⍵↓⍨⍵⍳'.'}acreConfig
  RecreateFolder targetPath
  parms←GetPublishConfig 0
  projName #.⎕NS''

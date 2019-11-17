@@ -1,22 +1,35 @@
- R←Test_009(stopFlag batchFlag);⎕TRAP;parms;filename;rc;LXwas
+ R←Test_009(stopFlag batchFlag);⎕TRAP;parms;filename;rc;LXwas;name;ref;buff;M;ps
 ⍝ Exercise `MakeStandAloneRunTimeExe` and implicitly also `CreateStandAloneExeParms`
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←∆Failed
 
- #.⎕SHADOW'Test_009'
- 'Test_009'#.⎕NS''
- #.Test_009.⎕FX'r←Version' 'r←''inno'' ''2.0.0'' ''yyy-mm-dd'''
+ name←⊃⎕SI
+ M←##.Maker
+ ref←⍎name #.⎕NS''
+ ref.⎕FX'r←Version' 'r←''inno'' ''2.0.0'' ''yyyy-mm-dd'''
+ ref.⎕FX'LX' '⍝ When thiis runnung the EXE cannot be overwritten' '⎕DL 10' '⎕OFF'
 
- filename←##.Maker.FilesAndDirs.GetTempPath,'Test_009'
- parms←##.Maker.CreateStandAloneExeParms filename'Test_009'
+ filename←M.FilesAndDirs.GetTempPath,name
+ parms←M.CreateStandAloneExeParms filename name
  LXwas←⎕LX
- ⎕LX←⊃⎕XSI
- rc←##.Maker.MakeStandAloneRunTimeExe parms
- ⎕LX←LXwas
- →GoToTidyUp 0=##.Maker.FilesAndDirs.IsFile filename,'.exe'
+ ⎕LX←'#.',name,'.LX'
+ rc←M.MakeStandAloneRunTimeExe parms
+ →GoToTidyUp 0=M.FilesAndDirs.IsFile filename,'.exe'
+
+ ⍝ Now we test what happens when we run the EXE and then try again creating it:
+ ps←##.Execute.DefaultParms
+ ps.wait←0
+ ps.hidden←1
+ ps.dir←¯1↓⊃⎕NPARTS filename
+ {}ps ##.Execute.Application filename,'.exe'
+ ⎕DL 3
+ rc←1 M.MakeStandAloneRunTimeExe parms  ⍝ Left arg (1) says "I am a test case!"
+ →PassesIf ¯1≡rc
 
  R←∆OK
 
 ∆TidyUp:
- :Trap 0 ⋄ ##.Maker.FilesAndDirs.DeleteFile filename,'.exe' ⋄ :EndTrap
+ ⎕LX←LXwas
+ #.⎕EX name
+ :Trap 0 ⋄ M.FilesAndDirs.DeleteFile filename,'.exe' ⋄ :EndTrap
 ⍝Done

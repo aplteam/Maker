@@ -1,4 +1,4 @@
- R←Test_006(stopFlag batchFlag);⎕TRAP;was;filename;now
+ R←Test_006(stopFlag batchFlag);⎕TRAP;was;filename;now;F
 ⍝ Exercise `IncreaseBuildID`
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←∆Failed
