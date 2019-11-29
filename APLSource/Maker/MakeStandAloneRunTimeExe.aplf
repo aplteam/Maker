@@ -46,7 +46,7 @@
          :EndTrap
          ⎕DL 0.25
      :EndTrap
- :Until testFlag∨success∨10<⎕←counter←counter+1
+ :Until testFlag∨success∨10<counter←counter+1
  :If ¯1≢rc
      'Creating stand-alone EXE failed even after 10 attempts'U.Assert success
  :EndIf

@@ -1,7 +1,7 @@
  R←Test_018(stopFlag batchFlag);⎕TRAP;tempFolder;tempFilename1;tempFilename2;APLs;noOf;F;dmx
 ⍝ Exercise `Distribute2AllUserCommandFolders`
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
- R←∆Failed
+ R←T._Failed
 
  F←##.Maker.FilesAndDirs
  tempFolder←F.GetTempPath,(⊃⎕SI),'\'
@@ -16,54 +16,54 @@
 ⍝ I. A Folder
  :If ##.WinSys.IsRunningAsAdmin
      noOf←##.Maker.Distribute2AllUserCommandFolders tempFolder
-     →GoToTidyUp noOf≠3×≢APLs
-     →GoToTidyUp~∧/F.IsFile⊃,/tempFilename1 tempFilename2{⍵,¨,/1↓⎕NPARTS ⍺}¨⊂{⍵,'\Salt\Spice\'}¨APLs
+     →T.GoToTidyUp noOf≠3×≢APLs
+     →T.GoToTidyUp~∧/F.IsFile⊃,/tempFilename1 tempFilename2{⍵,¨,/1↓⎕NPARTS ⍺}¨⊂{⍵,'\Salt\Spice\'}¨APLs
      F.DeleteFile⊃,/tempFilename1 tempFilename2{⍵,¨,/1↓⎕NPARTS ⍺}¨⊂{⍵,'\Salt\Spice\'}¨APLs
  :Else
      :Trap 11
          ##.Maker.Distribute2AllUserCommandFolders tempFolder
-         →GoToTidyUp ##.WinSys.IsRunningAsAdmin
+         →T.GoToTidyUp ##.WinSys.IsRunningAsAdmin
      :Else
          dmx←⎕DMX
-         →GoToTidyUp'2 problems!  (Access is denied.)'{⍺≢(≢⍺)↑⊃,/⍵}dmx.DM  ⍝ Fails because of the lack of admin rights.
+         →T.GoToTidyUp'2 problems!  (Access is denied.)'{⍺≢(≢⍺)↑⊃,/⍵}dmx.DM  ⍝ Fails because of the lack of admin rights.
      :EndTrap
  :EndIf
 
 ⍝ II. A single file
  :If ##.WinSys.IsRunningAsAdmin
      noOf←##.Maker.Distribute2AllUserCommandFolders tempFilename1
-     →GoToTidyUp noOf≠1
-     →GoToTidyUp~∧/F.IsFile({⍵,'\Salt\Spice\'}¨APLs),¨,/1↓⎕NPARTS tempFilename1
+     →T.GoToTidyUp noOf≠1
+     →T.GoToTidyUp~∧/F.IsFile({⍵,'\Salt\Spice\'}¨APLs),¨,/1↓⎕NPARTS tempFilename1
      F.DeleteFile({⍵,'\Salt\Spice\'}¨APLs),¨,/1↓⎕NPARTS tempFilename1
  :Else
      :Trap 11
          ##.Maker.Distribute2AllUserCommandFolders tempFilename1
-         →GoToTidyUp ##.WinSys.IsRunningAsAdmin
+         →T.GoToTidyUp ##.WinSys.IsRunningAsAdmin
      :Else
          dmx←⎕DMX
-         →GoToTidyUp'Access is denied.'{⍺≢(≢⍺)↑⊃,/⍵}dmx.DM  ⍝ Fails because of the lack of admin rights.
+         →T.GoToTidyUp'Access is denied.'{⍺≢(≢⍺)↑⊃,/⍵}dmx.DM  ⍝ Fails because of the lack of admin rights.
      :EndTrap
  :EndIf
 
 ⍝ III. Two files
  :If ##.WinSys.IsRunningAsAdmin
      noOf←##.Maker.Distribute2AllUserCommandFolders tempFilename1 tempFilename2
-     →GoToTidyUp noOf≠2
-     →GoToTidyUp~∧/F.IsFile({⍵,'\Salt\Spice\'}¨APLs),¨,/1↓⎕NPARTS tempFilename1
-     →GoToTidyUp~∧/F.IsFile({⍵,'\Salt\Spice\'}¨APLs),¨,/1↓⎕NPARTS tempFilename2
+     →T.GoToTidyUp noOf≠2
+     →T.GoToTidyUp~∧/F.IsFile({⍵,'\Salt\Spice\'}¨APLs),¨,/1↓⎕NPARTS tempFilename1
+     →T.GoToTidyUp~∧/F.IsFile({⍵,'\Salt\Spice\'}¨APLs),¨,/1↓⎕NPARTS tempFilename2
      F.DeleteFile({⍵,'\Salt\Spice\'}¨APLs),¨,/1↓⎕NPARTS tempFilename1
      F.DeleteFile({⍵,'\Salt\Spice\'}¨APLs),¨,/1↓⎕NPARTS tempFilename2
  :Else
      :Trap 11
          ##.Maker.Distribute2AllUserCommandFolders tempFilename1
-         →GoToTidyUp ##.WinSys.IsRunningAsAdmin
+         →T.GoToTidyUp ##.WinSys.IsRunningAsAdmin
      :Else
          dmx←⎕DMX
-         →GoToTidyUp'Access is denied.'{⍺≢(≢⍺)↑⊃,/⍵}dmx.DM  ⍝ Fails because of the lack of admin rights.
+         →T.GoToTidyUp'Access is denied.'{⍺≢(≢⍺)↑⊃,/⍵}dmx.DM  ⍝ Fails because of the lack of admin rights.
      :EndTrap
  :EndIf
 
- R←∆OK
+ R←T._OK
 
 ∆TidyUp:
  :Trap 0 ⋄ F.RmDir tempFolder ⋄ :EndTrap

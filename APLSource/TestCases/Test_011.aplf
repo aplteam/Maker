@@ -1,7 +1,7 @@
  R←Test_011(stopFlag batchFlag);⎕TRAP;F;A;filename;folder;rc;buff
 ⍝ Exercise `UpdateVersionNumberInInno_ISS`
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
- R←∆Failed
+ R←T._Failed
 
  F←##.Maker.FilesAndDirs
  A←##.APLTreeUtils
@@ -18,9 +18,9 @@
 
  folder ##.Maker.UpdateVersionNumberInInno_ISS'inno'
  buff←'flat'A.ReadUtf8File filename
- →GoToTidyUp 1≠+/'2.0.0'⍷buff
+ →T.GoToTidyUp 1≠+/'2.0.0'⍷buff
 
- R←∆OK
+ R←T._OK
 
 ∆TidyUp:
  :Trap 0 ⋄ F.RmDir folder ⋄ :EndTrap

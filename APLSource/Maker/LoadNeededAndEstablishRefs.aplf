@@ -1,7 +1,7 @@
  {r}←{loadInto}LoadNeededAndEstablishRefs(name XML);needed;ref;sourcePath;bool;neededScripts;attr;obj;path;wsname;target;lib
 ⍝ Loads and establishes references to all scripts needed by the project to be loaded, like
 ⍝ `APLTreeUtils`, into, by default, #._dependencies. It also copies needed stuff from workspaces.\\
-⍝ `loadInto` defaults to `#._dependencies` but can be the name (**not** a ref!) to any existing namespace.
+⍝ `loadInto` defaults to `#._dependencies` but can be the name (**not** a ref!) of any existing namespace.
 ⍝ Whatever it is, a reference pointing to it is returned.\\
 ⍝ Call this function **before** the acre project is opened!\\
 ⍝ * `name` is the name of the project, like "Fire"

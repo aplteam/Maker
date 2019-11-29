@@ -1,7 +1,7 @@
  R←Test_034(stopFlag batchFlag);⎕TRAP;xml;noOf;parms
 ⍝ Exercise `CopyToMyUCMDsFolderWithPrompt`
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
- R←∆Failed
+ R←T._Failed
 
  #.⎕SHADOW'TEMP'
  'TEMP'#.⎕NS''
@@ -25,7 +25,7 @@
  parms←xml ##.Maker.GetPublishConfig 0
 
  noOf←##.Maker.EstablishRefs parms
- →PassesIf 1=noOf
+ →T.PassesIf 1=noOf
 
- R←∆OK
+ R←T._OK
 ⍝Done

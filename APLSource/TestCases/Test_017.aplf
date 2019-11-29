@@ -3,19 +3,19 @@
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  :If batchFlag
-     R←∆NoBatchTest
+     R←T._NoBatchTest
  :Else
 
-     R←∆Failed
+     R←T._Failed
      :Trap 11
          {}'MoreTests/'##.Maker.RunInno'inno'
-         →FailsIf 1
+         →T.FailsIf 1
      :Else
          dmx←⎕DMX
-         →PassesIf'Inno compiler did abort'≡⊃dmx.DM
+         →T.PassesIf'Inno compiler did abort'≡⊃dmx.DM
      :EndTrap
 
-     R←∆OK
+     R←T._OK
 
  :EndIf
 ⍝Done

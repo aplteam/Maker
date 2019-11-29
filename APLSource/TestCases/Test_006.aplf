@@ -1,33 +1,33 @@
  R←Test_006(stopFlag batchFlag);⎕TRAP;was;filename;now;F
 ⍝ Exercise `IncreaseBuildID`
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
- R←∆Failed
+ R←T._Failed
 
  F←##.Maker.FilesAndDirs
  filename←'MoreTests/publish.config'
  was←##.APLTreeUtils.ReadUtf8File filename
- →PassesIf 0=∨/'buildid'⍷∊was
+ →T.PassesIf 0=∨/'buildid'⍷∊was
  #.⎕SHADOW'TEMP'
  'TEMP'#.⎕NS''
  #.TEMP.⎕FX'r←Version' 'r←''MakerTest'' ''1.0.0'' ''2019-01-05'''
  'MoreTests/publish.config'##.Maker.IncreaseBuildID'#.TEMP.Version'
- →GoToTidyUp'1.0.0.1'≢2⊃#.TEMP.Version
+ →T.GoToTidyUp'1.0.0.1'≢2⊃#.TEMP.Version
  now←⎕XML'flat'##.APLTreeUtils.ReadUtf8File filename
- →GoToTidyUp(,'1')≢,'buildid'##.Maker.xml.GetValueFrom now
+ →T.GoToTidyUp(,'1')≢,'buildid'##.Maker.xml.GetValueFrom now
  now←'flat'##.APLTreeUtils.ReadUtf8File filename
  now←'<buildid>1</buildid>'⎕R'<buildid>9</buildid>'⊣now
  ##.APLTreeUtils.WriteUtf8File filename now
  'MoreTests/publish.config'##.Maker.IncreaseBuildID'#.TEMP.Version'
  now←⎕XML'flat'##.APLTreeUtils.ReadUtf8File filename
- →GoToTidyUp'10'≢'buildid'##.Maker.xml.GetValueFrom now
+ →T.GoToTidyUp'10'≢'buildid'##.Maker.xml.GetValueFrom now
  now←'flat'##.APLTreeUtils.ReadUtf8File filename
  now←'<buildid>10</buildid>'⎕R'<buildid>99</buildid>'⊣now
  ##.APLTreeUtils.WriteUtf8File filename now
  'MoreTests/publish.config'##.Maker.IncreaseBuildID'#.TEMP.Version'
  now←⎕XML'flat'##.APLTreeUtils.ReadUtf8File filename
- →GoToTidyUp'100'≢'buildid'##.Maker.xml.GetValueFrom now
+ →T.GoToTidyUp'100'≢'buildid'##.Maker.xml.GetValueFrom now
 
- R←∆OK
+ R←T._OK
 
 ∆TidyUp:
  ##.APLTreeUtils.WriteUtf8File filename was

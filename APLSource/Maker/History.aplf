@@ -1,6 +1,8 @@
  History
-⍝ * 3.7.1
-⍝   * `MakeStandAloneRunTimeExe` improved.
-⍝   * Bug in `ProcessSingleScriptProjects` fixed.
+⍝ * 3.8.0
+⍝   * `SaveProjectWorkpace` does not take action regarding any namespace `TestCases`. Obsolete due to
+⍝     the new test framework `Tester2`.
+⍝   * `MakeWorkspace` now deleted everything that is marked as "development-only".
+⍝   * Internally: now uses the new test framework `Tester2`.
 ⍝\\
 ⍝ For information regarding older versions see <https://github.com/aplteam/Maker/releases>

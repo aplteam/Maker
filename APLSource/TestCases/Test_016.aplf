@@ -1,13 +1,13 @@
  R←Test_016(stopFlag batchFlag);⎕TRAP
 ⍝ Exercise `DropBuildNumber`
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
- R←∆Failed
+ R←T._Failed
 
- →PassesIf''≡##.Maker.DropBuildNumber''
- →PassesIf'1.2.3'≡##.Maker.DropBuildNumber'1.2.3'
- →PassesIf'1.2.3'≡##.Maker.DropBuildNumber'1.2.3.4567'
- →PassesIf'1.2.3'≡##.Maker.DropBuildNumber'Foo' '1.2.3' '2019-03-07'
- →PassesIf'1.2.3'≡##.Maker.DropBuildNumber'Foo' '1.2.3.4567' '2019-03-07'
+ →T.PassesIf''≡##.Maker.DropBuildNumber''
+ →T.PassesIf'1.2.3'≡##.Maker.DropBuildNumber'1.2.3'
+ →T.PassesIf'1.2.3'≡##.Maker.DropBuildNumber'1.2.3.4567'
+ →T.PassesIf'1.2.3'≡##.Maker.DropBuildNumber'Foo' '1.2.3' '2019-03-07'
+ →T.PassesIf'1.2.3'≡##.Maker.DropBuildNumber'Foo' '1.2.3.4567' '2019-03-07'
 
- R←∆OK
+ R←T._OK
 ⍝Done

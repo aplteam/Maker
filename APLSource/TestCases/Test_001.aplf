@@ -1,7 +1,7 @@
  R←Test_001(stopFlag batchFlag);⎕TRAP;F;path;A;zipFilename1;zipFilename2;zipFilename3
 ⍝ Exercise `CreateZipFile`
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
- R←∆Failed
+ R←T._Failed
 
  F←##.Maker.FilesAndDirs ⋄ A←##.APLTreeUtils
 
@@ -15,13 +15,13 @@
  'TEMP'#.⎕NS''
  #.TEMP.⎕FX'r←Version' 'r←''Foo'' ''0.1.0'' ''2019-02-19'''
  zipFilename1←(#.TEMP.Version ##.Maker.CreateZipFile'Foo'path)
- →GoToTidyUp'Foo-0.1.0.zip'≢zipFilename1
+ →T.GoToTidyUp'Foo-0.1.0.zip'≢zipFilename1
  zipFilename2←({⍬}##.Maker.CreateZipFile'Foo'path)
- →GoToTidyUp'Foo.zip'≢zipFilename2
+ →T.GoToTidyUp'Foo.zip'≢zipFilename2
  zipFilename3←({⍬}##.Maker.CreateZipFile'Foo.zip'path)
- →GoToTidyUp'Foo.zip'≢zipFilename3
+ →T.GoToTidyUp'Foo.zip'≢zipFilename3
 
- R←∆OK
+ R←T._OK
 
 ∆TidyUp:
  :Trap 0 ⋄ F.RmDir path ⋄ :EndTrap

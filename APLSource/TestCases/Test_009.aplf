@@ -1,7 +1,7 @@
  R←Test_009(stopFlag batchFlag);⎕TRAP;parms;filename;rc;LXwas;name;ref;buff;M;ps
 ⍝ Exercise `MakeStandAloneRunTimeExe` and implicitly also `CreateStandAloneExeParms`
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
- R←∆Failed
+ R←T._Failed
 
  name←⊃⎕SI
  M←##.Maker
@@ -14,7 +14,7 @@
  LXwas←⎕LX
  ⎕LX←'#.',name,'.LX'
  rc←M.MakeStandAloneRunTimeExe parms
- →GoToTidyUp 0=M.FilesAndDirs.IsFile filename,'.exe'
+ →T.GoToTidyUp 0=M.FilesAndDirs.IsFile filename,'.exe'
 
  ⍝ Now we test what happens when we run the EXE and then try again creating it:
  ps←##.Execute.DefaultParms
@@ -24,9 +24,9 @@
  {}ps ##.Execute.Application filename,'.exe'
  ⎕DL 3
  rc←1 M.MakeStandAloneRunTimeExe parms  ⍝ Left arg (1) says "I am a test case!"
- →PassesIf ¯1≡rc
+ →T.PassesIf ¯1≡rc
 
- R←∆OK
+ R←T._OK
 
 ∆TidyUp:
  ⎕LX←LXwas

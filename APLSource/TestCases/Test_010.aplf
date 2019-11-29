@@ -1,17 +1,17 @@
  R←Test_010(stopFlag batchFlag);⎕TRAP;path;A
 ⍝ Exercise `GetUserCommandFolder`
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
- R←∆Failed
+ R←T._Failed
 
  A←##.APLTreeUtils
 
  path←##.Maker.GetUserCommandFolder'foogoozoo.doesnotexist'   ⍝ Should not exist!
- →PassesIf'documents\myucmds'{⍺≡(-⍴⍺)↑⍵}A.Lowercase path
+ →T.PassesIf'documents\myucmds'{⍺≡(-⍴⍺)↑⍵}A.Lowercase path
 
  :If 'kai'≡A.Lowercase ⎕AN
      path←##.Maker.GetUserCommandFolder'fire_uc.dyalog'       ⍝ Exists on my PCs, therefore the check for ⎕AN
-     →PassesIf∨/'c:\users\kai\documents\myucmds'⍷A.Lowercase path
+     →T.PassesIf∨/'c:\users\kai\documents\myucmds'⍷A.Lowercase path
  :EndIf
 
- R←∆OK
+ R←T._OK
 ⍝Done

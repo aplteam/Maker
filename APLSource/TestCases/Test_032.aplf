@@ -1,7 +1,7 @@
  R←Test_032(stopFlag batchFlag);⎕TRAP;F;wasDir;xml
 ⍝ Exercise `LoadNeededAndEstablishRefs`  assuming Make (]RunMake)
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
- R←∆Failed
+ R←T._Failed
 
  F←##.Maker.FilesAndDirs
  #.⎕SHADOW'Foo'
@@ -11,11 +11,11 @@
  xml←##.Maker.GetPublishConfig 0
 
  ##.Maker.LoadNeededAndEstablishRefs'Foo'xml
- →GoToTidyUp 2≠≢#.Foo.⎕NL 9.1                  ⍝ `Foo` and `APLTreeUtils`
- →GoToTidyUp 2≠≢#.Foo.⎕NL 9.4                  ⍝ `FilesAndDirs` and `OS`; `Tester` and `WinReg` are NOT loaded!
- →GoToTidyUp 1≠≢#.Foo.Foo.⎕NL⍳16
+ →T.GoToTidyUp 2≠≢#.Foo.⎕NL 9.1                  ⍝ `Foo` and `APLTreeUtils`
+ →T.GoToTidyUp 2≠≢#.Foo.⎕NL 9.4                  ⍝ `FilesAndDirs` and `OS`; `Tester` and `WinReg` are NOT loaded!
+ →T.GoToTidyUp 1≠≢#.Foo.Foo.⎕NL⍳16
 
- R←∆OK
+ R←T._OK
 
 ∆TidyUp:
  {}F.Cd wasDir

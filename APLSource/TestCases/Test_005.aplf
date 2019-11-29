@@ -1,7 +1,7 @@
  R←Test_005(stopFlag batchFlag);⎕TRAP;F;tempFolder;dmx
 ⍝ Exercise `CopyTo`
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
- R←∆Failed
+ R←T._Failed
 
  F←##.Maker.FilesAndDirs
 
@@ -9,25 +9,25 @@
  F.RmDir tempFolder
  'Create!'F.CheckPath tempFolder
  'MoreTests\publish.config'##.Maker.CopyTo tempFolder,'\'
- →GoToTidyUp 0=F.IsFile tempFolder,'\publish.config'
+ →T.GoToTidyUp 0=F.IsFile tempFolder,'\publish.config'
 
  F.RmDir tempFolder
  'MoreTests'##.Maker.CopyTo tempFolder,'\'
- →GoToTidyUp 6≠≢⊃('recursive' 1)F.Dir tempFolder,'/*'
+ →T.GoToTidyUp 6≠≢⊃('recursive' 1)F.Dir tempFolder,'/*'
 
  F.RmDir tempFolder
  'MoreTests/'##.Maker.CopyTo tempFolder,'\'
- →GoToTidyUp 6≠≢⊃('recursive' 1)F.Dir tempFolder,'/*'
+ →T.GoToTidyUp 6≠≢⊃('recursive' 1)F.Dir tempFolder,'/*'
 
  :Trap 11
      'MoreTests\publish.config'##.Maker.CopyTo tempFolder   ⍝ That must generate an error: can't copy file over folder!
-     →GoToTidyUp 1
+     →T.GoToTidyUp 1
  :Else
      dmx←⎕DMX
-     →GoToTidyUp'Access is denied.'≢⊃dmx.DM
+     →T.GoToTidyUp'Access is denied.'≢⊃dmx.DM
  :EndTrap
 
- R←∆OK
+ R←T._OK
 
 ∆TidyUp:
  F.RmDir tempFolder
