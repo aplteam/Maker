@@ -1,8 +1,6 @@
  History
-⍝ * 3.8.0
-⍝   * `SaveProjectWorkpace` does not take action regarding any namespace `TestCases`. Obsolete due to
-⍝     the new test framework `Tester2`.
-⍝   * `MakeWorkspace` now deleted everything that is marked as "development-only".
-⍝   * Internally: now uses the new test framework `Tester2`.
+⍝ * 3.8.2
+⍝   * `MakeWorkspace` relied on the existence of `#._dependencies`; it should not.
+⍝   * Bug fix in `MakeWorkspace`
 ⍝\\
 ⍝ For information regarding older versions see <https://github.com/aplteam/Maker/releases>

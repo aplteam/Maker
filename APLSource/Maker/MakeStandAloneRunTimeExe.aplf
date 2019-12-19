@@ -5,10 +5,10 @@
 ⍝ Because the creation of a stand-alone EXE quite often fails for no apparent reason this function
 ⍝ repeats the attempt up to 10 times. However, the most common reason for a failure is that the EXE
 ⍝ is actually running and therefore cannot be overwritten. In case "Autostatus" in the "Options"
-⍝ of the session is ticked the error message "" would be displayed. This function will check for
-⍝ this and tell the user. (There is an REF 13574 to make this accessible via ⎕DMX; 2019-11)\\
-⍝ When the options ⍺ `testFlag` is `1` then only **one** ettempt is made to create the EXE, and
-⍝ in case of the aformentioned problem no intercation with the user is attempted and a `¯1` is returned.
+⍝ of the session is ticked the error message "Could not copy stub exe" would be displayed. This function
+⍝ will check for this and tell the user. (There is an REF 13574 to make this accessible via ⎕DMX; 2019-11)\\
+⍝ When the option `testFlag` is `1` then only **one** ettempt is made to create the EXE, and
+⍝ in case of the aformentioned problem no intercation with the user is attempted, and `¯1` is returned.
  rc←⍬
  ⎕IO←1 ⋄ ⎕ML←1
  testFlag←{0<⎕NC ⍵:⍎⍵ ⋄ 0}'testFlag'

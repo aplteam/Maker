@@ -56,12 +56,12 @@ html{line-height:1.15;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;}b
 </nav>
 <div class="h_tag">
 <a href="#The-XML-file-publishconfig" id="The-XML-file-publishconfig" class="autoheader_anchor">
-<h1>The XML file <code>publish.config</code></h1>
+<h1 data-id="The-XML-file-publishconfig">The XML file <code>publish.config</code></h1>
 </a>
 </div>
 <div class="h_tag">
 <a href="#Overview" id="Overview" class="autoheader_anchor">
-<h2>Overview</h2>
+<h2 data-id="Overview">Overview</h2>
 </a>
 </div>
 <p>The XML file <code>publish.config</code> is used by two different processes:</p>
@@ -75,7 +75,7 @@ html{line-height:1.15;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;}b
 </ol>
 <div class="h_tag">
 <a href="#Example" id="Example" class="autoheader_anchor">
-<h2>Example</h2>
+<h2 data-id="Example">Example</h2>
 </a>
 </div>
 <p>This is a <code>publish.config</code> file that takes advantage of all features on offer. We will discuss the features in detail later on.</p>
@@ -98,12 +98,12 @@ html{line-height:1.15;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;}b
 &lt;/tool&gt;</code></pre>
 <div class="h_tag">
 <a href="#The-contents-of-publishconfig" id="The-contents-of-publishconfig" class="autoheader_anchor">
-<h2>The contents of <code>publish.config</code></h2>
+<h2 data-id="The-contents-of-publishconfig">The contents of <code>publish.config</code></h2>
 </a>
 </div>
 <div class="h_tag">
 <a href="#The--tag" id="The--tag" class="autoheader_anchor">
-<h3>The <code>&lt;tool&gt;</code> tag</h3>
+<h3 data-id="The--tag">The <code>&lt;tool&gt;</code> tag</h3>
 </a>
 </div>
 <p>This is the outmost tag. Its “name” attribute defines the name of the project.</p>
@@ -111,26 +111,26 @@ html{line-height:1.15;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;}b
 <p>The namespace <code>#.Foo</code> usually contains test cases and references to any dependencies and might also contain stuff like helpers.</p>
 <div class="h_tag">
 <a href="#The-tags" id="The-tags" class="autoheader_anchor">
-<h3>The tags <code>&lt;version&gt;</code>, <code>&lt;buildid&gt;</code>, <code>&lt;date&gt;</code></h3>
+<h3 data-id="The-tags">The tags <code>&lt;version&gt;</code>, <code>&lt;buildid&gt;</code>, <code>&lt;date&gt;</code></h3>
 </a>
 </div>
 <p>These tags belong together and define a particular version. While <code>&lt;version&gt;</code> and <code>&lt;date&gt;</code> are supposed to be set by the developer, <code>&lt;buildid&gt;</code> is automatically increased whenever the <code>]RunMake</code> user command is run on a project.</p>
 <div class="h_tag">
 <a href="#The-tag" id="The-tag" class="autoheader_anchor">
-<h3>The tag <code>&lt;container&gt;</code></h3>
+<h3 data-id="The-tag">The tag <code>&lt;container&gt;</code></h3>
 </a>
 </div>
 <p>These days by naming convention the name of the container is identical with the “name” attribute of the <code>&lt;tool&gt;</code> tag preceded by an underscore (<code>_</code>).</p>
 <div class="h_tag">
 <a href="#The-tag-1" id="The-tag-1" class="autoheader_anchor">
-<h3>The tag <code>&lt;needs&gt;</code></h3>
+<h3 data-id="The-tag-1">The tag <code>&lt;needs&gt;</code></h3>
 </a>
 </div>
 <p>This tag might be empty. If it is not empty it will contain either <code>&lt;script&gt;</code> or <code>&lt;ws&gt;</code> tags or both.</p>
 <p>The tag is used to define dependencies for both loading a project as well as “Making” the project.</p>
 <div class="h_tag">
 <a href="#The-tags--and" id="The-tags--and" class="autoheader_anchor">
-<h4>The tags <code>&lt;script&gt;</code> and <code>&lt;ws&gt;</code></h4>
+<h4 data-id="The-tags--and">The tags <code>&lt;script&gt;</code> and <code>&lt;ws&gt;</code></h4>
 </a>
 </div>
 <p>These tags may occur only as children of the <code>&lt;needs&gt;</code> tag.</p>
@@ -145,20 +145,20 @@ html{line-height:1.15;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;}b
 <p>In order to define a dependency that lives in a different library you need to define the library.</p>
 <div class="h_tag">
 <a href="#The-tag-2" id="The-tag-2" class="autoheader_anchor">
-<h5>The tag <code>&lt;script&gt;</code></h5>
+<h5 data-id="The-tag-2">The tag <code>&lt;script&gt;</code></h5>
 </a>
 </div>
 <p>This tag is used in case the dependency is simply a single script. It may carry the <code>library</code> and the <code>development</code> attribute but no other attributes.</p>
 <div class="h_tag">
 <a href="#The-library-attribute" id="The-library-attribute" class="autoheader_anchor">
-<h6>The <code>library</code> attribute</h6>
+<h6 data-id="The-library-attribute">The <code>library</code> attribute</h6>
 </a>
 </div>
 <p>This value, when specified, is <strong>not</strong> a fully qualified path but simply the name of one of the sub-folders within the folder where all libraries and their projects live.</p>
 <p>This is an example: <code>&lt;script library="APLTree"&gt;APLTreeUtils&lt;/script&gt;</code></p>
 <div class="h_tag">
 <a href="#The-development-attribute" id="The-development-attribute" class="autoheader_anchor">
-<h6>The <code>development</code> attribute</h6>
+<h6 data-id="The-development-attribute">The <code>development</code> attribute</h6>
 </a>
 </div>
 <p>By default a dependency is loaded no matter what. By setting <code>development="true"</code> you can make sure that the dependency is loaded when <code>]OpenMyAcreProject</code> is executed but ignored when <code>]RunMake</code> is executed.</p>
@@ -166,13 +166,13 @@ html{line-height:1.15;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;}b
 <p>Note: <code>&lt;script development="1"&gt;</code> achieves the same but is now deprecated.</p>
 <div class="h_tag">
 <a href="#The-target-attribute" id="The-target-attribute" class="autoheader_anchor">
-<h6>The <code>target</code> attribute</h6>
+<h6 data-id="The-target-attribute">The <code>target</code> attribute</h6>
 </a>
 </div>
 <p>This defaults to <code>#._dependencies</code>.</p>
 <div class="h_tag">
 <a href="#The-tag-3" id="The-tag-3" class="autoheader_anchor">
-<h5>The tag <code>&lt;ws&gt;</code></h5>
+<h5 data-id="The-tag-3">The tag <code>&lt;ws&gt;</code></h5>
 </a>
 </div>
 <p>This tag is used in case the dependency is something that is available as a workspace. It may carry the <code>library</code> and the <code>development</code> attributes but also the <code>copy</code> attribute.</p>
@@ -180,7 +180,7 @@ html{line-height:1.15;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;}b
 <p>This is an example: <code>&lt;ws copy="GUI"&gt;APLGUI&lt;/ws&gt;</code>.</p>
 <div class="h_tag">
 <a href="#The-tag-4" id="The-tag-4" class="autoheader_anchor">
-<h6>The tag <code>&lt;erase&gt;</code></h6>
+<h6 data-id="The-tag-4">The tag <code>&lt;erase&gt;</code></h6>
 </a>
 </div>
 <p>It might well be that a copy operation triggered by the <code>&lt;ws&gt;</code> tag copied more objects than actually required. In this case the <code>&lt;erase&gt;</code> objects with its sub-tag <code>&lt;obj&gt;</code> can be used to ridden any unwanted objects.</p>
@@ -193,47 +193,47 @@ html{line-height:1.15;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;}b
 &lt;/erase&gt;</code></pre>
 <div class="h_tag">
 <a href="#The--tag-1" id="The--tag-1" class="autoheader_anchor">
-<h3>The <code>&lt;autoload&gt;</code> tag</h3>
+<h3 data-id="The--tag-1">The <code>&lt;autoload&gt;</code> tag</h3>
 </a>
 </div>
 <p>This tag is 1 only for any APLTeam projects. It means that the project is loaded in a standard fashion. For other projects, like Carlisle's “Rumba”, the <code>&lt;autoload&gt;</code> value would be 0.</p>
 <div class="h_tag">
 <a href="#The--tag-2" id="The--tag-2" class="autoheader_anchor">
-<h3>The <code>&lt;buildid&gt;</code> tag</h3>
+<h3 data-id="The--tag-2">The <code>&lt;buildid&gt;</code> tag</h3>
 </a>
 </div>
 <p>This tag's value is the building ID of a project.</p>
 <p>It is automatically increased by the <code>]RunMake</code> user command. This allows to tell two versions apart despite them having the same version number and version date.</p>
 <div class="h_tag">
 <a href="#The--tag-3" id="The--tag-3" class="autoheader_anchor">
-<h3>The <code>&lt;lx&gt;</code> tag</h3>
+<h3 data-id="The--tag-3">The <code>&lt;lx&gt;</code> tag</h3>
 </a>
 </div>
 <p>This tag can be passed to <code>Maker.Set_LX</code>. If it is not empty then this function will set <code>⎕LX</code> in the current workspace accordingly.</p>
 <p>This is an example: <code>&lt;lx&gt;#.AutoHotkey.Run&lt;/lx&gt;</code></p>
 <div class="h_tag">
 <a href="#The--tag-4" id="The--tag-4" class="autoheader_anchor">
-<h3>The <code>&lt;admin&gt;</code> tag</h3>
+<h3 data-id="The--tag-4">The <code>&lt;admin&gt;</code> tag</h3>
 </a>
 </div>
 <p>This tag should carry either 0 or 1 as value.</p>
 <p>If it is a 1 then the user command <code>]RunMake</code> makes sure that the instance of Dyalog that will load the workspace <code>Make.dws</code> and run its <code>⎕LX</code> will be started in elevated mode.</p>
 <div class="h_tag">
 <a href="#The--tag-5" id="The--tag-5" class="autoheader_anchor">
-<h3>The <code>&lt;initial&gt;</code> tag</h3>
+<h3 data-id="The--tag-5">The <code>&lt;initial&gt;</code> tag</h3>
 </a>
 </div>
 <p>If this tag exists at all it must carry the name of a fully qualified function name.</p>
 <p>The user command <code>]OpenMyProject</code> will execute that function automatically after the acre project was opened.</p>
 <div class="h_tag">
 <a href="#The--tag-6" id="The--tag-6" class="autoheader_anchor">
-<h3>The <code>&lt;scriptonly&gt;</code> tag</h3>
+<h3 data-id="The--tag-6">The <code>&lt;scriptonly&gt;</code> tag</h3>
 </a>
 </div>
 <p>This is either 1 or 0. A 1 means that the project consists of a single script and nothing else.</p>
 <div class="h_tag">
 <a href="#The--tag-7" id="The--tag-7" class="autoheader_anchor">
-<h3>The <code>&lt;refs&gt;</code> tag</h3>
+<h3 data-id="The--tag-7">The <code>&lt;refs&gt;</code> tag</h3>
 </a>
 </div>
 <p>This may contain zeros to many <code>&lt;ref&gt;</code> tags. The purpose of a <code>&lt;ref&gt;</code> tag is to establish references that cannot be derived from a project name. For example, the APL-cation project <code>APLGUI</code> contains a sub-namespace <code>GUI</code> that contains the real stuff.</p>
