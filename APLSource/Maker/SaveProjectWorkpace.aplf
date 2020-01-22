@@ -1,10 +1,11 @@
  {r}←{saveAs}SaveProjectWorkpace name;rc;msg;lx
 ⍝ Save the current workspace without `#.Make` and without the stack under the name "project.dws".
 ⍝ `#.Make` must be deleted before calling this function.\\
-⍝ By default ⎕WSID is used to save the WS and the it is moved to "project.dws". However, you can define
-⍝ a different source workspace name via `saveAs`. The name of the target workspace is fixed: project.dws!\\
+⍝ By default `⎕WSID` is used to save the WS and the it is moved to "project.dws".
+⍝ However, you can define a different source workspace name via `saveAs`. The name of the target
+⍝ workspace is fixed: project.dws!\\
 ⍝ The WS contains the whole project including dependencies, development tools and test cases.
-⍝ ⎕LX is set to `` temporarily before the ⎕SAVE and restored afterwards.
+⍝ `⎕LX` is set to ⍬ temporarily before the `⎕SAVE` and restored afterwards.
  r←⍬
  saveAs←{0<⎕NC ⍵:⍎⍵ ⋄ ⎕WSID}'saveAs'
  lx←#.⎕LX

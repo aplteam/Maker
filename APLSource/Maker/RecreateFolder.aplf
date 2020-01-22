@@ -1,11 +1,26 @@
- {r}←RecreateFolder targetFolder;rc;⎕IO;⎕ML;F
-⍝ Typically the right argument is `./Dist`. The folder will be removed and then created.
+ {r}←{max}RecreateFolder targetFolder;rc;⎕IO;⎕ML;F;flag;en;more;counter
+⍝ Typically the right argument is `./Dist`. The folder will be removed and then created.\\
+⍝ `max` defaults to 4, meaning that the program tries a maximum of 4 times when an error occurs.
+⍝ The loop was introduced because on some systems the first attempt often, the second attempt
+⍝ sometimes failed, but finally it would succeed.
  ⎕IO←1 ⋄ ⎕ML←1
  r←⍬
  F←FilesAndDirs
  :If F.IsDir targetFolder
-     U.Assert 0=⊃rc←F.RmDir targetFolder
-     ⎕DL 0.25
+     max←{0<⎕NC ⍵:⍎⍵ ⋄ 4}'max'
+     counter←flag←0
+     :Repeat
+         counter+←1
+         (rc en more)←F.RmDir targetFolder
+         :If rc=0
+             flag←1
+         :Else
+             ⎕DL 0.25
+         :EndIf
+     :Until flag∨max=counter
+     :If ~flag
+         (more,'; ⎕EN: ',⍕en)U.Assert 0
+     :EndIf
  :EndIf
  'Could not create the target folder'U.Assert'Create!'F.CheckPath targetFolder
 ⍝Done
