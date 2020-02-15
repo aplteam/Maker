@@ -18,10 +18,11 @@
      r.FileVersion←2⊃#.⍎r.ProjectName,'.Version'
      r.FileDescription←''
      r.ProductVersion←2⊃#.⍎r.ProjectName,'.Version'
-     r.CompanyName←'APL Team Ltd'      ⍝ Not shown by Windows Explorer anyway
-     r.Comments←''                     ⍝ Not shown by Windows Explorer anyway
-     r.Commandline←''                  ⍝ Any commandline parameters to be passed on
+     r.CompanyName←'APL Team Ltd'       ⍝ Not shown by Windows Explorer anyway
+     r.Comments←''                      ⍝ Not shown by Windows Explorer anyway
+     r.Commandline←''                   ⍝ Any commandline parameters to be passed on
      r.Resource←''
+     r.RunTime←1                        ⍝ Set this to 1 only when you need to debug the EXE.
      _←r.⎕FX'r←∆List' 'r←{⍵,[1.5]⍎¨⍵}'' ''~⍨¨↓⎕nl 2'
      r
  }

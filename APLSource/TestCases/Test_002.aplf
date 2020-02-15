@@ -1,19 +1,22 @@
- R←Test_002(stopFlag batchFlag);⎕TRAP;F;folder;rc
+ R←Test_002(stopFlag batchFlag);⎕TRAP;F;folder;rc;folder2;more;en
 ⍝ Exercise `RecreateFolder`
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←T._Failed
 
  F←##.Maker.FilesAndDirs
  folder←F.NormalizePath'.\Tests\Test-RecreateFolder'
- {}F.RmDir folder
- rc←##.Maker.RecreateFolder folder
+ folder2←folder,'\aaa\bbb'
+ {}F.RmDir folder2
+ rc←##.Maker.RecreateFolder folder2
  →T.GoToTidyUp 0≠≢rc
  ⎕DL 0.01
- rc←##.Maker.RecreateFolder folder
+ ##.APLTreeUtils.WriteUtf8File(folder,'\aaa\MyFile.txt')'Hello world'
+ rc←2 ##.Maker.RecreateFolder folder2
  →T.GoToTidyUp 0≠≢rc
 
  R←T._OK
 
 ∆TidyUp:
- F.RmDir folder
+ (rc en more)←F.RmDir folder
+ Assert 0=rc
 ⍝Done

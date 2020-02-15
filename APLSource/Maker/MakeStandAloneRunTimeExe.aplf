@@ -16,7 +16,7 @@
  'Parameter space does not provide a filename'⎕SIGNAL 11/⍨0=p.⎕NC'Filename'
  '"Filename" is empty'⎕SIGNAL 11/⍨0=≢p.Filename
  counter←success←0
- RUNTIME←8
+ RUNTIME←8×p.RunTime
  details←0 2⍴''
  details⍪←'FileDescription'p.FileDescription
  details⍪←'ProductVersion'p.ProductVersion

@@ -1,5 +1,7 @@
  History
-⍝ * 3.8.3
-⍝   * `RecreateFolder` made more resilient.
+⍝ * 4.0.0
+⍝   * `CreateStandAloneExeParms` now comes with a flag `RunTime` that defaults to 1.
+⍝   * `MakeStandAloneRunTimeExe` now honours the parameter `RunTime` for easier debugging.
+⍝   * Left argument of `RecreateFolder` has changed: rather than `max` it is now `levels`.
 ⍝\\
 ⍝ For information regarding older versions see <https://github.com/aplteam/Maker/releases>

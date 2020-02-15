@@ -1,17 +1,20 @@
- {r}←{max}RecreateFolder targetFolder;rc;⎕IO;⎕ML;F;flag;en;more;counter
+ {r}←{levels}RecreateFolder targetFolder;rc;⎕IO;⎕ML;F;flag;en;more;counter;max
 ⍝ Typically the right argument is `./Dist`. The folder will be removed and then created.\\
-⍝ `max` defaults to 4, meaning that the program tries a maximum of 4 times when an error occurs.
+⍝ `level` defaults to 1, meaning that only the very last level of the path is removed.
+⍝ Tries a maximum of 4 times with a delay in between when an error occurs.
 ⍝ The loop was introduced because on some systems the first attempt often, the second attempt
 ⍝ sometimes failed, but finally it would succeed.
  ⎕IO←1 ⋄ ⎕ML←1
  r←⍬
  F←FilesAndDirs
+ targetFolder←F.NormalizePath targetFolder
+ levels←¯1+{0<⎕NC ⍵:⍎⍵ ⋄ 1}'levels'
  :If F.IsDir targetFolder
-     max←{0<⎕NC ⍵:⍎⍵ ⋄ 4}'max'
+     max←4
      counter←flag←0
      :Repeat
          counter+←1
-         (rc en more)←F.RmDir targetFolder
+         (rc en more)←F.RmDir F.CurrentSep{1↓⊃,/⍺,¨⍵}(-levels)↓F.CurrentSep ##.APLTreeUtils.Split targetFolder
          :If rc=0
              flag←1
          :Else
