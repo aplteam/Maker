@@ -14,7 +14,7 @@
      counter←flag←0
      :Repeat
          counter+←1
-         (rc en more)←F.RmDir F.CurrentSep{1↓⊃,/⍺,¨⍵}(-levels)↓F.CurrentSep ##.APLTreeUtils.Split targetFolder
+         (rc en more)←F.RmDir F.CurrentSep{1↓⊃,/⍺,¨⍵}(-levels)↓F.CurrentSep APLTreeUtils.Split targetFolder
          :If rc=0
              flag←1
          :Else

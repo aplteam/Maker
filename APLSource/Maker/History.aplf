@@ -1,4 +1,6 @@
  History
+⍝ * 4.0.1
+⍝   * Bug fix in `RecreateFolder`: APLTreeUtils was addressed incorrectly.
 ⍝ * 4.0.0
 ⍝   * `CreateStandAloneExeParms` now comes with a flag `RunTime` that defaults to 1.
 ⍝   * `MakeStandAloneRunTimeExe` now honours the parameter `RunTime` for easier debugging.
