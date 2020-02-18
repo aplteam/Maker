@@ -1,4 +1,4 @@
- {r}←{levels}RecreateFolder targetFolder;rc;⎕IO;⎕ML;F;flag;en;more;counter;max
+ {r}←{levels}RecreateFolder targetFolder;rc;⎕IO;⎕ML;F;flag;en;more;counter;max;targetFolder2
 ⍝ Typically the right argument is `./Dist`. The folder will be removed and then created.\\
 ⍝ `level` defaults to 1, meaning that only the very last level of the path is removed.
 ⍝ Tries a maximum of 4 times with a delay in between when an error occurs.
@@ -9,12 +9,13 @@
  F←FilesAndDirs
  targetFolder←F.NormalizePath targetFolder
  levels←¯1+{0<⎕NC ⍵:⍎⍵ ⋄ 1}'levels'
- :If F.IsDir targetFolder
+ targetFolder2←F.CurrentSep{1↓⊃,/⍺,¨⍵}(-levels)↓F.CurrentSep APLTreeUtils.Split targetFolder
+ :If F.IsDir targetFolder2
      max←4
      counter←flag←0
      :Repeat
          counter+←1
-         (rc en more)←F.RmDir F.CurrentSep{1↓⊃,/⍺,¨⍵}(-levels)↓F.CurrentSep APLTreeUtils.Split targetFolder
+         (rc en more)←F.RmDir targetFolder2
          :If rc=0
              flag←1
          :Else
