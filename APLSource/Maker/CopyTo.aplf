@@ -13,7 +13,9 @@
      'Investigate "more" and "list": something went wrong'U.Assert success
      r←list
  :Else
-     'Could not create target directory'U.Assert'Create!'FilesAndDirs.CheckPath y
+     :If FilesAndDirs.IsDir x
+         'Could not create target directory'U.Assert'Create!'FilesAndDirs.CheckPath y
+     :EndIf
      (rc more)←x FilesAndDirs.CopyTo y
      more U.Assert 0=rc
  :EndIf

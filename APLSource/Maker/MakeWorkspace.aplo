@@ -24,16 +24,18 @@
  r←⍬
  toBeCopied←{0<⎕NC ⍵:⍎⍵ ⋄ ''}'toBeCopied'
  ⎕IO←1 ⋄ ⎕ML←1
- bool1←xml[;2]≡¨⊂'script'
- needed←bool1⌿xml[;3]
- bool2←(⊂⊂'development' 'true')∊¨↓¨bool1⌿xml[;4]
- toBeDeleted←bool2⌿bool1⌿xml[;3]
- needed←(~bool2)/needed
- needed,←{⊃⍵[;2]/⍨'copy'∘≡¨⍵[;1]}¨(xml[;2]≡¨⊂'ws')⌿xml[;4]
- :If 0<#.⎕NC'_dependencies'
-     #._dependencies.⎕EX¨toBeDeleted
+ :If 0<≢xml
+     bool1←xml[;2]≡¨⊂'script'
+     needed←bool1⌿xml[;3]
+     bool2←(⊂⊂'development' 'true')∊¨↓¨bool1⌿xml[;4]
+     toBeDeleted←bool2⌿bool1⌿xml[;3]
+     needed←(~bool2)/needed
+     needed,←{⊃⍵[;2]/⍨'copy'∘≡¨⍵[;1]}¨(xml[;2]≡¨⊂'ws')⌿xml[;4]
+     :If 0<#.⎕NC'_dependencies'
+         #._dependencies.⎕EX¨toBeDeleted
+     :EndIf
+     #.⎕EX↑(needed,'_dependencies'((∆WithUnderscore/'_'),name))~⍨' '~¨⍨↓#.⎕NL⍳16
  :EndIf
- #.⎕EX↑(needed,'_dependencies'((∆WithUnderscore/'_'),name))~⍨' '~¨⍨↓#.⎕NL⍳16
  ⎕EX'#.',name,'.AcreConfig'
  0 ⎕SAVE ⎕WSID
  #.⎕EX(∆WithUnderscore/'_')name

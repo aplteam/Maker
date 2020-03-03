@@ -1,4 +1,8 @@
  History
+⍝ * 4.0.3
+⍝   * `MakeWorkspace` crashed in case there were no dependencies at all.
+⍝   * `CopyTo` failed on a filename-to-filename copy operation.
+⍝   * Documentation on MakeWorkspace improved.
 ⍝ * 4.0.2
 ⍝   * Bug fix in `RecreateFolder`: when more than one level was specified and the last-level folder  did not
 ⍝     exist then the other levels weren't removed when they should have been.
