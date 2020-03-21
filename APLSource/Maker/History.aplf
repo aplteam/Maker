@@ -1,4 +1,7 @@
  History
+⍝ * 5.0.0
+⍝   * Breaking change: the method `ProcessSingleScriptProjects` now saves its subjects either with the
+⍝     extension ".aplc" or ".apln" rather than "'.dyalog".
 ⍝ * 4.0.3
 ⍝   * `MakeWorkspace` crashed in case there were no dependencies at all.
 ⍝   * `CopyTo` failed on a filename-to-filename copy operation.

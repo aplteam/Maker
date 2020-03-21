@@ -2,7 +2,7 @@
 ⍝ This function needs no input whatsoever, it rather works everything out itself.\\
 ⍝ If this is executed on a non-scripted project an error is thrown.
 ⍝ For that to work it relies on the current directory being the project folder.\\
-⍝ For other, more complex scenarios see `Run_2` and `Run_3`.\\
+⍝ For other more complex scenarios see `Run_2` and `Run_3`.\\
  ⎕IO←1 ⋄ ⎕ML←1 ⋄ ⎕WX←3
  r←⍬
  A←APLTreeUtils
@@ -21,7 +21,8 @@
      IncreaseBuildID ref
  :EndIf
  body←⎕SRC ref
- filename←(targetPath,'/',projName,'.dyalog')
+ filename←FilesAndDirs.NormalizePath targetPath,'/',projName
+ filename,←'.apl',(1+':namespace '{⍺≡(≢⍺)↑⍵}A.Lowercase{⊃(+/∧\'⍝'=⊃¨⍵)↓⍵}body)⊃'cn'
  A.WriteUtf8File filename body
  filename2←U.GetSourceFolder projName,'.dyalog'
  A.WriteUtf8File filename2 body
