@@ -13,8 +13,9 @@
  target←'#.',(∆WithUnderscore/'_'),name     ⍝ By naming convention
  :If 0<≢neededScripts←bool⌿needed[;3]
      ref←⍎target ⎕NS''     ⍝ By naming convention
+     neededScripts←sourcePath∘{l⊃⍨1⍳⍨⎕NEXISTS¨⍺∘,¨l←⍵∘,¨'.aplc' '.apln' '.dyalog'}¨neededScripts
      loadInto∘{⎕SE.SALT.Load sourcePath,⍵,' -target=',⍺}¨neededScripts
-     loadInto∘ref.{⍎⍵,'←',⍺,'.',⍵}¨neededScripts
+     loadInto∘ref.{⍎⍵,'←',⍺,'.',⍵}¨{⍵↑⍨¯1+⍵⍳'.'}¨neededScripts
  :EndIf
  bool←~bool ⍝ The workspaces
  :For wsname attr :In ↓bool⌿needed[;3 4]

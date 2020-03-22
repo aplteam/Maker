@@ -24,7 +24,9 @@
  filename←FilesAndDirs.NormalizePath targetPath,'/',projName
  filename,←'.apl',(1+':namespace '{⍺≡(≢⍺)↑⍵}A.Lowercase{⊃(+/∧\'⍝'=⊃¨⍵)↓⍵}body)⊃'cn'
  A.WriteUtf8File filename body
- filename2←U.GetSourceFolder projName,'.dyalog'
+ filename2←U.GetSourceFolder projName
+ ⍝ 1 ⎕NDELETE filename2,'.dyalog'     ⍝ No! We leave those for the time being in order to allow old stuff to find them. To be removed soon...
+ filename2,←{{⌽⍵↑⍨⍵⍳'.'}⌽⍵}filename
  A.WriteUtf8File filename2 body
  version←body U.GetVersioNoFromScript pathInWS
  ⎕FX'r←Version dummy'('r←⍬ ''',version,''' ⍬')

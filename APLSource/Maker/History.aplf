@@ -1,5 +1,8 @@
  History
-⍝ * 5.0.0
+⍝ * 5.1.0 from 2010-03-22
+⍝   * For compatability with .apln|.aplc rather than (.dyalog) `EstablishRefsInRoot` need to change as well.
+⍝   * Bug fix in `ProcessSingleScriptProjects`.
+⍝ * 5.0.0 from 2020-03-21
 ⍝   * Breaking change: the method `ProcessSingleScriptProjects` now saves its subjects either with the
 ⍝     extension ".aplc" or ".apln" rather than "'.dyalog".
 ⍝ * 4.0.3
