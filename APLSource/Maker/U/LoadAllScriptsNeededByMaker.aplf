@@ -4,12 +4,16 @@
 ⍝ Otherwise it's not, for example when `Maker`'s ]Make is executed.
  ⎕IO←1 ⋄ ⎕ML←1
  target←{0<⎕NC ⍵:⍎⍵ ⋄ ##.⎕THIS}'target'
- needed←'APLTreeUtils' 'FilesAndDirs' 'OS' 'SevenZip' 'Execute' 'WinReg' 'MarkAPL' 'WinSys'
- needed,←TesterFlag/⊂'Tester'
  path←GetSourceFolder''
+ cmd←path,'APLTreeUtils.apln -target=',⍕target
+ rc←⍕⎕SE.UCMD'SALT.Load ',cmd
+ Assert'APLTreeUtils'≡{⍵↑⍨-¯1+1⍳⍨⌽'.'=⍵}rc
+ needed←'FilesAndDirs' 'OS' 'DotNetZip' 'Execute' 'WinReg' 'MarkAPL' 'WinSys'
+ needed,←TesterFlag/⊂'Tester2'
  :For name :In needed
-     cmd←path,name,'.dyalog -target=',⍕target
+     cmd←path,name,'.aplc -target=',⍕target
      rc←⍕⎕SE.UCMD'SALT.Load ',cmd
      Assert name≡{⍵↑⍨-¯1+1⍳⍨⌽'.'=⍵}rc
  :EndFor
+ needed,←⊂'APLTreeUtils'
 ⍝Done

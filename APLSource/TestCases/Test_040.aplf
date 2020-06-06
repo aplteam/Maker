@@ -1,34 +1,42 @@
- R←Test_006(stopFlag batchFlag);⎕TRAP;was;filename;now;F
-⍝ Exercise `IncreaseBuildID`
+ R←Test_040(stopFlag batchFlag);⎕TRAP;filename;now;F
+⍝ Exercise `IncreaseBuildID` on a function
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←T._Failed
 
  F←##.Maker.FilesAndDirs
  filename←'MoreTests/publish.config'
- was←##.APLTreeUtils.ReadUtf8File filename
- →T.PassesIf 0=∨/'buildid'⍷∊was
+ filename←'MoreTests/publish.config'
+ (filename,'.orig')F.CopyTo filename
  #.⎕SHADOW'TEMP'
  'TEMP'#.⎕NS''
+
  #.TEMP.⎕FX'r←Version' 'r←''MakerTest'' ''1.0.0'' ''2019-01-05'''
  'MoreTests/publish.config'##.Maker.IncreaseBuildID'#.TEMP.Version'
- →T.GoToTidyUp'1.0.0.1'≢2⊃#.TEMP.Version
+ →T.FailsIf'1.0.0.1'≢2⊃#.TEMP.Version
  now←⎕XML'flat'##.APLTreeUtils.ReadUtf8File filename
- →T.GoToTidyUp(,'1')≢,'buildid'##.Maker.xml.GetValueFrom now
+ →T.FailsIf(,'1')≢,'buildid'##.Maker.xml.GetValueFrom now
  now←'flat'##.APLTreeUtils.ReadUtf8File filename
  now←'<buildid>1</buildid>'⎕R'<buildid>9</buildid>'⊣now
  ##.APLTreeUtils.WriteUtf8File filename now
  'MoreTests/publish.config'##.Maker.IncreaseBuildID'#.TEMP.Version'
  now←⎕XML'flat'##.APLTreeUtils.ReadUtf8File filename
- →T.GoToTidyUp'10'≢'buildid'##.Maker.xml.GetValueFrom now
+ →T.FailsIf'10'≢'buildid'##.Maker.xml.GetValueFrom now
  now←'flat'##.APLTreeUtils.ReadUtf8File filename
  now←'<buildid>10</buildid>'⎕R'<buildid>99</buildid>'⊣now
  ##.APLTreeUtils.WriteUtf8File filename now
  'MoreTests/publish.config'##.Maker.IncreaseBuildID'#.TEMP.Version'
  now←⎕XML'flat'##.APLTreeUtils.ReadUtf8File filename
- →T.GoToTidyUp'100'≢'buildid'##.Maker.xml.GetValueFrom now
+ →T.FailsIf'100'≢'buildid'##.Maker.xml.GetValueFrom now
+
+ (filename,'.orig')F.CopyTo filename
+ #.TEMP.⎕FX'r←Version' 'r←''MakerTest'' ''1.0.0-beta'' ''2020-02-06'''
+ 'MoreTests/publish.config'##.Maker.IncreaseBuildID'#.TEMP.Version'
+ →T.FailsIf'1.0.0.1-beta'≢2⊃#.TEMP.Version
+
+ (filename,'.orig')F.CopyTo filename
+ #.TEMP.⎕FX'r←Version' 'r←''MakerTest'' ''1.0.0.1-beta'' ''2020-02-06'''
+ 'MoreTests/publish.config'##.Maker.IncreaseBuildID'#.TEMP.Version'
+ →T.FailsIf'1.0.0.1-beta'≢2⊃#.TEMP.Version
 
  R←T._OK
-
-∆TidyUp:
- ##.APLTreeUtils.WriteUtf8File filename was
 ⍝Done

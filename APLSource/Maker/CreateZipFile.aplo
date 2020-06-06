@@ -1,4 +1,4 @@
- {zipFilename}←(VersionFunction CreateZipFile)(name folder);list;has;buff;rc;more;myZipper;was;version;F
+ {zipFilename}←(VersionFunction CreateZipFile)(name folder);version
 ⍝ Everything in `folder\` goes into `folder\{name}.zip`.\\
 ⍝ `VersionFunction` is supposed to be one of:
 ⍝ 1. A niladic `Version` function that returns either a simple text vector or a nested three-element
@@ -10,39 +10,24 @@
 ⍝ If you don't want a version number to be added at all then just pass `{''}` as operand.\\
 ⍝ If you want to specify a string then you must create a function for this, for example:\\
 ⍝ `⎕FX'r←Version dummy'('r←⍬ '4.3.2 ⍬')`\\
-⍝ See below why that is necessary.\\
 ⍝ It is assumed that any function provided as an operand provides either a three-element vector with
 ⍝ the second element being the actual version number (first=name, third=date) or an empty vector.\\
-⍝ **Warning**: this function does temporarily change the current directory. This is necessary because
-⍝ otherwise the relative paths created by "SevenZip" would not be what they are supposed to be.
- F←FilesAndDirs
- was←F.Cd folder
- :Trap 0
-     :If 0<|1 2⊃⎕AT'VersionFunction'
-         buff←VersionFunction ⍬
-     :Else
-         buff←VersionFunction
-     :EndIf
-     zipFilename←name
-     :If 1=≡buff
-         :If 0<≢buff
-             zipFilename←name,'-',buff
-         :EndIf
-     :ElseIf 0<≢buff
-         zipFilename←name,'-',2⊃buff
-     :EndIf
-     zipFilename,←{'.zip'/⍨'.zip'≢##.Maker.APLTreeUtils.Lowercase ¯4↑⍵}zipFilename
-     myZipper←⎕NEW SevenZip(,⊂zipFilename)
-     list←2↓¨⊃('recursive' 1)F.Dir'.\*'
-     list/⍨←F.IsFile list
-     :Repeat
-         (rc more buff)←myZipper.Add list
-         has←2⊃myZipper.List ⍬
-     :Until 0∊⍴list←list~has
+ :If 0<|1 2⊃⎕AT'VersionFunction'
+     version←VersionFunction ⍬
  :Else
-     {}F.Cd was          ⍝ Make sure that the current dir is restored even if the user Ctrl+Breaks the code!
-     (1+⊃⎕LC)⎕STOP⊃⎕SI
-     :Return
- :EndTrap
- {}F.Cd was
+     version←VersionFunction
+ :EndIf
+ zipFilename←name
+ :If 1=≡version
+     :If 0<≢version
+         zipFilename←name,'-',version
+     :EndIf
+ :ElseIf 0<≢version
+     zipFilename←name,'-',2⊃version
+ :EndIf
+ zipFilename,←{'.zip'/⍨'.zip'≢##.Maker.APLTreeUtils.Lowercase ¯4↑⍵}zipFilename
+ zipFilename←FilesAndDirs.GetTempPath,zipFilename
+ 1 ⎕NDELETE zipFilename
+ folder DotNetZip.ZipFolder zipFilename
+ zipFilename FilesAndDirs.MoveTo folder
 ⍝Done

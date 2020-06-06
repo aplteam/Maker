@@ -8,10 +8,10 @@
 ⍝ `⎕LX` is set to ⍬ temporarily before the `⎕SAVE` and restored afterwards.
  r←⍬
  saveAs←{0<⎕NC ⍵:⍎⍵ ⋄ ⎕WSID}'saveAs'
- lx←#.⎕LX
- #.⎕LX←''
+⍝ lx←#.⎕LX
+⍝ #.⎕LX←''
  0 ⎕SAVE saveAs
- ⎕LX←lx
+⍝ ⎕LX←lx
  :If saveAs≢'project.dws'
      (rc msg)←saveAs FilesAndDirs.MoveTo'project.dws'
      msg U.Assert 0=rc

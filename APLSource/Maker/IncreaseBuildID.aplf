@@ -1,4 +1,4 @@
- {r}←{filename}IncreaseBuildID fnsName;⎕ML;⎕IO;xml;row;filename;result;buildID;isTest;A;flag;counter;folder
+ {r}←{filename}IncreaseBuildID fnsName;⎕ML;⎕IO;xml;row;filename;result;buildID;isTest;A;folder
 ⍝ Increases the build-ID in the file `publish.config`.
 ⍝ If there is no such element in this file yet it is injected with the value 0.
 ⍝ The build ID is then increased by 1, the xml is written back and acre is informed.\\
@@ -15,18 +15,7 @@
  row←xml[;2]⍳⊂'buildid'
  buildID←1+⊃(//)⎕VFI 3⊃xml[row;]
  xml[row;3]←⊂⍕buildID
-
- ⍝ We've seen this going wrong very often, therefore the loop!
- flag←counter←0
- :Repeat
-     :Trap 0
-         A.WriteUtf8File filename(⎕XML xml)
-         flag←1
-     :Else
-         ⎕DL 0.1
-     :EndTrap
- :Until flag∨20<counter←counter+1
-
+ A.WriteUtf8File filename(⎕XML xml)
  fnsName U.AddBuildID2Version buildID
  :If ~isTest
      result←⎕SE.UCMD'acre.SetChanged ',⍕fnsName

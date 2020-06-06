@@ -15,11 +15,11 @@
  'TEMP'#.⎕NS''
  #.TEMP.⎕FX'r←Version' 'r←''Foo'' ''0.1.0'' ''2019-02-19'''
  zipFilename1←(#.TEMP.Version ##.Maker.CreateZipFile'Foo'path)
- →T.GoToTidyUp'Foo-0.1.0.zip'≢zipFilename1
+ →T.GoToTidyUp(F.CurrentSep,'Foo-0.1.0.zip'){⍺≢(-≢⍺)↑⍵}zipFilename1
  zipFilename2←({⍬}##.Maker.CreateZipFile'Foo'path)
- →T.GoToTidyUp'Foo.zip'≢zipFilename2
+ →T.GoToTidyUp(F.CurrentSep,'Foo.zip'){⍺≢(-≢⍺)↑⍵}zipFilename2
  zipFilename3←({⍬}##.Maker.CreateZipFile'Foo.zip'path)
- →T.GoToTidyUp'Foo.zip'≢zipFilename3
+ →T.GoToTidyUp(F.CurrentSep,'Foo.zip'){⍺≢(-≢⍺)↑⍵}zipFilename3
 
  R←T._OK
 

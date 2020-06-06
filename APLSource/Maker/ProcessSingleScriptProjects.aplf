@@ -31,5 +31,4 @@
  version←body U.GetVersioNoFromScript pathInWS
  ⎕FX'r←Version dummy'('r←⍬ ''',version,''' ⍬')
  (Version CreateZipFile)projName targetPath
- FilesAndDirs.DeleteFile filename
 ⍝Done

@@ -17,6 +17,7 @@
  R←T._OK
 
 ∆TidyUp:
+ ⎕DL 0.1
  (rc en more)←F.RmDir folder
  Assert 0=rc
 ⍝Done
