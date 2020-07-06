@@ -38,5 +38,11 @@
  'MoreTests/publish.config'##.Maker.IncreaseBuildID'#.TEMP.Version'
  →T.FailsIf'1.0.0.1-beta'≢2⊃#.TEMP.Version
 
+ (filename,'.orig')F.CopyTo filename
+ #.TEMP.⎕FX'r←Version' 'r←(Last⍕⎕THIS) ''1.0.0.1-beta'' ''2020-02-06'''
+ #.TEMP.⎕FX ⎕CR'##.APLTreeUtils.Last'
+ 'MoreTests/publish.config'##.Maker.IncreaseBuildID'#.TEMP.Version'
+ →T.FailsIf'1.0.0.1-beta'≢2⊃#.TEMP.Version
+
  R←T._OK
 ⍝Done

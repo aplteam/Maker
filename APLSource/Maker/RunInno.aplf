@@ -1,4 +1,4 @@
- {setupFilename}←{path}RunInno name;A;F;counter;tempdir;cmd;issFilename;batFilename;buff;msg;success;setupFilename;flag;inno
+ {setupFilename}←{path}RunInno name;F;A;counter;flag;issFilename;inno;cmd;tempdir;iss;batFilename;buff;msg;success;exeName;targetDir;more;rc
 ⍝ Runs the INNO batch compiler in order to create an installer.\\
 ⍝ `name` is the project name; for "Fire" that would be "Fire".\\
 ⍝ Note that the Inno script is modified in case there is an assignment found to `MyAppVersion`: it gets the version number.\\
@@ -17,8 +17,11 @@
  U.UpdateVersionName issFilename name
  inno←U.SelectInno ⍬
  cmd←'"',inno,'" ',issFilename,'"'
- tempdir←(WinSys.ExpandEnv'%localAppData%'),'\Temp\InnoTempDir'
+ tempdir←F.EnforceSlash(WinSys.ExpandEnv'%localAppData%'),'\Temp\InnoTempDir'
  'Could not create temp directory'U.Assert'Create!'F.CheckPath tempdir
+ iss←1⊃F.NGET issFilename 1
+ iss←'^OutputDir *= *\{[^}]*\}'⎕R('OutputDir=',tempdir)⍠('Greedy' 0)⊣iss
+ (⊂iss)F.NPUT issFilename 1
  :Repeat
      counter+←1
      ⎕←(⍕counter),' attempt to create the SetUp.exe...'
@@ -36,5 +39,10 @@
      F.DeleteFile batFilename   ⍝ Delete the BAT file
  :Until success∨10=counter
  'Attempted 10 times to create the installer EXE, always failed!'U.Assert 10>counter
- setupFilename←⊃¯1↑msg
+ exeName←⊃¯1↑msg
+ targetDir←iss U.GetDefFromInno'TargetDir'
+ '"TargetDir" needs to be defined in the Inno script'U.Assert 0<≢targetDir
+ (rc more)←exeName F.MoveTo targetDir
+ more U.Assert 0=rc
+ setupFilename←F.ExpandPath targetDir,⊃,/1↓⎕NPARTS exeName
 ⍝Done

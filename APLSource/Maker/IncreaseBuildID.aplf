@@ -1,8 +1,8 @@
  {r}←{filename}IncreaseBuildID fnsName;⎕ML;⎕IO;xml;row;filename;result;buildID;isTest;A;folder
 ⍝ Increases the build-ID in the file `publish.config`.
 ⍝ If there is no such element in this file yet it is injected with the value 0.
-⍝ The build ID is then increased by 1, the xml is written back and acre is informed.\\
-⍝ Then `fnsName` is modified accordingly and acre informed about the change.\\
+⍝ The build ID is then increased by 1, the xml is written back and acre is notified.\\
+⍝ Then `fnsName` is modified accordingly and acre notified about the change.\\
 ⍝ The left argument is used only by test cases.
  ⎕IO←1 ⋄ ⎕ML←1
  r←⍬

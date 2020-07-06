@@ -12,7 +12,7 @@
          (offset length row)←⊃buff
          varsName←{{⍵↑⍨¯1+⍵⍳'←'}' '~⍨⍵↓⍨⍵⍳'∇'}(row+1)⊃body
          row+←2+⊃('\b',varsName,'←')⎕S 2⊣(1+row)↓body
-         version←2⊃⍎row⊃body
+         version←{⍵↑⍨¯1+⍵⍳''''}{{⌽⍵/⍨4>+\''''=⍵}⌽⍵}row⊃body
      :EndIf
  :Else
      ref←⍎¯1↓⊃'.'##.A.SplitPath fnsname←x

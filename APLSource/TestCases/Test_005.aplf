@@ -13,11 +13,11 @@
 
  F.RmDir tempFolder
  'MoreTests'##.Maker.CopyTo tempFolder,'\'
- →T.GoToTidyUp 7≠≢⊃('recursive' 1)F.Dir tempFolder,'/*'
+ →T.GoToTidyUp 11≠≢⊃('recursive' 1)F.Dir tempFolder,'/*'
 
  F.RmDir tempFolder
  'MoreTests/'##.Maker.CopyTo tempFolder,'\'
- →T.GoToTidyUp 7≠≢⊃('recursive' 1)F.Dir tempFolder,'/*'
+ →T.GoToTidyUp 11≠≢⊃('recursive' 1)F.Dir tempFolder,'/*'
 
  :Trap 11
      'MoreTests\publish.config'##.Maker.CopyTo tempFolder   ⍝ That must generate an error: can't copy file over folder!

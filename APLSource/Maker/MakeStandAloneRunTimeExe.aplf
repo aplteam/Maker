@@ -1,4 +1,4 @@
- {rc}←{testFlag}MakeStandAloneRunTimeExe p;counter;success;RUNTIME;⎕IO;⎕ML;details;sw
+ {rc}←{testFlag}MakeStandAloneRunTimeExe p;counter;success;RUNTIME;⎕IO;⎕ML;details;sw;tempFile;more;rc
 ⍝ Attempts to create a stand-alone EXE from the current workspace.\\
 ⍝ `p` is a parameter space, typically created by calling `CreateStandAloneExeParms`.\\
 ⍝ `←` is what the `Bind` method returns or `⍬` in case something goes wrong without throwing an error.\\
@@ -8,8 +8,8 @@
 ⍝ of the session is ticked the error message "Could not copy stub exe" would be displayed. This function
 ⍝ will check for this and tell the user. (There is an REF 13574 to make this accessible via ⎕DMX; 2019-11)\\
 ⍝ When the option `testFlag` is `1` then only **one** ettempt is made to create the EXE, and
-⍝ in case of the aformentioned problem no intercation with the user is attempted, and `¯1` is returned.
- rc←⍬
+⍝ in case of the aformentioned problem no intercation with the user is attempted, and `¯1` is returned.\\
+ rc←¯1
  ⎕IO←1 ⋄ ⎕ML←1
  testFlag←{0<⎕NC ⍵:⍎⍵ ⋄ 0}'testFlag'
  'Right argument is not a parameter space'⎕SIGNAL 11/⍨9.1≠⎕NC⊂,'p'
@@ -25,9 +25,10 @@
  details⍪←'ProductName'p.ProjectName
  details⍪←'FileVersion'(2⊃#.⍎p.ProjectName,'.Version')
  details⍪←'LegalCopyright'('See https://github.com/aplteam/',p.ProjectName)
+ tempFile←'exe'FilesAndDirs.GetTempFilename2 2⊃⎕NPARTS p.Filename
  :Repeat
      :Trap 11
-         rc←2 ⎕NQ'#' 'Bind'p.Filename'StandaloneNativeExe'RUNTIME p.Resource p.Icon p.Commandline details
+         rc←2 ⎕NQ'#' 'Bind'tempFile'StandaloneNativeExe'RUNTIME p.Resource p.Icon p.Commandline details
          success←1
      :Else
          :Trap 0
@@ -47,7 +48,9 @@
          ⎕DL 0.25
      :EndTrap
  :Until testFlag∨success∨10<counter←counter+1
- :If ¯1≢rc
-     'Creating stand-alone EXE failed even after 10 attempts'U.Assert success
+ 'Creating stand-alone EXE failed even after 10 attempts'U.Assert success
+ ⎕DL 0.1
+ :If 0≠1⊃tempFile FilesAndDirs.MoveTo p.Filename
+     rc←¯1
  :EndIf
 ⍝Done

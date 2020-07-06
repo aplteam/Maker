@@ -1,4 +1,4 @@
- R←Test_041(stopFlag batchFlag);⎕TRAP;filename;now;F
+ R←Test_041(stopFlag batchFlag);⎕TRAP;filename;now;F;body
 ⍝ Exercise `IncreaseBuildID` on a class
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←T._Failed
@@ -34,6 +34,14 @@
 
  (filename,'.orig')F.CopyTo filename
  #.TEMP.⎕FIX':Class Foo' '∇r←Version' ':Access Public Shared' 'r←''MakerTest'' ''1.0.0.1-beta'' ''2019-01-05''' '∇' ':EndClass'
+ 'MoreTests/publish.config'##.Maker.IncreaseBuildID #.TEMP.Foo
+ →T.FailsIf'1.0.0.1-beta'≢2⊃#.TEMP.Foo.Version
+
+ (filename,'.orig')F.CopyTo filename
+ body←':Class Foo' '∇r←Version' ':Access Public Shared' 'r←(Last⍕⎕THIS) ''1.0.0.1-beta'' ''2019-01-05''' '∇'
+ body,←'Last←{' '(≢⍵)=where←¯1+⌊/''.''⍳⍨⌽,⍵:0⍴⍵' '0 1∊⍨≡r←(-where)↑⍵:r' '⍬⍴r' '}'
+ body,←⊂':EndClass'
+ #.TEMP.⎕FIX body
  'MoreTests/publish.config'##.Maker.IncreaseBuildID #.TEMP.Foo
  →T.FailsIf'1.0.0.1-beta'≢2⊃#.TEMP.Foo.Version
 

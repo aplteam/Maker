@@ -1,4 +1,13 @@
  History
+⍝ * 5.4.0 from 2010-07-06
+⍝   * `RunInno` now handles aspects of the script in order to make Inno's output folder point to the
+⍝     temp folder. Only when the EXE was created is it copied to the real target folder.
+⍝     This avoids problems with DropBox and shared folders but not AntiVirus snake oil.
+⍝   * Bug fixes
+⍝     * YesOrNo updated (18.0 problem)
+⍝     * `U.AddBuildID2Version` did not get on well with function calls in the `Version` function like
+⍝       `Last⍕⎕THIS`
+⍝     * In `RunnInno` the way the AppID is recognized got improved.
 ⍝ * 5.3.0 from 2010-05-23
 ⍝   * Internal change: `CreateZipFile` now uses DotNetZip rather than SevenZip.
 ⍝ * 5.2.0 from 2010-05-12
