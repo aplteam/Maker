@@ -23,8 +23,10 @@
          ⎕SE.SALT.Load sourcePath,'APLTreeUtils2.aplc -target=',loadInto
          neededScripts~←⊂'APLTreeUtils2.aplc'
      :EndIf
-     loadInto∘{⎕SE.SALT.Load sourcePath,⍵,' -target=',⍺}¨neededScripts
-     loadInto∘ref.{⍎⍵,'←',⍺,'.',⍵}¨{⍵↑⍨¯1+⍵⍳'.'}¨neededScripts
+     :If 0<≢neededScripts
+         loadInto∘{⎕SE.SALT.Load sourcePath,⍵,' -target=',⍺}¨neededScripts
+         loadInto∘ref.{⍎⍵,'←',⍺,'.',⍵}¨{⍵↑⍨¯1+⍵⍳'.'}¨neededScripts
+     :EndIf
  :EndIf
  bool←~bool ⍝ The workspaces
  :For wsname attr :In ↓bool⌿needed[;3 4]

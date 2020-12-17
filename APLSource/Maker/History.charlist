@@ -1,46 +1,15 @@
+* 6.0.1 from 2020-12-17
+  * Bug fix: `LoadNeededAndEstablishRefs` crashed when APLTreeUtils2 is the one and only dependency.
+  * Documentation polished (`History`)
 * 6.0.0 from 2020-12-17
   * Tatin support added: `CreateTatinPackageConfig`
   * New function `CopyBetter` introduced.
-  * Now saves to _Source2 as a temporary measure until all APLTree members are available as packages.
   * Uses just `APLTreeUtils2: `APLTreeUtils` is not supported anymore.
   * Instead of FilesAndDirs.CopyTo (does not exist anymore) ⎕NCOPY is now used by the newly introduced
     function `CopyTo`.
-  * Calls to APLTreeUtils,[ReadUtf8File|WriteUtf8File] replaced by calls to FilesAndDir.[NGET|NPUT]
+  * Calls to APLTreeUtils,[ReadUtf8File|WriteUtf8File] replaced by calls to `⎕NGET|⎕NPUT`
   * Bug fixes:
     * `U.AddBuildID2Version` was not prepared to deal with no `Version` function at all, or several
       hits when we are interested in the just the first one.
-* 5.4.0 from 2020-07-06
-  * `RunInno` now handles aspects of the script in order to make Inno's output folder point to the
-    temp folder. Only when the EXE was created is it copied to the real target folder.
-    This avoids problems with DropBox and shared folders but not AntiVirus snake oil.
-  * Bug fixes
-    * YesOrNo updated (18.0 problem)
-    * `U.AddBuildID2Version` did not get on well with function calls in the `Version` function like
-      `Last⍕⎕THIS`
-    * In `RunnInno` the way the AppID is recognized got improved.
-* 5.3.0 from 2020-05-23
-  * Internal change: `CreateZipFile` now uses DotNetZip rather than SevenZip.
-* 5.2.0 from 2020-05-12
-  * Bug fix: `LoadAllScriptsNeededByMaker` now honours new extensions: .apln/.aplc rather than .dyalog
-  * `SaveProjectWorkpace` does not touch `⎕LX` anymore.
-* 5.1.0 from 2020-03-22
-  * For compatability with .apln|.aplc rather than (.dyalog) `EstablishRefsInRoot` need to change as well.
-  * Bug fix in `ProcessSingleScriptProjects`.
-* 5.0.0 from 2020-03-21
-  * Breaking change: the method `ProcessSingleScriptProjects` now saves its subjects either with the
-    extension ".aplc" or ".apln" rather than "'.dyalog".
-* 4.0.3
-  * `MakeWorkspace` crashed in case there were no dependencies at all.
-  * `CopyTo` failed on a filename-to-filename copy operation.
-  * Documentation on MakeWorkspace improved.
-* 4.0.2
-  * Bug fix in `RecreateFolder`: when more than one level was specified and the last-level folder  did not
-    exist then the other levels weren't removed when they should have been.
-* 4.0.1
-  * Bug fix in `RecreateFolder`: APLTreeUtils was addressed incorrectly.
-* 4.0.0
-  * `CreateStandAloneExeParms` now comes with a flag `RunTime` that defaults to 1.
-  * `MakeStandAloneRunTimeExe` now honours the parameter `RunTime` for easier debugging.
-  * Left argument of `RecreateFolder` has changed: rather than `max` it is now `levels`.
 \\
 For information regarding older versions see <https://github.com/aplteam/Maker/releases>
