@@ -1,4 +1,4 @@
- {r}←{filename}IncreaseBuildID fnsName;⎕ML;⎕IO;xml;row;filename;result;buildID;isTest;A;folder
+ {r}←{filename}IncreaseBuildID fnsName;⎕ML;⎕IO;xml;row;filename;result;buildID;isTest;A;folder;F
 ⍝ Increases the build-ID in the file `publish.config`.
 ⍝ If there is no such element in this file yet it is injected with the value 0.
 ⍝ The build ID is then increased by 1, the xml is written back and acre is notified.\\
@@ -6,20 +6,20 @@
 ⍝ The left argument is used only by test cases.
  ⎕IO←1 ⋄ ⎕ML←1
  r←⍬
- A←APLTreeUtils
+ A←APLTreeUtils2 ⋄ F←FilesAndDirs
  (filename isTest)←{0<⎕NC ⍵:(⍎⍵)1 ⋄ 'publish.config' 0}'filename'
- xml←⎕XML'flat'A.ReadUtf8File filename
+ xml←⎕XML 1⊃⎕NGET filename
  :If ~(⊂'buildid')∊xml[;2]
      xml⍪←1 'buildid' '0'(0 2⍴⊂'')5
  :EndIf
  row←xml[;2]⍳⊂'buildid'
  buildID←1+⊃(//)⎕VFI 3⊃xml[row;]
  xml[row;3]←⊂⍕buildID
- A.WriteUtf8File filename(⎕XML xml)
+ (⊂⎕XML xml)F.NPUT filename 1
  fnsName U.AddBuildID2Version buildID
  :If ~isTest
      result←⎕SE.UCMD'acre.SetChanged ',⍕fnsName
      U.Assert 1=⍴result
  :EndIf
- folder←'expand'FilesAndDirs.NormalizePath{0∊⍴⍵:'./' ⋄ ⍵}1⊃⎕NPARTS filename
+ folder←'expand'F.NormalizePath{0=≢⍵:'./' ⋄ ⍵}1⊃⎕NPARTS filename
 ⍝Done

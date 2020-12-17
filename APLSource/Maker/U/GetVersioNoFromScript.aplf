@@ -5,10 +5,10 @@
      flag←3=⌊|⎕NC⊂scriptName,'.Version'     ⍝ Allmost all members of the APLTree project have a niladic function `Version`...
      flag:2⊃⍎scriptName,'.Version'          ⍝ ... which returns a 3-element-vector: name, version, date
 
-   ⍝ The exception is `APLTreeUtils` which **cannot** have a function
+   ⍝ The exception is `APLTreeUtils2` which **cannot** have a function
    ⍝ `Version` but carries the string "*** Version" as a comment:
      buff←'⍝.* \*\*\* Version'⎕S 2 1⍠('Greedy' 0)⊣⍺
      0∊⍴buff:'Could not establish version number?!'⎕SIGNAL 11
      (item offset)←1⊃buff
-     {⍵↑⍨¯1+⍵⍳' '}##.APLTreeUtils.dlb offset↓(item+1)⊃⍺
+     {⍵↑⍨¯1+⍵⍳' '}##.APLTreeUtils2.DLB offset↓(item+1)⊃⍺
  }

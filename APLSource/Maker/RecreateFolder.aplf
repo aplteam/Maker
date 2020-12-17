@@ -9,7 +9,7 @@
  F←FilesAndDirs
  targetFolder←F.NormalizePath targetFolder
  levels←¯1+{0<⎕NC ⍵:⍎⍵ ⋄ 1}'levels'
- targetFolder2←F.CurrentSep{1↓⊃,/⍺,¨⍵}(-levels)↓F.CurrentSep APLTreeUtils.Split targetFolder
+ targetFolder2←F.CurrentSep{1↓⊃,/⍺,¨⍵}(-levels)↓F.CurrentSep APLTreeUtils2.Split targetFolder
  :If F.IsDir targetFolder2
      max←4
      counter←flag←0

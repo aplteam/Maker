@@ -1,13 +1,13 @@
- {r}←ProcessSingleScriptProjects(pathToSource targetPath);M;⎕IO;⎕ML;⎕WX;A;projName;body;ref;filename;pathInWS;version;filename2;parms;fns;Version;acreConfig
+ {r}←ProcessSingleScriptProjects(pathToSource targetPath);M;⎕IO;⎕ML;⎕WX;A;projName;body;ref;filename;pathInWS;version;filename2;parms;fns;∆Version;acreConfig
 ⍝ This function needs no input whatsoever, it rather works everything out itself.\\
 ⍝ If this is executed on a non-scripted project an error is thrown.
 ⍝ For that to work it relies on the current directory being the project folder.\\
 ⍝ For other more complex scenarios see `Run_2` and `Run_3`.\\
  ⎕IO←1 ⋄ ⎕ML←1 ⋄ ⎕WX←3
  r←⍬
- A←APLTreeUtils
- acreConfig←'flat'A.ReadUtf8File'acre.config'
- acreConfig←A.dlb'"ProjectSpace":'{⍵↓⍨(≢⍺)+1⍳⍨⍺⍷⍵}acreConfig
+ A←APLTreeUtils2
+ acreConfig←1⊃⎕NGET'acre.config'
+ acreConfig←A.DLB'"ProjectSpace":'{⍵↓⍨(≢⍺)+1⍳⍨⍺⍷⍵}acreConfig
  acreConfig←1↓{⍵/⍨2>+\⍵='"'}acreConfig
  projName←{⍵↓⍨⍵⍳'.'}acreConfig
  RecreateFolder targetPath
@@ -17,18 +17,14 @@
  {}⎕SE.UCMD'acre.openproject ','expand'FilesAndDirs.NormalizePath'./'
  ref←⍎pathInWS←'#.',(∆WithUnderscore/'_'),projName,'.',projName
  'Not a script-only project!'⎕SIGNAL 11/⍨(,'1')≢,parms.script
- :If 'APLTreeUtils'≢projName
-     IncreaseBuildID ref
- :EndIf
+ IncreaseBuildID ref
  body←⎕SRC ref
  filename←FilesAndDirs.NormalizePath targetPath,'/',projName
  filename,←'.apl',(1+':namespace '{⍺≡(≢⍺)↑⍵}A.Lowercase{⊃(+/∧\'⍝'=⊃¨⍵)↓⍵}body)⊃'cn'
- A.WriteUtf8File filename body
- filename2←U.GetSourceFolder projName
- ⍝ 1 ⎕NDELETE filename2,'.dyalog'     ⍝ No! We leave those for the time being in order to allow old stuff to find them. To be removed soon...
- filename2,←{{⌽⍵↑⍨⍵⍳'.'}⌽⍵}filename
- A.WriteUtf8File filename2 body
+ (⊂body)⎕NPUT filename 1
+ filename2←pathToSource,⊃,/1↓⎕NPARTS filename
+ (⊂body)⎕NPUT filename2 1
  version←body U.GetVersioNoFromScript pathInWS
- ⎕FX'r←Version dummy'('r←⍬ ''',version,''' ⍬')
- (Version CreateZipFile)projName targetPath
+ ⎕FX'r←∆Version dummy'('r←⍬ ''',version,''' ⍬')
+ (∆Version CreateZipFile)projName targetPath
 ⍝Done

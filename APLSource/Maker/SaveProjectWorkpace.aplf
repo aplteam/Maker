@@ -1,4 +1,4 @@
- {r}←{saveAs}SaveProjectWorkpace name;rc;msg;lx
+ {r}←{saveAs}SaveProjectWorkpace name;lx
 ⍝ Save the current workspace without `#.Make` and without the stack under the name "project.dws".
 ⍝ `#.Make` must be deleted before calling this function.\\
 ⍝ By default `⎕WSID` is used to save the WS and the it is moved to "project.dws".
@@ -13,7 +13,7 @@
  0 ⎕SAVE saveAs
 ⍝ ⎕LX←lx
  :If saveAs≢'project.dws'
-     (rc msg)←saveAs FilesAndDirs.MoveTo'project.dws'
-     msg U.Assert 0=rc
+     1 ⎕NDELETE'project.dws'
+     'project.dws'⎕NMOVE saveAs
  :EndIf
 ⍝Done

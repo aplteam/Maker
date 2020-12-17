@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Coverage</title>
+<meta charset="utf-8"/>
+<style>
+@media screen{
+    html {background-color: #FFFFF0;}
+body {
+    font-size: 16px;
+    font-family : Verdana, "Bitstream Vera Sans", "DejaVu Sans", Tahoma, Geneva, Arial, Sans-serif;
+    margin: 1em;
+}
+th, td {padding: 5px 10px;}
+th {text-align: left;}
+h1, h2, h3, h4, h5, h6 {color: #424242;}
+h1 {font-size: 22px;}
+h2 {font-size: 18px; margin-top: 2em; margin-bottom:0.3em;}
+tbody tr:nth-child(even) {background-color: #F0F0F0;}
+tbody tr:nth-child(odd) {background-color: #FAFAFA;}
+th {background-color: #E6E6E6;color: #424242;}
+table {border: silver 1px solid; font-size: 14px;font-family: APLFont, monospace;}
+code , code a {font-size: 14px; font-family: APLFont, monospace;}
+code.header {
+    font-size: 16px; 
+    font-family: APLFont, monospace; 
+    margin: 1.5em 0.5em 0 0.5em; 
+    padding:0;
+    display: block;
+}
+div.code-block {
+    border: 1px silver dashed;
+    background-color: #F2F2F2;
+    display: block;
+    margin: 0.5em 0.5em 0.5em 0.5em;
+    padding: 0.5em;
+}
+div.code-block code {display: block; white-space: pre-wrap; margin:0; padding:0; word-wrap: break-word;}
+.emphasize { font-weight: 800;}
+ul li, ol li {margin: 0.7em 0.2em;}
+.float-right {float:right;}
+.no-underline {    text-decoration :none;}
+.top-links {font-size:20px; padding-left: 0.6em;}
+.align-right {text-align: right;}
+#footer hr {margin-top:1.5em;}
+#footer p {margin-top:5px; padding-top:0; font-size: 9px;}
+@font-face {
+        font-family: "APLFont";
+    src:
+        local("APL385 Unicode"),
+        url("https://misc.aplteam.com/apl385.ttf") format("truetype");
+}}
+@media print{@page {size: portrait}
+@page {
+    margin: 1cm 1cm 1cm 1.75cm;
+    @bottom-right {
+        content: counter(page) " / " counter(pages);
+  }
+}
+body {
+    font: 12pt "Times New Roman", Times, serif;
+    line-height: 1.2;
+     /* CSS3 filter, at the moment Webkit only. Prefix it for future implementations */
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%); /* future-proof */
+}
+h1 {font-size: 18pt;}
+h2 {font-size: 16pt; margin-top: 10pt; margin-bottom: 3pt;}
+th, td {padding: 2pt 3pt;}
+th {text-align: left;background-color: #DBDBDB;}
+tbody tr:nth-child(odd) {background-color: #EDEDED;}
+table {
+    color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    font-size: 8pt;
+    font-family: APLFont, monospace;
+}
+div.keep-together {break-inside: avoid; break-before:auto;}
+table {border: silver 1pt solid;}
+code , code a {font-size: 8pt; font-family: APLFont, monospace;}
+code.header {
+    font-size: 8pt;
+    font-family: APLFont, monospace;
+    margin: 7pt 3pt 0 10pt;
+    padding:0;
+    display: block;
+}
+div.code-block {
+    border: 1pt silver dashed;
+    background-color: #F2F2F2;
+    display: block;
+    margin: 4pt 4pt 4pt 4pt;
+    padding: 4pt;
+}
+div.code-block code {display: block; white-space: pre-wrap; margin:0; padding:0; word-wrap: break-word;}
+.emphasize { font-weight: 800;}
+a {text-decoration: none;color: black;}
+ul li, ol li {margin: 8pt 3pt;}
+.no-print {display:none;}
+.align-right {text-align: right;}
+#footer hr {margin-top:1.5em;}
+#footer p {margin-top:5pt; padding-top:0; font-size: 6pt;}
+@font-face {
+        font-family: "APLFont";
+    src:
+        local("APL385 Unicode"),
+        url("https://misc.aplteam.com/apl385.ttf") format("truetype");
+}}
+</style>
+</head>
+<body>
+<h1 id="top">Coverage Report</h1>
+<p>Watched: 343 fns/opr within <code>#.Maker.Maker</code></p>
+<p>The test test suite was executed 2 times:</p>
+<table>
+<thead>
+<tr><th>Executed at</th><th>APLVersion</th><th>Memory (MB)</th></tr>
+<thead>
+</tbody>
+<tr><td>2020-11-30 18:25:39</td><td>Windows-64 ⋄ 18.0.39099.0 ⋄ W ⋄ Development</td><td>52</td></tr>
+<tr><td>2020-11-30 18:41:32</td><td>Windows-64 ⋄ 18.0.39099.0 ⋄ W ⋄ Development</td><td>54</td></tr>
+</tbody>
+</table>
+<p>Overall 33% of the testable code is  covered.</p>
+<p>(Comment lines, empty lines, all <code>:End</code>* lines etc. are all ignored)</p>
+<p>79 of the fns/opr are 100% covered.</p>
+<p>171 are not covered at all:</p>
+<table>
+<tbody>
+<tr><td>#.Maker.Maker.EstablishRefsInRoot</td></tr>
+<tr><td>#.Maker.Maker.MakeWorkspace</td></tr>
+<tr><td>#.Maker.Maker.ProcessSingleScriptProjects</td></tr>
+<tr><td>#.Maker.Maker.Public</td></tr>
+<tr><td>#.Maker.Maker.RemoveStuffButSetupEXE</td></tr>
+<tr><td>#.Maker.Maker.Run_1</td></tr>
+<tr><td>#.Maker.Maker.Run_2</td></tr>
+<tr><td>#.Maker.Maker.Run_3</td></tr>
+<tr><td>#.Maker.Maker.SaveProjectWorkpace</td></tr>
+<tr><td>#.Maker.Maker.APLTreeUtils2.Version</td></tr>
+<tr><td>#.Maker.Maker.APLTreeUtils2.Uppercase</td></tr>
+<tr><td>#.Maker.Maker.APLTreeUtils2.IsChar</td></tr>
+<tr><td>#.Maker.Maker.APLTreeUtils2.ToNum</td></tr>
+<tr><td>#.Maker.Maker.APLTreeUtils2.IsScripted</td></tr>
+<tr><td>#.Maker.Maker.APLTreeUtils2.Assert</td></tr>
+<tr><td>#.Maker.Maker.APLTreeUtils2.Last</td></tr>
+<tr><td>#.Maker.Maker.APLTreeUtils2.GoToWebPage</td></tr>
+<tr><td>#.Maker.Maker.APLTreeUtils2.IsRunningAsAdmin</td></tr>
+<tr><td>#.Maker.Maker.APLTreeUtils2.Create_UUID</td></tr>
+<tr><td>#.Maker.Maker.APLTreeUtils2.Base64</td></tr>
+<tr><td>#.Maker.Maker.APLTreeUtils2.AtLeastVersion</td></tr>
+<tr><td>#.Maker.Maker.APLTreeUtils2.FormatDateTime</td></tr>
+<tr><td>#.Maker.Maker.DotNetZip.Version</td></tr>
+<tr><td>#.Maker.Maker.DotNetZip.make1</td></tr>
+<tr><td>#.Maker.Maker.DotNetZip.make2</td></tr>
+<tr><td>#.Maker.Maker.DotNetZip.make</td></tr>
+<tr><td>#.Maker.Maker.DotNetZip.Add</td></tr>
+<tr><td>#.Maker.Maker.DotNetZip.ExtractTo</td></tr>
+<tr><td>#.Maker.Maker.DotNetZip.List</td></tr>
+<tr><td>#.Maker.Maker.DotNetZip.Delete</td></tr>
+<tr><td>#.Maker.Maker.DotNetZip.Dispose</td></tr>
+<tr><td>#.Maker.Maker.DotNetZip.Cleanup</td></tr>
+<tr><td>#.Maker.Maker.DotNetZip.UnzipTo</td></tr>
+<tr><td>#.Maker.Maker.DotNetZip.ListZipContents</td></tr>
+<tr><td>#.Maker.Maker.DotNetZip.QuadNEW</td></tr>
+<tr><td>#.Maker.Maker.DotNetZip.Add_</td></tr>
+<tr><td>#.Maker.Maker.Execute.Version</td></tr>
+<tr><td>#.Maker.Maker.Execute.Application</td></tr>
+<tr><td>#.Maker.Maker.Execute.DefaultParms</td></tr>
+<tr><td>#.Maker.Maker.Execute.ExpandEnv</td></tr>
+<tr><td>#.Maker.Maker.Execute.WaitForSingleObject</td></tr>
+<tr><td>#.Maker.Maker.Execute.GetExitCodeThread</td></tr>
+<tr><td>#.Maker.Maker.Execute.TerminateProcess</td></tr>
+<tr><td>#.Maker.Maker.Execute.EnforceBackslash</td></tr>
+<tr><td>#.Maker.Maker.FilesAndDirs.Version</td></tr>
+<tr><td>#.Maker.Maker.FilesAndDirs.PWD</td></tr>
+<tr><td>#.Maker.Maker.FilesAndDirs.EnforceBackslash</td></tr>
+<tr><td>#.Maker.Maker.FilesAndDirs.PolishCurrentDir</td></tr>
+<tr><td>#.Maker.Maker.FilesAndDirs.IsSymbolicLink</td></tr>
+<tr><td>#.Maker.Maker.FilesAndDirs.ListDirs</td></tr>
+<tr><td>#.Maker.Maker.FilesAndDirs.ListFiles</td></tr>
+<tr><td>#.Maker.Maker.FilesAndDirs.Exists</td></tr>
+<tr><td>#.Maker.Maker.FilesAndDirs.GetNewLineCharsFor</td></tr>
+<tr><td>#.Maker.Maker.FilesAndDirs.NNAMES</td></tr>
+<tr><td>#.Maker.Maker.FilesAndDirs.NCREATE</td></tr>
+<tr><td>#.Maker.Maker.FilesAndDirs.GetLastError</td></tr>
+<tr><td>#.Maker.Maker.FilesAndDirs.HandlePath</td></tr>
+<tr><td>#.Maker.Maker.FilesAndDirs.GetMsgFromError</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.Version</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.InjectCssFilenamesIntoHtml</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.ConvertMarkdownFile</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.CreateHelpParms</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.Execute</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.Reference</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.Help</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.Matrix2MarkdownTable</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.Matrix2MarkdownList</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.ProcessList</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.ProcessTable_</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.ProcessTableWithoutColTitles</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.ProcessATX_Header</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.ProcessATX_HeaderLink</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.ScanForBlockQuotes</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.AddBookmarkLink</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.ProcessEmbeddedParms_</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.ProcessHtmlBlock_ScriptStylePre</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.ProcessHtmlBlock_HtmlComments</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.ProcessHtmlBlockType_CDATA</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.ProcessHtmlBlockType_Tags</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.IsSelfDefinedHtmlTag</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.Process_PRE</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.IdentifyListItems</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.NotWithinWord</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.GetBookMarkNameFromCaption</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.CreateMarkdownFromUrlAndLinkText</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.InjectLinkTextIntoReportLink</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.ReplaceFootnoteReferences</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.AppendFootnoteDefinitions</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.InjectNumberedHeaders</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.CalculateHeaderNumbers</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.ExecExternalFns</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.GetCurrentDir</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.ReplaceLinkID</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.CollectItem</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.CollectItemPara</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.GetUrlAndTitleFromLink</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.CreateTOC</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.MassageCodeBlock</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.CompileHelp</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.CopyTo</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.GetCodeBlockFrom</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.ProcessLeanPubCodeEmphasizing</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.ProcessLeanPubExtensions_</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.ConvertLeanpubExtension2Markdown</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.ShowHtml</td></tr>
+<tr><td>#.Maker.Maker.OS.Version</td></tr>
+<tr><td>#.Maker.Maker.OS.ShellExecute</td></tr>
+<tr><td>#.Maker.Maker.OS.WinExecute</td></tr>
+<tr><td>#.Maker.Maker.OS.CreateParms_WinExecute</td></tr>
+<tr><td>#.Maker.Maker.OS.WinExecBatch</td></tr>
+<tr><td>#.Maker.Maker.OS.GetSharedLib</td></tr>
+<tr><td>#.Maker.Maker.OS.GetPID</td></tr>
+<tr><td>#.Maker.Maker.OS.KillPID</td></tr>
+<tr><td>#.Maker.Maker.OS.GetDyaLib</td></tr>
+<tr><td>#.Maker.Maker.OS.GetTempFilename</td></tr>
+<tr><td>#.Maker.Maker.OS.GetTempPath</td></tr>
+<tr><td>#.Maker.Maker.OS.GetLastError</td></tr>
+<tr><td>#.Maker.Maker.WinReg.Version</td></tr>
+<tr><td>#.Maker.Maker.WinReg.ListReg</td></tr>
+<tr><td>#.Maker.Maker.WinReg.PutString</td></tr>
+<tr><td>#.Maker.Maker.WinReg.PutValue</td></tr>
+<tr><td>#.Maker.Maker.WinReg.PutBinary</td></tr>
+<tr><td>#.Maker.Maker.WinReg.KeyInfo</td></tr>
+<tr><td>#.Maker.Maker.WinReg.GetAllValues</td></tr>
+<tr><td>#.Maker.Maker.WinReg.GetAllNamesAndValues</td></tr>
+<tr><td>#.Maker.Maker.WinReg.GetAllValueNames</td></tr>
+<tr><td>#.Maker.Maker.WinReg.GetTree</td></tr>
+<tr><td>#.Maker.Maker.WinReg.GetTreeWithValues</td></tr>
+<tr><td>#.Maker.Maker.WinReg.CopyTree</td></tr>
+<tr><td>#.Maker.Maker.WinReg.DeleteSubKey</td></tr>
+<tr><td>#.Maker.Maker.WinReg.DeleteSubKeyTree</td></tr>
+<tr><td>#.Maker.Maker.WinReg.DeleteValue</td></tr>
+<tr><td>#.Maker.Maker.WinReg.GetTypeAsStringFrom</td></tr>
+<tr><td>#.Maker.Maker.WinReg.GetErrorAsStringFrom</td></tr>
+<tr><td>#.Maker.Maker.WinReg.DoesValueExist</td></tr>
+<tr><td>#.Maker.Maker.WinReg.OpenAndCreateKey</td></tr>
+<tr><td>#.Maker.Maker.WinReg.GetDyalogRegPath</td></tr>
+<tr><td>#.Maker.Maker.WinReg.GetVersion</td></tr>
+<tr><td>#.Maker.Maker.WinReg.ExpandEnv</td></tr>
+<tr><td>#.Maker.Maker.WinReg.GetAsString</td></tr>
+<tr><td>#.Maker.Maker.WinSys.Version</td></tr>
+<tr><td>#.Maker.Maker.WinSys.CONSTANT</td></tr>
+<tr><td>#.Maker.Maker.WinSys.GetVersion</td></tr>
+<tr><td>#.Maker.Maker.WinSys.GetFileVersionInfo</td></tr>
+<tr><td>#.Maker.Maker.WinSys.GetDiskFreeSpace</td></tr>
+<tr><td>#.Maker.Maker.WinSys.GetComputerName</td></tr>
+<tr><td>#.Maker.Maker.WinSys.GetDefaultBrowser</td></tr>
+<tr><td>#.Maker.Maker.WinSys.GetSystemMetrics</td></tr>
+<tr><td>#.Maker.Maker.WinSys.GetWindowsDirectory</td></tr>
+<tr><td>#.Maker.Maker.WinSys.GetDPI</td></tr>
+<tr><td>#.Maker.Maker.WinSys.FindExecutable</td></tr>
+<tr><td>#.Maker.Maker.WinSys.GetAllDrives</td></tr>
+<tr><td>#.Maker.Maker.WinSys.GetDriveAndType</td></tr>
+<tr><td>#.Maker.Maker.WinSys.List_SM</td></tr>
+<tr><td>#.Maker.Maker.WinSys.GetMsgFrom</td></tr>
+<tr><td>#.Maker.Maker.WinSys.GetSystemParametersInfo</td></tr>
+<tr><td>#.Maker.Maker.WinSys.GetFormCaptionFontInfo</td></tr>
+<tr><td>#.Maker.Maker.WinSys.FindWindow</td></tr>
+<tr><td>#.Maker.Maker.WinSys.GetHandleFromCaption</td></tr>
+<tr><td>#.Maker.Maker.WinSys.GetModuleFileName</td></tr>
+<tr><td>#.Maker.Maker.WinSys.IsRunningAsAdmin</td></tr>
+<tr><td>#.Maker.Maker.WinSys.SetWindowParms</td></tr>
+<tr><td>#.Maker.Maker.WinSys.GetLastError</td></tr>
+<tr><td>#.Maker.Maker.U.EstablishRefs</td></tr>
+<tr><td>#.Maker.Maker.U.GetIniFile</td></tr>
+<tr><td>#.Maker.Maker.U.GetMajorVersionNumber</td></tr>
+<tr><td>#.Maker.Maker.U.GetValueFrom</td></tr>
+<tr><td>#.Maker.Maker.U.GetVersioNoFromScript</td></tr>
+<tr><td>#.Maker.Maker.U.LoadAllScriptsNeededByMaker</td></tr>
+<tr><td>#.Maker.Maker.U.Superuser</td></tr>
+<tr><td>#.Maker.Maker.U.TellProblemWithoutTrap</td></tr>
+</tbody>
+</table>
+<div id="partly-covered" class="keep-together">
+<p>93 are partly covered:</p>
+<table>
+<thead>
+<tr><th style="text-align:left;">Function/Operator</th><th style="text-align:left;">Lines not executed</th><th style="text-align:left;">Coverage</th><th style="text-align:right;">≢</th></tr>
+</thead>
+<tbody>
+<tr><td>#.Maker.Maker.MarkAPL.InjectSubTOCs</td><td>34←≢2-12,14-17,19-20,22-24,26,28-37,39-40,43</td><td>3%</td><td class="align-right">35</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.HandleAbbreviations</td><td>17←≢2-7,9-18,20</td><td>6%</td><td class="align-right">18</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.ProcessDefinitionLists</td><td>42←≢5-21,26-38,40-41,44-45,47,49-55</td><td>9%</td><td class="align-right">46</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.ProcessBlockQuotes</td><td>21←≢4-24</td><td>9%</td><td class="align-right">23</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.MarkUpInlineCode</td><td>9←≢2-5,7-10,13</td><td>10%</td><td class="align-right">10</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.ProcessDataDefs</td><td>18←≢3-11,13-14,17-19,22,24,26-27</td><td>10%</td><td class="align-right">20</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.ProcessFunctionCalls</td><td>24←≢4-18,21-24,27-29,31,34</td><td>11%</td><td class="align-right">27</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.ProcessFootnoteDefs</td><td>16←≢3-18</td><td>11%</td><td class="align-right">18</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.ProcessCodeBlock</td><td>23←≢5-19,21,23-27,29-30</td><td>12%</td><td class="align-right">26</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.ProcessSubTOC</td><td>15←≢3-13,15-16,19-20</td><td>12%</td><td class="align-right">17</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.ScanForPara</td><td>13←≢4-16</td><td>13%</td><td class="align-right">15</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.ProcessReferenceLinks</td><td>13←≢3-11,13,15-17</td><td>13%</td><td class="align-right">15</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.GetMaskForCode</td><td>21←≢11-25,31-34,37-38</td><td>16%</td><td class="align-right">25</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.CollectToc</td><td>10←≢3-12</td><td>17%</td><td class="align-right">12</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.ProcessDoubleTildes</td><td>14←≢6-19</td><td>18%</td><td class="align-right">17</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.ProcessSetextHeader</td><td>21←≢6-26</td><td>19%</td><td class="align-right">26</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.ProcessEmeddedHTML</td><td>8←≢5-12</td><td>20%</td><td class="align-right">10</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.InjectTOC</td><td>12←≢5,8-12,14-15,17-19,21</td><td>20%</td><td class="align-right">15</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.ProcessAbbreviationDefs</td><td>7←≢3-7,9,11</td><td>22%</td><td class="align-right">9</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.WhereAreCodeBlocks</td><td>18←≢7-8,10-14,16-19,21-22,24-26,28,31</td><td>22%</td><td class="align-right">23</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.ProcessUnderscores</td><td>17←≢12-17,19-29</td><td>23%</td><td class="align-right">22</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.CheckOddNumberOfDoubleQuotes</td><td>20←≢12-14,16-23,25-31,33,37</td><td>23%</td><td class="align-right">26</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.ProcessTable</td><td>6←≢3-7,9</td><td>25%</td><td class="align-right">8</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.ReplaceLinkIDs</td><td>3,4,5</td><td>25%</td><td class="align-right">4</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.ProcessAsterisks</td><td>12←≢12-23</td><td>29%</td><td class="align-right">17</td></tr>
+<tr><td>#.Maker.Maker.WinReg.CheckPath</td><td>10←≢5-13,15</td><td>29%</td><td class="align-right">14</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.ProcessDoubleUnderscores</td><td>11←≢7,10-19</td><td>31%</td><td class="align-right">16</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.ProcessEmbeddedParms</td><td>15←≢11-25</td><td>32%</td><td class="align-right">22</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.GatherFootNoteReferences</td><td>6←≢9-14</td><td>33%</td><td class="align-right">9</td></tr>
+<tr><td>#.Maker.Maker.WinReg.GetString</td><td>31←≢13-14,25,27,29-31,33-48,50-54,56,58-59</td><td>33%</td><td class="align-right">46</td></tr>
+<tr><td>#.Maker.Maker.WinReg.HandleDataType</td><td>7←≢5-11</td><td>36%</td><td class="align-right">11</td></tr>
+<tr><td>#.Maker.Maker.WinReg.Get_HKEY_From</td><td>12←≢5,9-17,19,22</td><td>37%</td><td class="align-right">19</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.RemoveLampLines</td><td>3,4</td><td>50%</td><td class="align-right">4</td></tr>
+<tr><td>#.Maker.Maker.FilesAndDirs.GetTempPath</td><td>5←≢8,13-15,17</td><td>58%</td><td class="align-right">12</td></tr>
+<tr><td>#.Maker.Maker.FilesAndDirs.Cd</td><td>8←≢13,21,25-27,29-30,33</td><td>60%</td><td class="align-right">20</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.ProcessLists</td><td>3,5</td><td>60%</td><td class="align-right">5</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.GetBookmarkAnchors</td><td>10,11</td><td>60%</td><td class="align-right">5</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.GetBookmarkLinks</td><td>7,11</td><td>60%</td><td class="align-right">5</td></tr>
+<tr><td>#.Maker.Maker.APLTreeUtils2.DLB</td><td>8,9,10</td><td>63%</td><td class="align-right">8</td></tr>
+<tr><td>#.Maker.Maker.APLTreeUtils2.DTB</td><td>8,9,10</td><td>63%</td><td class="align-right">8</td></tr>
+<tr><td>#.Maker.Maker.Execute.GetExitCodeProcess</td><td>4,5</td><td>67%</td><td class="align-right">6</td></tr>
+<tr><td>#.Maker.Maker.Execute.CR</td><td>2</td><td>67%</td><td class="align-right">3</td></tr>
+<tr><td>#.Maker.Maker.Execute.LF</td><td>2</td><td>67%</td><td class="align-right">3</td></tr>
+<tr><td>#.Maker.Maker.FilesAndDirs.RmDir</td><td>8←≢27,42-45,50-52</td><td>69%</td><td class="align-right">26</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.GetMarkdown</td><td>2,3,10</td><td>70%</td><td class="align-right">10</td></tr>
+<tr><td>#.Maker.Maker.FilesAndDirs.NGET</td><td>5←≢16,20-21,23-24</td><td>71%</td><td class="align-right">17</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.ScanMarkdown</td><td>11←≢5-9,11-12,38-41</td><td>71%</td><td class="align-right">38</td></tr>
+<tr><td>#.Maker.Maker.MakeStandAloneRunTimeExe</td><td>10←≢33-38,40-42,47</td><td>73%</td><td class="align-right">37</td></tr>
+<tr><td>#.Maker.Maker.FilesAndDirs.IsDir</td><td>4←≢7,25,28,33</td><td>73%</td><td class="align-right">15</td></tr>
+<tr><td>#.Maker.Maker.FilesAndDirs.IsFile</td><td>9,10,20</td><td>73%</td><td class="align-right">11</td></tr>
+<tr><td>#.Maker.Maker.FilesAndDirs.CheckPath</td><td>10,11,13</td><td>73%</td><td class="align-right">11</td></tr>
+<tr><td>#.Maker.Maker.WinReg.GetValue</td><td>12←≢19-20,28,32-33,35,41,43,45,49,57,59</td><td>73%</td><td class="align-right">45</td></tr>
+<tr><td>#.Maker.Maker.CopyBetter</td><td>7←≢10,21-23,29-31</td><td>75%</td><td class="align-right">28</td></tr>
+<tr><td>#.Maker.Maker.Execute.Process</td><td>25←≢35,42,70,73-74,87-90,105,118-119,128,133-135,138-141,144-146,149-150</td><td>75%</td><td class="align-right">102</td></tr>
+<tr><td>#.Maker.Maker.Execute.CreateStartupInfo</td><td>5</td><td>75%</td><td class="align-right">4</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.CheckForInvalidFootnotes</td><td>8,9</td><td>75%</td><td class="align-right">8</td></tr>
+<tr><td>#.Maker.Maker.FilesAndDirs.Dir</td><td>18←≢58,68-69,71,78-79,106,116-120,122-124,129-131</td><td>76%</td><td class="align-right">76</td></tr>
+<tr><td>#.Maker.Maker.FilesAndDirs.NPUT</td><td>4←≢23-24,26-27</td><td>76%</td><td class="align-right">17</td></tr>
+<tr><td>#.Maker.Maker.WinReg.GetAllSubKeyNames</td><td>5←≢4-5,10,24-25</td><td>77%</td><td class="align-right">22</td></tr>
+<tr><td>#.Maker.Maker.U.YesOrNo</td><td>7←≢12,15,20,24-25,45-46</td><td>79%</td><td class="align-right">33</td></tr>
+<tr><td>#.Maker.Maker.EraseStuff</td><td>8</td><td>80%</td><td class="align-right">5</td></tr>
+<tr><td>#.Maker.Maker.APLTreeUtils2.SplitPath</td><td>8</td><td>80%</td><td class="align-right">5</td></tr>
+<tr><td>#.Maker.Maker.FilesAndDirs.MkDir</td><td>13,18,29</td><td>80%</td><td class="align-right">15</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.ProcessLeanPubExtensions</td><td>11</td><td>80%</td><td class="align-right">5</td></tr>
+<tr><td>#.Maker.Maker.U.Select</td><td>6←≢26-29,32-33</td><td>81%</td><td class="align-right">32</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.MakeHTML_Doc</td><td>5←≢15,24,32-34</td><td>83%</td><td class="align-right">30</td></tr>
+<tr><td>#.Maker.Maker.WinReg.ConvertErrorCode</td><td>13</td><td>83%</td><td class="align-right">6</td></tr>
+<tr><td>#.Maker.Maker.LoadNeededAndEstablishRefs</td><td>4←≢17,22-23,36</td><td>85%</td><td class="align-right">27</td></tr>
+<tr><td>#.Maker.Maker.FilesAndDirs.NormalizePath</td><td>33,36,37</td><td>85%</td><td class="align-right">20</td></tr>
+<tr><td>#.Maker.Maker.FilesAndDirs.GetTempFilename</td><td>20,24,34</td><td>85%</td><td class="align-right">20</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.Markdown2HTML</td><td>15,24</td><td>85%</td><td class="align-right">13</td></tr>
+<tr><td>#.Maker.Maker.CopyToUserCommandFolderWithPrompt</td><td>4←≢25,34-35,53</td><td>88%</td><td class="align-right">34</td></tr>
+<tr><td>#.Maker.Maker.IncreaseBuildID</td><td>20,21</td><td>88%</td><td class="align-right">16</td></tr>
+<tr><td>#.Maker.Maker.APLTreeUtils2.DMB</td><td>10</td><td>88%</td><td class="align-right">8</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.CheckInternalLinks</td><td>9</td><td>88%</td><td class="align-right">8</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.CheckForHtmlBlock</td><td>9</td><td>88%</td><td class="align-right">8</td></tr>
+<tr><td>#.Maker.Maker.CopyToSource</td><td>15,28</td><td>89%</td><td class="align-right">18</td></tr>
+<tr><td>#.Maker.Maker.RecreateFolder</td><td>21,25</td><td>89%</td><td class="align-right">19</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.Init</td><td>14,22</td><td>89%</td><td class="align-right">19</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.Process</td><td>22,23</td><td>89%</td><td class="align-right">18</td></tr>
+<tr><td>#.Maker.Maker.WinReg.OpenKey</td><td>14</td><td>89%</td><td class="align-right">9</td></tr>
+<tr><td>#.Maker.Maker.CopyToMyUCMDsFolderWithPrompt</td><td>25,34,35</td><td>90%</td><td class="align-right">29</td></tr>
+<tr><td>#.Maker.Maker.DotNetZip.Initialize</td><td>9</td><td>90%</td><td class="align-right">10</td></tr>
+<tr><td>#.Maker.Maker.GetUserCommandFolder</td><td>18</td><td>91%</td><td class="align-right">11</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.CompileParms</td><td>2</td><td>91%</td><td class="align-right">11</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.ProcessParagraph</td><td>11</td><td>92%</td><td class="align-right">13</td></tr>
+<tr><td>#.Maker.Maker.CopyTo</td><td>22</td><td>93%</td><td class="align-right">14</td></tr>
+<tr><td>#.Maker.Maker.CreateZipFile</td><td>22</td><td>93%</td><td class="align-right">14</td></tr>
+<tr><td>#.Maker.Maker.FilesAndDirs.GetTempSubDir</td><td>19</td><td>93%</td><td class="align-right">15</td></tr>
+<tr><td>#.Maker.Maker.FilesAndDirs.GetTempFilename2</td><td>23</td><td>94%</td><td class="align-right">16</td></tr>
+<tr><td>#.Maker.Maker.MarkAPL.InjectCssIntoHtml</td><td>9</td><td>94%</td><td class="align-right">17</td></tr>
+<tr><td>#.Maker.Maker.FilesAndDirs.DeleteFile</td><td>13</td><td>95%</td><td class="align-right">21</td></tr>
+<tr><td>#.Maker.Maker.U.AddBuildID2Version</td><td>11</td><td>96%</td><td class="align-right">27</td></tr>
+</tbody>
+</table>
+</div>
+<div id="footer">
+<hr>
+<p>Created by "CodeCoverage" version 0.7.0.29-beta from 2020-11-30</p>
+</div>
+</body>
+</html>

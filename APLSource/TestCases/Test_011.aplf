@@ -1,10 +1,9 @@
- R←Test_011(stopFlag batchFlag);⎕TRAP;F;A;filename;folder;rc;buff
+ R←Test_011(stopFlag batchFlag);⎕TRAP;F;filename;folder;rc;buff
 ⍝ Exercise `UpdateVersionNumberInInno_ISS`
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←T._Failed
 
  F←##.Maker.FilesAndDirs
- A←##.APLTreeUtils
 
  #.⎕SHADOW'inno'
  'inno'#.⎕NS''
@@ -13,11 +12,11 @@
  folder←'expand'F.NormalizePath F.GetTempPath,'\Test_011\'
  'Create!'F.CheckPath folder
  filename←folder,'inno.iss'
- rc←'MoreTests\inno.iss'F.CopyTo filename
+ 'MoreTests\inno.iss'##.Maker.CopyTo filename
  ##.Maker.U.Assert F.IsFile filename
 
  folder ##.Maker.UpdateVersionNumberInInno_ISS'inno'
- buff←'flat'A.ReadUtf8File filename
+ buff←1⊃F.NGET filename
  →T.GoToTidyUp 1≠+/'2.0.0'⍷buff
 
  R←T._OK

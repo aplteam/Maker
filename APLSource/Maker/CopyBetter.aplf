@@ -1,0 +1,40 @@
+ {r}←{quietFlag}CopyBetter y;file1;file2;caption1;caption2;ts2;ts1;format;ts1_;ts2_;msg;sep;body2;body1;A
+⍝ Compare two different files and asks the user for copying over the "better" one.\\
+⍝ `⍺` defaults to 0 but may be 1 in which case the user will not be prompted (tests and automated processes).
+⍝ Naturally they default to the filenames.\\
+⍝ Returns 0 for "no action", 1 for `file1` winning the day and 2 otherwise.
+ r←0
+ quietFlag←{0<⎕NC ⍵:⍎⍵ ⋄ 0}'quietFlag'
+ :If 0<⎕NC'APLTreeUtils2'
+     A←APLTreeUtils2
+ :Else
+     ∘∘∘ ⍝Huuh?!
+ :EndIf
+ y←⊆y
+ '⍵ must have a length of 2 or 4'⎕SIGNAL 11/⍨~(≢y)∊2 4
+ (file1 file2 caption1 caption2)←4↑y,y
+ (ts1 ts2)←{⊃⊃('type' 3)FilesAndDirs.Dir ⍵}¨file1 file2
+ format←{⍎,⊃,/'ZI4' 'ZI2' 'ZI2' 'ZI2' 'ZI2' 'ZI2' 'ZI4'⎕FMT¨⍵}
+ (ts1_ ts2_)←format¨ts1 ts2
+ sep←⎕UCS 10
+ :If ts1_>ts2_
+     :If quietFlag
+         msg←'Copy newer version',sep,('  ',caption1),sep,' from ',A.FormatDateTime ts1
+         msg,←sep,'over',sep,('   ',caption2),sep,,' from ',(A.FormatDateTime ts2),'  ?'
+     :OrIf 1 U.YesOrNo msg
+         file1 CopyTo file2
+     :EndIf
+     r←1
+ :ElseIf ts1_<ts2_
+     :If quietFlag
+         msg←'Copy newer version ',sep,('  ',caption2),sep,' from ',A.FormatDateTime ts2
+         msg,←sep,'over',sep,('   ',caption1),sep,,' from ',(A.FormatDateTime ts1),'  ?'
+     :OrIf 1 U.YesOrNo msg
+         file2 CopyTo file1
+         r←2
+     :EndIf
+ :Else
+     (body1 body2)←{FilesAndDirs.NGET ⍵}¨file1 file2
+     'The two files share a timestamp but differ in content?!'U.Assert≡/body1 body2
+ :EndIf
+⍝Done

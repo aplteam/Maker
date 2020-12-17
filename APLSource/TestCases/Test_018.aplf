@@ -9,23 +9,23 @@
  'Create!'F.CheckPath tempFolder
  tempFilename1←tempFolder,(⊃⎕SI),'_1.txt'
  tempFilename2←tempFolder,(⊃⎕SI),'_2.txt'
- {##.APLTreeUtils.WriteUtf8File ⍵ ⍵}tempFilename1
- {##.APLTreeUtils.WriteUtf8File ⍵ ⍵}tempFilename2
+ (⊂tempFilename1)⎕NPUT tempFilename1
+ (⊂tempFilename2)⎕NPUT tempFilename2
  APLs←##.Maker.U.GetAllDyalogInstallFolders
 
 ⍝ I. A Folder
  :If ##.WinSys.IsRunningAsAdmin
      noOf←##.Maker.Distribute2AllUserCommandFolders tempFolder
-     →T.GoToTidyUp noOf≠3×≢APLs
+     →T.GoToTidyUp noOf≠2×≢APLs
      →T.GoToTidyUp~∧/F.IsFile⊃,/tempFilename1 tempFilename2{⍵,¨,/1↓⎕NPARTS ⍺}¨⊂{⍵,'\Salt\Spice\'}¨APLs
      F.DeleteFile⊃,/tempFilename1 tempFilename2{⍵,¨,/1↓⎕NPARTS ⍺}¨⊂{⍵,'\Salt\Spice\'}¨APLs
  :Else
-     :Trap 11
+     :Trap 19
          ##.Maker.Distribute2AllUserCommandFolders tempFolder
          →T.GoToTidyUp ##.WinSys.IsRunningAsAdmin
      :Else
          dmx←⎕DMX
-         →T.GoToTidyUp'2 problems!  (Access is denied.)'{⍺≢(≢⍺)↑⊃,/⍵}dmx.DM  ⍝ Fails because of the lack of admin rights.
+         →T.GoToTidyUp'FILE ACCESS ERROR'≢dmx.EM  ⍝ Fails because of the lack of admin rights.
      :EndTrap
  :EndIf
 
@@ -36,12 +36,12 @@
      →T.GoToTidyUp~∧/F.IsFile({⍵,'\Salt\Spice\'}¨APLs),¨,/1↓⎕NPARTS tempFilename1
      F.DeleteFile({⍵,'\Salt\Spice\'}¨APLs),¨,/1↓⎕NPARTS tempFilename1
  :Else
-     :Trap 11
+     :Trap 19
          ##.Maker.Distribute2AllUserCommandFolders tempFilename1
          →T.GoToTidyUp ##.WinSys.IsRunningAsAdmin
      :Else
          dmx←⎕DMX
-         →T.GoToTidyUp'Access is denied.'{⍺≢(≢⍺)↑⊃,/⍵}dmx.DM  ⍝ Fails because of the lack of admin rights.
+         →T.GoToTidyUp'FILE ACCESS ERROR'≢dmx.EM  ⍝ Fails because of the lack of admin rights.
      :EndTrap
  :EndIf
 
@@ -54,12 +54,12 @@
      F.DeleteFile({⍵,'\Salt\Spice\'}¨APLs),¨,/1↓⎕NPARTS tempFilename1
      F.DeleteFile({⍵,'\Salt\Spice\'}¨APLs),¨,/1↓⎕NPARTS tempFilename2
  :Else
-     :Trap 11
+     :Trap 19
          ##.Maker.Distribute2AllUserCommandFolders tempFilename1
          →T.GoToTidyUp ##.WinSys.IsRunningAsAdmin
      :Else
          dmx←⎕DMX
-         →T.GoToTidyUp'Access is denied.'{⍺≢(≢⍺)↑⊃,/⍵}dmx.DM  ⍝ Fails because of the lack of admin rights.
+         →T.GoToTidyUp'FILE ACCESS ERROR'≢dmx.EM  ⍝ Fails because of the lack of admin rights.
      :EndTrap
  :EndIf
 

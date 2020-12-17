@@ -18,10 +18,10 @@
      copyContent←'*'=¯1↑path
      'Invalid right argument'⎕SIGNAL 11/⍨copyContent∧'/'≠⊃¯2↑path
      list←⊃('recursive' 1)FilesAndDirs.Dir path,(~(¯1↑path)∊'/*')/'/'
-     list/⍨←'.zip'∘≢¨APLTreeUtils.Lowercase 3⊃∘⎕NPARTS¨list
+     list/⍨←'.zip'∘≢¨APLTreeUtils2.Lowercase 3⊃∘⎕NPARTS¨list
      path←(-'*'=¯1↑path)↓path
      :If 0=⎕NC'toFolder'
-         toFolder←('%USERPROFILE%\Documents\MyUCMDS'),(~copyContent)/'/',⊃¯1↑('/'APLTreeUtils.Split path)~⊂''
+         toFolder←('%USERPROFILE%\Documents\MyUCMDS'),(~copyContent)/'/',⊃¯1↑('/'APLTreeUtils2.Split path)~⊂''
      :Else
          toFolder←'%USERPROFILE%\Documents\MyUCMDS\',⍕toFolder
      :EndIf
@@ -36,16 +36,14 @@
                  ('Creating ',toFolder2,' failed')U.Assert'Create!'FilesAndDirs.CheckPath toFolder2
              :Else
                  toFolder2←toFolder,'/',(⍴path)↓this
-                 (rc more)←this FilesAndDirs.CopyTo toFolder2
-                 'Copying to %USERPROFILE%\Documents\MyUCMDS failed'U.Assert 0=+/rc
+                 this CopyTo toFolder2
              :EndIf
          :EndFor
      :EndIf
  :Else
      list←{{,⊂,⍵}⍣(0 1∊⍨≡⍵)⊣⍵}y
-     list/⍨←'.zip'∘≢¨APLTreeUtils.Lowercase 3⊃∘⎕NPARTS¨list
+     list/⍨←'.zip'∘≢¨APLTreeUtils2.Lowercase 3⊃∘⎕NPARTS¨list
      toFolder←(GetUserCommandFolder⊃list),'/'
-     (rc more)←↓⍉↑toFolder∘{⍵ FilesAndDirs.CopyTo ⍺}¨list
-     'Copying to %USERPROFILE%\Documents\MyUCMDS failed'U.Assert 0=+/rc
+     list CopyTo toFolder
  :EndIf
 ⍝Done

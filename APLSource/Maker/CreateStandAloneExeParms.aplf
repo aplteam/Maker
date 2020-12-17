@@ -10,7 +10,7 @@
      2≠≢⍵:'Invalid right argument: provide "filename" and "projectName"'⎕SIGNAL 5
      r←⎕NS''
      r.(Filename ProjectName)←⍵
-     r.Filename←'.exe'{⍺≡APLTreeUtils.Lowercase(-⍴⍺)↑⍵:⍵ ⋄ ⍵,'.exe'}r.Filename
+     r.Filename←'.exe'{⍺≡APLTreeUtils2.Lowercase(-⍴⍺)↑⍵:⍵ ⋄ ⍵,'.exe'}r.Filename
      r.Icon←''
      r.CompanyName←'APL Team Ltd'
      r.LegalCopyright←'See https://github.com/aplteam/',r.ProjectName

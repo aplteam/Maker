@@ -1,0 +1,2 @@
+ r←GetMajorVersionNumber
+ r←{⊃⊃(//)⎕VFI ⍵↑⍨¯1+⍵⍳'.'}2⊃##.Version

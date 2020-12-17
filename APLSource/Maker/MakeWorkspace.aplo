@@ -41,7 +41,7 @@
  #.⎕EX(∆WithUnderscore/'_')name
  ('#.',(∆WithUnderscore/'_'),name,'.',name)#.⎕CY ⎕WSID
  :If 0<≢toBeCopied
-     toBeCopied←APLTreeUtils.Nest toBeCopied
+     toBeCopied←⊆toBeCopied
      name∘{('#.',(∆WithUnderscore/'_'),⍺,'.',⍵)#.⎕CY ⎕WSID}¨toBeCopied
  :EndIf
 

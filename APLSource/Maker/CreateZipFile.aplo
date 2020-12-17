@@ -25,9 +25,9 @@
  :ElseIf 0<≢version
      zipFilename←name,'-',2⊃version
  :EndIf
- zipFilename,←{'.zip'/⍨'.zip'≢##.Maker.APLTreeUtils.Lowercase ¯4↑⍵}zipFilename
+ zipFilename,←{'.zip'/⍨'.zip'≢##.Maker.APLTreeUtils2.Lowercase ¯4↑⍵}zipFilename
  zipFilename←FilesAndDirs.GetTempPath,zipFilename
  1 ⎕NDELETE zipFilename
  folder DotNetZip.ZipFolder zipFilename
- zipFilename FilesAndDirs.MoveTo folder
+ folder ⎕NCOPY⍠('IfExists' 'Replace')⊣zipFilename
 ⍝Done

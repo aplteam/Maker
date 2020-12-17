@@ -1,8 +1,8 @@
- R←Test_019(stopFlag batchFlag);⎕TRAP;dmx;F;A;exe;rc
+ R←Test_019(stopFlag batchFlag);⎕TRAP;dmx;F;exe;rc;iss;ind;offset
 ⍝ Exercise `RunInno` with a made-up application.
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
- F←##.Maker.FilesAndDirs ⋄ A←##.APLTreeUtils
+ F←##.Maker.FilesAndDirs
 
  :If batchFlag
      R←T._NoBatchTest
@@ -12,14 +12,22 @@
 
      Assert 0=1⊃F.RmDir'Installed'
      Assert 0=1⊃F.RmDir'MoreTests/Installed/foo'
+     'MoreTests/inno2-orig.iss'##.Maker.CopyTo'MoreTests/inno2.iss'
+     #.⎕SHADOW'inno2'
+     'inno2'#.⎕NS''
+     #.inno2.⎕FX'r←Version' 'r←''inno2'' ''1.1.0'' ''2020-11-29'''
      exe←'MoreTests/'##.Maker.RunInno'inno2'
      rc←##.Execute.Process exe
      →T.GoToTidyUp 0=F.IsFile'Installed\foo\unins000.exe'
+     iss←⊃F.NGET'MoreTests/inno2.iss' 1
+     ind←1+⊃'#define MyAppVersion "[0-9.]+"'⎕S 2⊣iss
+     →T.GoToTidyUp'1.1.0'≢{'"'~⍨⍵/⍨{⍵∨≠\⍵}⍵∊'"'}ind⊃iss
 
      R←T._OK
 
  :EndIf
 
 ∆TidyUp:
+ Assert 1=F.DeleteFile'MoreTests/inno2.iss'
  Assert 0=1⊃F.RmDir'Installed'
  Assert 0=1⊃F.RmDir'MoreTests/Installed/foo'

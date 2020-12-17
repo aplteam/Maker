@@ -9,7 +9,7 @@
  pathToSource←(⎕SE.UCMD'GetAcreProjectPath'),'_Source\'
  targetPath←'Dist\'
  ⎕CY'C:\Users\',⎕AN,'\Documents\MyUCMDs\Maker.dws'
- M←#.Make.Maker.Maker ⋄ A←M.APLTreeUtils ⋄ F←M.FilesAndDirs
+ M←#.Make.Maker.Maker ⋄ A←M.APLTreeUtils2 ⋄ F←M.FilesAndDirs
 ⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝⍝
  name←      ⍝ WithOUT extension!
  ⎕WSID←'expand'F.NormalizePath(⊃A.SplitPath ⎕WSID),'..\',name,'.dws'

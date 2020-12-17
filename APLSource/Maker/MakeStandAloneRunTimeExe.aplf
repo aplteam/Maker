@@ -50,7 +50,9 @@
  :Until testFlag∨success∨10<counter←counter+1
  'Creating stand-alone EXE failed even after 10 attempts'U.Assert success
  ⎕DL 0.1
- :If 0≠1⊃tempFile FilesAndDirs.MoveTo p.Filename
+ :Trap 19 22
+     p.Filename ⎕NMOVE tempFile
+ :Else
      rc←¯1
- :EndIf
+ :EndTrap
 ⍝Done

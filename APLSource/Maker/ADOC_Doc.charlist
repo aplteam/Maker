@@ -18,7 +18,7 @@ Several assumptions must be met:
   `#.Foo`. This is ruled by the global `∆WithUnderscore` which defaults to 0. 
   
   Some projects require a leading `_`, so rather than `#.Foo` it would be `#._Foo`. This is
-  particularly true for the `APLTreeUtils` project. In order to achieve that set 
+  particularly true for the `APLTreeUtils2` project. In order to achieve that set 
   `∆WithUnderscore←1`.
 
 * Acre's configuration file must be named `acre.config` (rather than the deprecated name

@@ -1,4 +1,4 @@
- R←Test_009(stopFlag batchFlag);⎕TRAP;parms;filename;rc;LXwas;name;ref;buff;M;ps;success
+ R←Test_009(stopFlag batchFlag);⎕TRAP;parms;filename;rc;LXwas;name;ref;buff;M;ps;success;flag;counter
 ⍝ Exercise `MakeStandAloneRunTimeExe` and implicitly also `CreateStandAloneExeParms`
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←T._Failed
@@ -32,6 +32,13 @@
 ∆TidyUp:
  ⎕LX←LXwas
  #.⎕EX name
- ⎕DL 7
- :Trap 0 ⋄ M.FilesAndDirs.DeleteFile filename,'.exe' ⋄ :EndTrap
+ flag←counter←0
+ :Repeat
+     :If 0=flag←M.FilesAndDirs.DeleteFile filename,'.exe'
+         ⎕DL 0.5
+         :If 20<counter←counter+1
+             ∘∘∘ ⍝ Something went wrong here!
+         :EndIf
+     :EndIf
+ :Until flag
 ⍝Done

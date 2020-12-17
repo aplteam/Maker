@@ -1,4 +1,4 @@
- {r}←{toFolder}CopyToUserCommandFolderWithPrompt y;⎕ML;⎕IO;isFolder;path;copyContent;list;toFolder;this;toFolder2;rc;more;isSubFolder
+ {r}←{toFolder}CopyToUserCommandFolderWithPrompt y;⎕ML;⎕IO;isFolder;path;copyContent;list;toFolder;this;toFolder2;isSubFolder;qdmx;msg
 ⍝ Copies what's specified by `y` to the user's user command folder (Spice).\\
 ⍝ `y` might be a simple character vector representing the name of a folder, typically `Dist`.
 ⍝ In that case the folder itself is copied over.\\
@@ -18,10 +18,10 @@
      copyContent←'*'=¯1↑path
      'Invalid right argument'⎕SIGNAL 11/⍨copyContent∧'/'≠⊃¯2↑path
      list←⊃('recursive' 1)FilesAndDirs.Dir path,(~(¯1↑path)∊'/*')/'/'
-     list/⍨←'.zip'∘≢¨APLTreeUtils.Lowercase 3⊃∘⎕NPARTS¨list
+     list/⍨←'.zip'∘≢¨APLTreeUtils2.Lowercase 3⊃∘⎕NPARTS¨list
      path←(-'*'=¯1↑path)↓path
      :If 0=⎕NC'toFolder'
-         toFolder←(GetUserCommandFolder⊃list),(~copyContent)/'/',⊃¯1↑('/'APLTreeUtils.Split path)~⊂''
+         toFolder←(GetUserCommandFolder⊃list),(~copyContent)/'/',⊃¯1↑('/'APLTreeUtils2.Split path)~⊂''
      :Else
          toFolder←(GetUserCommandFolder''),'\',⍕toFolder
      :EndIf
@@ -36,16 +36,23 @@
                  ('Creating ',toFolder2,' failed')U.Assert'Create!'FilesAndDirs.CheckPath toFolder2
              :Else
                  toFolder2←toFolder,'/',(⍴path)↓this
-                 (rc more)←this FilesAndDirs.CopyTo toFolder2
-                 'Copying to the User Command folder failed'U.Assert 0=+/rc
+                 this CopyTo toFolder2
              :EndIf
          :EndFor
      :EndIf
  :Else
      list←{{,⊂,⍵}⍣(0 1∊⍨≡⍵)⊣⍵}y
-     list/⍨←'.zip'∘≢¨APLTreeUtils.Lowercase 3⊃∘⎕NPARTS¨list
+     list/⍨←'.zip'∘≢¨APLTreeUtils2.Lowercase 3⊃∘⎕NPARTS¨list
      toFolder←(GetUserCommandFolder⊃list),'/'
-     (rc more)←↓⍉↑toFolder∘{⍵ FilesAndDirs.CopyTo ⍺}¨list
-     'Copying to the User Command folder failed'U.Assert 0=+/rc
+     :Trap 0
+         toFolder∘{⍵ CopyTo ⍺}¨list
+     :Else
+         qdmx←⎕DMX
+         :If 0<≢msg←⊃¯1↑qdmx.OSError
+             msg ⎕SIGNAL 11
+         :Else
+             qdmx.EM ⎕SIGNAL 11
+         :EndIf
+     :EndTrap
  :EndIf
 ⍝Done

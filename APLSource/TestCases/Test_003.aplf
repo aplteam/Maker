@@ -1,4 +1,4 @@
- R←Test_003(stopFlag batchFlag);⎕TRAP;F;folder;zipFilename;rc;targetFolder;list1;list2
+ R←Test_003(stopFlag batchFlag);⎕TRAP;F;folder;zipFilename;targetFolder;list1;list2
 ⍝ Exercise `CopyToSource`.
 ⍝ Needs the user.
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
@@ -13,8 +13,7 @@
 
  folder←'./Tests/'
  zipFilename←folder,'myzipfile.zip'
- rc←##.APLTreeUtils.WriteUtf8File zipFilename'Pretends to be a zip file'
- →T.GoToTidyUp 0≠≢rc
+ (⊂'Pretends to be a zip file')⎕NPUT zipFilename 1
  targetFolder←##.Maker.CopyToSource'./Tests/' 'Maker_Test_003'
 
  list1←⊃('recursive' 1)F.Dir'./Tests/'

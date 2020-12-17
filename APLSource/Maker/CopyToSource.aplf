@@ -13,7 +13,7 @@
      RecreateFolder toFolder
      files←⊃('recursive' 1)F.Dir fromFolder
      :If removeZipFiles
-         files/⍨←{'.zip'≢APLTreeUtils.Lowercase ¯4↑⍵}¨files       ⍝ Remove all ZIP files
+         files/⍨←{'.zip'≢APLTreeUtils2.Lowercase ¯4↑⍵}¨files       ⍝ Remove all ZIP files
      :EndIf
      dir←''
      :For file :In files
@@ -22,8 +22,7 @@
              dir←((⍴fromFolder)↓file),'/'
          :Else
              subFolder←⊃⎕NPARTS(⍴fromFolder)↓file
-             (rc more)←file F.CopyTo toFolder,subFolder
-             more U.Assert 0=rc
+             file CopyTo toFolder,subFolder
          :EndIf
      :EndFor
  :Else

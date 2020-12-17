@@ -6,12 +6,12 @@
 ⍝ [;4] flag: valid numeric representation
 ⍝ The left argument is used by test cases only.
  r←0 3⍴⎕NULL
- A←##.APLTreeUtils
+ A←##.APLTreeUtils2
  :If 0=⎕NC'cl'
      cl←2 ⎕NQ'#' 'GetCommandLine'   ⍝ Command line
  :EndIf
  cl←{b←{~{⍵∨≠\⍵}⍵='"'}⍵ ⋄ ⍵⊂⍨b\' '=b/⍵}' ',cl
- cl←A.dlb cl~⊂,' '
+ cl←A.DLB cl~⊂,' '
  cl←1↓¨('-'=⊃¨cl)/cl
  :If 0<≢cl
      r←↑{'='∊⍵:('='A.Split ⍵),1 ⋄ ⍵ ⎕NULL 0}¨cl

@@ -11,10 +11,10 @@
  rk←'SOFTWARE\Dyalog\Dyalog APL/W-64 15.0 Unicode\SALT\CommandFolder'
  userCommandFolders←WinReg.GetString rk
  (('∘'=userCommandFolders)/userCommandFolders)←';'  ⍝ There was once a version which used `∘` as a separator!
- userCommandFolders←';'APLTreeUtils.Split userCommandFolders
- userCommandFolders←(~∨/¨'\salt\spice'∘⍷¨APLTreeUtils.Lowercase userCommandFolders)/userCommandFolders
- userCommandFolders←({(⍳⍴⍵)=⍵⍳⍵}APLTreeUtils.Lowercase userCommandFolders)/userCommandFolders
- userCommandScriptName{⍺,(⍵≢(-⍴⍵)↑APLTreeUtils.Lowercase ⍺)/⍵}←'.dyalog'
+ userCommandFolders←';'APLTreeUtils2.Split userCommandFolders
+ userCommandFolders←(~∨/¨'\salt\spice'∘⍷¨APLTreeUtils2.Lowercase userCommandFolders)/userCommandFolders
+ userCommandFolders←({(⍳⍴⍵)=⍵⍳⍵}APLTreeUtils2.Lowercase userCommandFolders)/userCommandFolders
+ userCommandScriptName{⍺,(⍵≢(-⍴⍵)↑APLTreeUtils2.Lowercase ⍺)/⍵}←'.dyalog'
  :If ∨/b←FilesAndDirs.IsFile userCommandFolders,¨⊂'\',userCommandScriptName
      userCommandFolder←(b⍳1)⊃userCommandFolders
  :Else

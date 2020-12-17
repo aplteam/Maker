@@ -18,8 +18,8 @@
  xml.needed⍪←2 'ws' 'Conga'(↑('lib' '[DYALOG]')('copy' 'DRC'))5
 
  #.TEMP ##.Maker.LoadNeededAndEstablishRefs'Foo'xml
- →T.GoToTidyUp 3≠≢#.Foo.⎕NL 9.1                  ⍝ `Foo`, `APLTreeUtils` and `DRC`
- →T.GoToTidyUp 4≠≢#.Foo.⎕NL 9.4                  ⍝ `FilesAndDirs`, `OS`, `Tester` and `WinReg`
+ →T.GoToTidyUp 3≠≢#.Foo.⎕NL 9.1                  ⍝ `Foo` and `DRC`
+ →T.GoToTidyUp 4≠≢#.Foo.⎕NL 9.4                  ⍝ `APLTreeUtils2`, `FilesAndDirs`, `OS`, `Tester` and `WinReg`
  →T.GoToTidyUp 1≠≢#.Foo.Foo.⎕NL⍳16
 
  R←T._OK

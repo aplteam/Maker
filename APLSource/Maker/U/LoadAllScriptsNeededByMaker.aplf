@@ -1,19 +1,19 @@
  {needed}←{target}LoadAllScriptsNeededByMaker TesterFlag;needed;path;name;cmd;rc;⎕ML;⎕IO
 ⍝ Loads all classes and scripts needed by `Maker`.\\
-⍝ If `TesterFlag` is 1 then the `Tester` class is loaded as well; needed for developing/debugging the `Maker` application.
+⍝ If `TesterFlag` is 1 then the `Tester2` class is loaded as well; needed for developing/debugging the `Maker` application.
 ⍝ Otherwise it's not, for example when `Maker`'s ]Make is executed.
  ⎕IO←1 ⋄ ⎕ML←1
  target←{0<⎕NC ⍵:⍎⍵ ⋄ ##.⎕THIS}'target'
  path←GetSourceFolder''
- cmd←path,'APLTreeUtils.apln -target=',⍕target
+ cmd←path,'APLTreeUtils2.aplc -target=',⍕target
  rc←⍕⎕SE.UCMD'SALT.Load ',cmd
- Assert'APLTreeUtils'≡{⍵↑⍨-¯1+1⍳⍨⌽'.'=⍵}rc
+ Assert'APLTreeUtils2'≡{⍵↑⍨-¯1+1⍳⍨⌽'.'=⍵}rc
  needed←'FilesAndDirs' 'OS' 'DotNetZip' 'Execute' 'WinReg' 'MarkAPL' 'WinSys'
- needed,←TesterFlag/⊂'Tester2'
+ needed,←TesterFlag/'Tester2' 'CodeCoverage'
  :For name :In needed
      cmd←path,name,'.aplc -target=',⍕target
      rc←⍕⎕SE.UCMD'SALT.Load ',cmd
-     Assert name≡{⍵↑⍨-¯1+1⍳⍨⌽'.'=⍵}rc
+     rc Assert name≡{⍵↑⍨-¯1+1⍳⍨⌽'.'=⍵}rc
  :EndFor
- needed,←⊂'APLTreeUtils'
+ needed,←⊂'APLTreeUtils2'
 ⍝Done

@@ -1,19 +1,28 @@
- {r}←{loadInto}LoadNeededAndEstablishRefs(name XML);needed;ref;sourcePath;bool;neededScripts;attr;obj;path;wsname;target;lib
+ {r}←{loadInto}LoadNeededAndEstablishRefs(name XML);needed;ref;sourcePath;bool;neededScripts;attr;obj;path;wsname;target;lib;neededScripts_
 ⍝ Loads and establishes references to all scripts needed by the project to be loaded, like
-⍝ `APLTreeUtils`, into, by default, #._dependencies. It also copies needed stuff from workspaces.\\
+⍝ `APLTreeUtils2`, into, by default, #._dependencies. It also copies needed stuff from workspaces.\\
 ⍝ `loadInto` defaults to `#._dependencies` but can be the name (**not** a ref!) of any existing namespace.
 ⍝ Whatever it is, a reference pointing to it is returned.\\
 ⍝ Call this function **before** the acre project is opened!\\
 ⍝ * `name` is the name of the project, like "Fire"
 ⍝ * `XML` is the contents of `public.config` as a namespace
- loadInto←{0<⎕NC ⍵:⍕⍎⍵ ⋄ _←'_dependencies'#.⎕NS'' ⋄ '#._dependencies'}'loadInto'
  needed←XML.needed
+ loadInto←{0<⎕NC ⍵:⍕⍎⍵ ⋄ _←'_dependencies'#.⎕NS'' ⋄ '#._dependencies'}'loadInto'
  bool←needed[;2]≡¨⊂'script'
  sourcePath←U.GetSourceFolder''
  target←'#.',(∆WithUnderscore/'_'),name     ⍝ By naming convention
  :If 0<≢neededScripts←bool⌿needed[;3]
      ref←⍎target ⎕NS''     ⍝ By naming convention
-     neededScripts←sourcePath∘{l⊃⍨1⍳⍨⎕NEXISTS¨⍺∘,¨l←⍵∘,¨'.aplc' '.apln' '.dyalog'}¨neededScripts
+     neededScripts_←sourcePath∘{(l,⊂'???')⊃⍨1⍳⍨⎕NEXISTS¨⍺∘,¨l←⍵∘,¨'.aplc' '.apln' '.dyalog'}¨neededScripts
+     :If '?'∊∊neededScripts_
+         6 ⎕SIGNAL⍨'Missing: ',⊃,/('?'=⊃¨neededScripts_)/neededScripts
+     :EndIf
+     neededScripts←neededScripts_
+     ⍝ Because older version do not support lazy fixing:
+     :If (⊂'APLTreeUtils2.aplc')∊neededScripts
+         ⎕SE.SALT.Load sourcePath,'APLTreeUtils2.aplc -target=',loadInto
+         neededScripts~←⊂'APLTreeUtils2.aplc'
+     :EndIf
      loadInto∘{⎕SE.SALT.Load sourcePath,⍵,' -target=',⍺}¨neededScripts
      loadInto∘ref.{⍎⍵,'←',⍺,'.',⍵}¨{⍵↑⍨¯1+⍵⍳'.'}¨neededScripts
  :EndIf
@@ -21,7 +30,7 @@
  :For wsname attr :In ↓bool⌿needed[;3 4]
      obj←'copy'xml.GetAttributeFrom attr
      path←FilesAndDirs.NormalizePath sourcePath,wsname,'/',wsname,'.dws'
-     :If 0<≢lib←⊃APLTreeUtils.Uppercase'lib'xml.GetAttributeFrom attr
+     :If 0<≢lib←⊃##.APLTreeUtils2.Uppercase'lib'xml.GetAttributeFrom attr
          :If '[DYALOG]'≡lib
              path←(2 ⎕NQ'#' 'GetEnvironment' 'DYALOG'),'\ws\',wsname
          :Else

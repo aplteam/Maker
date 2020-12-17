@@ -4,5 +4,5 @@
  :If (⊂name)∊attr[;1]
      r←2⊃attr[attr[;1]⍳⊂name;]
  :EndIf
- r←','##.APLTreeUtils.Split r
+ r←','##.APLTreeUtils2.Split r
 ⍝Done

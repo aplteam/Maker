@@ -1,22 +1,30 @@
- {r}←x CopyTo y;success;more;list;rc
+ {r}←x CopyTo y
 ⍝ Copy `x` to `y`.\\
 ⍝ `x` can be one of:
 ⍝ * A nested vector of character vectors, each being a filename.
-⍝ * A simple string representing either a filename or a folder. If it is a folder than all files
-⍝   within that folder are copied over including any sub-folders and their content.
-⍝   Sub folders may or may not exist.\\
-⍝ Checks the return code and throws an error in case something went wrong.\\
-⍝ Returns '' in case x is not a folder and a list of files and folders copied otherwise.
- r←⍬
- :If FilesAndDirs.IsDir x
-     (success more list)←x FilesAndDirs.CopyTree y
-     'Investigate "more" and "list": something went wrong'U.Assert success
-     r←list
- :Else
-     :If FilesAndDirs.IsDir x
-         'Could not create target directory'U.Assert'Create!'FilesAndDirs.CheckPath y
+⍝ * A simple string representing either a filename or a folder.
+⍝   * A folder is copied over together with its contents
+⍝   * A simple file is copied over as such
+⍝ `y` must be a folder in case `x` specified a folder or is a list of files.
+⍝ Otherwise it must be a filename.\\
+⍝ Throws an error in case something went wrong.\\
+⍝ Returns the count of files and folders that have been copied, if any.
+ r←0
+ :If 2>|≡x
+     (x y)←FilesAndDirs.NormalizePath¨x y
+     :If FilesAndDirs.IsFile x
+     :AndIf FilesAndDirs.IsDir y
+     :AndIf ~(¯1↑y)∊'/\'
+         'Cannot copy file over folder.'⎕SIGNAL 11
      :EndIf
-     (rc more)←x FilesAndDirs.CopyTo y
-     more U.Assert 0=rc
+     r←y ⎕NCOPY⍠('IfExists' 'Replace')⊣x
+ :Else
+     :If ~(¯1↑y)∊'/\'
+         'Cannot copy file over folder.'U.Assert 0=FilesAndDirs.IsDir y
+     :EndIf
+     y←FilesAndDirs.NormalizePath y
+     x←FilesAndDirs.NormalizePath¨x
+     'Could not create target directory'U.Assert'Create!'FilesAndDirs.CheckPath y
+     r←y ⎕NCOPY⍠('IfExists' 'Replace')⊣x
  :EndIf
 ⍝Done

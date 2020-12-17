@@ -1,4 +1,4 @@
- {setupFilename}←{path}RunInno name;F;A;counter;flag;issFilename;inno;cmd;tempdir;iss;batFilename;buff;msg;success;exeName;targetDir;more;rc
+ {setupFilename}←{path}RunInno name;F;counter;flag;issFilename;inno;cmd;tempdir;iss;batFilename;buff;msg;success;exeName;targetDir;more;rc
 ⍝ Runs the INNO batch compiler in order to create an installer.\\
 ⍝ `name` is the project name; for "Fire" that would be "Fire".\\
 ⍝ Note that the Inno script is modified in case there is an assignment found to `MyAppVersion`: it gets the version number.\\
@@ -10,7 +10,7 @@
 ⍝ Running the Inno compiler this way fails quite frequently, most often with either "file in use" or "EndUpdateResource failed",
 ⍝ for no apparent reason. However, normally it helps to just try again.
 ⍝ Normally after 3-5 times it works but sometimes it takes longer, so we try a max of 10 times before giving up.\\
- F←FilesAndDirs ⋄ A←APLTreeUtils
+ F←FilesAndDirs
  counter←flag←0
  path←{0<⎕NC ⍵:⍎⍵ ⋄ F.PWD}'path'
  issFilename←'expand'F.NormalizePath path,'\',name,'.iss'
@@ -28,7 +28,7 @@
      batFilename←F.GetTempFilename''
      F.DeleteFile batFilename
      batFilename,←'.bat'
-     A.WriteUtf8File batFilename cmd
+     (⊂cmd)⎕NPUT batFilename
      buff←Execute.Process batFilename
      msg←2⊃buff
      :If 0=+/'The process cannot access the file because it is being used by another process.'⍷∊msg
@@ -42,7 +42,7 @@
  exeName←⊃¯1↑msg
  targetDir←iss U.GetDefFromInno'TargetDir'
  '"TargetDir" needs to be defined in the Inno script'U.Assert 0<≢targetDir
- (rc more)←exeName F.MoveTo targetDir
- more U.Assert 0=rc
+ 1 ⎕NDELETE targetDir,⊃,/1↓⎕NPARTS exeName
+ targetDir ⎕NMOVE exeName
  setupFilename←F.ExpandPath targetDir,⊃,/1↓⎕NPARTS exeName
 ⍝Done

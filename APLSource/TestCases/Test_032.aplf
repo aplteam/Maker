@@ -11,8 +11,8 @@
  xml←##.Maker.GetPublishConfig 0
 
  ##.Maker.LoadNeededAndEstablishRefs'Foo'xml
- →T.GoToTidyUp 2≠≢#.Foo.⎕NL 9.1                  ⍝ `Foo` and `APLTreeUtils`
- →T.GoToTidyUp 2≠≢#.Foo.⎕NL 9.4                  ⍝ `FilesAndDirs` and `OS`; `Tester` and `WinReg` are NOT loaded!
+ →T.GoToTidyUp 2≠≢#.Foo.⎕NL 9.1                  ⍝ `Foo`
+ →T.GoToTidyUp 2≠≢#.Foo.⎕NL 9.4                  ⍝ `APLTreeUtils2`, `FilesAndDirs` and `OS`; `Tester` and `WinReg` are NOT loaded!
  →T.GoToTidyUp 1≠≢#.Foo.Foo.⎕NL⍳16
 
  R←T._OK

@@ -1,0 +1,30 @@
+ R←Test_050(stopFlag batchFlag);⎕TRAP;F;dir;file1;file2;res
+⍝ Exercise `CopyBetter` on two files
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+ R←T._Failed
+
+ F←##.Maker.FilesAndDirs
+ dir←F.GetTempSubDir''
+ (⊂'First')F.NPUT file1←dir,'/first.txt'
+ ⎕DL 1.01
+ (⊂'Second')F.NPUT file2←dir,'/Second.txt'
+
+ res←1 ##.Maker.CopyBetter file1 file2
+ →T.GoToTidyUp 2≠res
+ →T.GoToTidyUp(2⍴⊂'Second')≢({⊃F.NGET ⍵}¨file1 file2)~¨⊂⎕TC
+
+ ⎕DL 1.01
+ (⊂'Third')F.NPUT file1 1
+ res←1 ##.Maker.CopyBetter file1 file2
+ →T.GoToTidyUp 1≠res
+ →T.GoToTidyUp(2⍴⊂'Third')≢({⊃F.NGET ⍵}¨file1 file2)~¨⊂⎕TC
+
+ res←1 ##.Maker.CopyBetter file1 file2
+ →T.GoToTidyUp 0≠res
+ →T.GoToTidyUp(2⍴⊂'Third')≢({⊃F.NGET ⍵}¨file1 file2)~¨⊂⎕TC
+
+ R←T._OK
+
+∆TidyUp:
+ F.RmDir dir
+⍝Done

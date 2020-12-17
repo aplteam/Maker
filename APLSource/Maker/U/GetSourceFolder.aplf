@@ -1,3 +1,4 @@
- r←GetSourceFolder subFolder;⎕IO;⎕ML
- ⎕IO←1 ⋄ ⎕ML←1
+ r←GetSourceFolder subFolder
+⍝ Originally we needed to do gymnastics here in order to tell old from new requirements.
+⍝ Now we do only 18.0 or later, and everything must be Tatin compatible.
  r←GetProjectFolder'_Source/',subFolder

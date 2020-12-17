@@ -6,7 +6,7 @@
 ⍝ you can pass the XML as left argument.
  ⎕IO←1 ⋄ ⎕ML←1
  parms←⎕NS''
- XML←{0<⎕NC ⍵:⍎⍵ ⋄ ⎕XML'flat'APLTreeUtils.ReadUtf8File'publish.config'}'XML'
+ XML←{0<⎕NC ⍵:⍎⍵ ⋄ ⎕XML 1⊃⎕NGET'publish.config'}'XML'
  parms.needed←'needs'xml.GetRangeFrom XML
  :If 0=keepDevelopmentTools
      ⍝ Remove what's only needed for development:

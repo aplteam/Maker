@@ -10,7 +10,7 @@
  rc←##.Maker.RecreateFolder folder2
  →T.GoToTidyUp 0≠≢rc
  ⎕DL 0.01
- ##.APLTreeUtils.WriteUtf8File(folder,'\aaa\MyFile.txt')'Hello world'
+ (⊂'Hello world')⎕NPUT folder,'\aaa\MyFile.txt'
  rc←2 ##.Maker.RecreateFolder folder2
  →T.GoToTidyUp 0≠≢rc
 

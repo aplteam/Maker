@@ -6,7 +6,7 @@
 ⍝ You can tell the function to **not** add a built ID to the version by passing 1 as (optional) ⍺.
  noBuiltID←{0<⎕NC ⍵:⍎⍵ ⋄ 0}'noBuiltID'
  :If 3=⎕NC'#.',name,'.Version'
-     script←'flat'##.A.ReadUtf8File issFilename
+     script←⊃##.F.NGET issFilename
      searchFor←'#define \bMyAppVersion\b'
      :If 0<≢buff←searchFor ⎕S 0 1⍠('Greedy' 0)('IC' 1)('Mode' 'D')⊣script
          'More than one definition of "MyAppVersion" found in Inno script'Assert 1=≢buff
@@ -15,7 +15,7 @@
          script←(1++/2>+\'"'=script)↓script
          script←' "',({⍵/⍨3>+\'.'=⍵}⍣noBuiltID⊣(1+⎕IO)⊃⍎'#.',name,'.Version'),'"',script
          script←(-offset+length)⌽script
-         ##.A.WriteUtf8File issFilename script
+         (⊂script)##.F.NPUT issFilename 1
      :EndIf
  :EndIf
 ⍝Done

@@ -24,7 +24,7 @@
      →T.GoToTidyUp 1
  :Else
      dmx←⎕DMX
-     →T.GoToTidyUp'Access is denied.'≢⊃dmx.DM
+     →T.GoToTidyUp'Cannot copy file over folder.'≢⊃dmx.DM
  :EndTrap
 
  R←T._OK

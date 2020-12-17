@@ -8,17 +8,18 @@
  :If flag←0=≡x
      body←⎕SRC ref←x
      result←2⊃ref.Version
-     :If 1=≢buff←'∇ *[A-Za-z]←Version'⎕S 0 1 2⍠('Mode' 'L')('Greedy' 0)('IC' 1)⊣body
-         (offset length row)←⊃buff
-         varsName←{{⍵↑⍨¯1+⍵⍳'←'}' '~⍨⍵↓⍨⍵⍳'∇'}(row+1)⊃body
-         row+←2+⊃('\b',varsName,'←')⎕S 2⊣(1+row)↓body
-         version←{⍵↑⍨¯1+⍵⍳''''}{{⌽⍵/⍨4>+\''''=⍵}⌽⍵}row⊃body
+     :If 0=≢buff←'∇ *[A-Za-z]←Version'⎕S 0 1 2⍠('Mode' 'L')('Greedy' 0)('IC' 1)⊣body
+         ∘∘∘ ⍝ No function `Version` ?! That makes no sense...
      :EndIf
+     (offset length row)←⊃buff   ⍝ There might be other `Version` functions but the first one is "ours"
+     varsName←{{⍵↑⍨¯1+⍵⍳'←'}' '~⍨⍵↓⍨⍵⍳'∇'}(row+1)⊃body
+     row+←2+⊃('\b',varsName,'←')⎕S 2⊣(1+row)↓body
+     version←{⍵↑⍨¯1+⍵⍳''''}{{⌽⍵/⍨4>+\''''=⍵}⌽⍵}row⊃body
  :Else
      ref←⍎¯1↓⊃'.'##.A.SplitPath fnsname←x
      body←⎕NR fnsname
      version←2⊃⍎fnsname
-     row←⊃¯1↑##.A.Where∨/¨version∘⍷¨body
+     row←⊃¯1↑⍸∨/¨version∘⍷¨body
  :EndIf
  appendix←{⍵↓⍨+/∧\⍵∊⎕D,'.'}version
  version←(-≢appendix)↓version
